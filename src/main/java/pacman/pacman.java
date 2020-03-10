@@ -5,27 +5,23 @@ class pacman extends position {
 		super(x,y,exist);
 	}
 	//functions those add and substract pacman's positions
-	public String down(){
-		this.y++;
-		return ("x="+this.x+", y="+this.y);
+	public void down(){
+		super.y++;
 	}
-	public String right(){
-		this.x++;
-		return ("x="+this.x+", y="+this.y);
+	public void right(){
+		super.x++;
 	}
-	public String left(){
-		this.x--;
-		return ("x="+this.x+", y="+this.y);
+	public void left(){
+		super.x--;
 	}
-	public String up(){
-		this.y--;
-		return ("x="+this.x+", y="+this.y);
+	public void up(){
+		super.y--;
 	}
 	public int getX(){
-		return  this.x;
+		return  super.x;
 	}
 	public int getY(){
-		return  this.y;
+		return  super.y;
 	}
 	//
 }
