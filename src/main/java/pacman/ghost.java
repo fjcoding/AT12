@@ -4,4 +4,13 @@ class ghost extends position {
 		super(x,y,exist);
         this.eatable = false;
 	}
+	protected boolean getEatable(){
+
+		return this.eatable;
+	}
+
+	protected void changeEatable(){
+
+		this.eatable= true;
+	}
 }

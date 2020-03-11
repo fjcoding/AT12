@@ -4,4 +4,8 @@ class food extends position {
 		super(x,y,exist);
         this.special = false;
 	}
+	private boolean getKindofFood()
+	{
+		return this.special;
+	}
 }
