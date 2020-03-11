@@ -16,7 +16,7 @@ class Main extends JFrame {
         this.setVisible(true); 
     }
 
-    public static void main(String[] args) {  
+    public static void main(String[] args){  
         Main frame = new Main();
         frame.setMinimumSize(new Dimension(900, 900));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
