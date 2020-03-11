@@ -28,13 +28,7 @@ class Main extends Frame{
         //Initialize object wall
         
     }
-    public void paint(Graphics g,int x, int y){
-        //g.setColor(Color.RED);
-        ImageIcon ghost = new ImageIcon("images/ghost.jpg");
-        Image ghostImg = ghost.getImage();
-        g.drawImage(ghostImg,0,0,50,50,null);
-        
-    }
+    
     public static void main(String[] args){
         //p = new pacman(8, 8, true);
         //f = new food(2, 1, true);
@@ -44,8 +38,7 @@ class Main extends Frame{
         Thread ghostThread = new Thread(ghost1);
         ghostThread.start();
         //Graphics g = new Graphics();
-        paint(ghost1.getX(), ghost1.getY());
-         
+        //paint(ghost1.getX(), ghost1.getY(), null);
         Main m = new Main(); 
         
     }
