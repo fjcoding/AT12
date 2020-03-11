@@ -17,11 +17,6 @@ class pacman extends position {
 	public void up(){
 		super.y--;
 	}
-	public int getX(){
-		return  super.x;
-	}
-	public int getY(){
-		return  super.y;
-	}
+	
 	//
 }
