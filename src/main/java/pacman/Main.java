@@ -16,19 +16,19 @@ class Main extends JFrame{
         this.setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(900,900);
+        p = new pacman(30,30,true);
 
-
-        ImageIcon imageIcon = new ImageIcon("pacmanIcon.png");
-        JButton buttonPacman= new JButton();
-        buttonPacman.setBounds(50, 50, 30, 30);
-        buttonPacman.setIcon(imageIcon);
-
-        add(buttonPacman);
-
-
+        setPositionPacman(p);
         this.setVisible(true);
         
         
+    }
+    public void setPositionPacman(pacman pacmanPos){
+        ImageIcon imageIcon = new ImageIcon("pacmanIcon.png");
+        JButton buttonPacman= new JButton();
+        buttonPacman.setBounds(p.getX(), p.getY(), 30, 30);
+        buttonPacman.setIcon(imageIcon);
+        add(buttonPacman);
     }
 
     public static void main(String[] args){
