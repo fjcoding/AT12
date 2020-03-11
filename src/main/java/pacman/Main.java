@@ -1,7 +1,10 @@
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
-class Main extends Frame{
+class Main extends JFrame{
 
     //attrib
     private pacman p;
@@ -11,12 +14,20 @@ class Main extends Frame{
 
     public Main(){
         this.setLayout(null);
-        this.setSize(200,200);
-		this.setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(900,900);
 
-       // w = new ArrayList <wall>();     //create arraylist for outer wall
-        //fill outer wall with -
-        //Initialize object wall
+
+        ImageIcon imageIcon = new ImageIcon("pacmanIcon.png");
+        JButton buttonPacman= new JButton();
+        buttonPacman.setBounds(50, 50, 30, 30);
+        buttonPacman.setIcon(imageIcon);
+
+        add(buttonPacman);
+
+
+        this.setVisible(true);
+        
         
     }
 
