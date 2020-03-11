@@ -4,7 +4,7 @@ class Pacman extends Position {
 
     protected ArrayList <Position> walls;
 
-    public Pacman (int x, int y, boolean exist){
+    public Pacman (int x, int y, boolean exist) {
         super(x, y, exist);
         walls = new ArrayList<Position>(); 
         addWall();
@@ -12,7 +12,7 @@ class Pacman extends Position {
     
     //functions those add and substract pacman's positions	
     public int down() {
-        if(existDistintPacman(x, y+30)){
+        if(existDistintPacman(x, y+30)) {
             return super.y = y;
         }else{
             return super.y += 30;
