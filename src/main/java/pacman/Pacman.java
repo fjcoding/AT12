@@ -38,5 +38,3 @@ class Pacman extends Position{
             return false;
         }
     }
-    
-}

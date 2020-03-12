@@ -36,17 +36,7 @@ public class PacmanDotTest{
 		Pacman p = new Pacman(5, 5, true);
 		Ghost   g = new Ghost(5, 5, true);
 		g.changeEatable();		
-		assertEquals(true,p.isEatable(g));		
+		assertEquals(true,p.isEatable(g));
 	}
-
-	
-	
-	
-
-
-
-	
-	
-	
-
+    
 }
