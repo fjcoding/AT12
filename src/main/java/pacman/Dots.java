@@ -7,8 +7,7 @@ class Dots extends Position {
         this.special = false;
 	}
 	
-	private boolean getKindofFood()
-	{
+	private boolean getKindofFood(){
 		return this.special;
 	}
 	
