@@ -1,9 +1,9 @@
-class Ghost extends Position {
+class Ghost extends Position{
     
-    private boolean eatable;
+    private boolean eatable;    //it becomes the ghost eatable
     
-    public Ghost (int x, int y,boolean exist){
-        super(x,y,exist);
+    public Ghost (int x, int y, boolean exist){
+        super(x, y, exist);
         this.eatable = false;
     }
     

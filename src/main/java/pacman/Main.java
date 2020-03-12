@@ -5,7 +5,7 @@ class Main extends Frame{
 
     //attrib
     private Pacman objectPacman;
-    private Dots objectDots;
+    private Dot objectDots;
     private Ghost objectGhost;
  
     public Main(){
