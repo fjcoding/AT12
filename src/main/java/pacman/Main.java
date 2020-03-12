@@ -1,44 +1,45 @@
-import java.awt.*;
-import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-class Main extends JFrame{
+class Main extends JFrame implements KeyListener{
 
-    //attrib
-    private pacman p;
-    private food f;
-    private ghost g;
-    private ArrayList <wall> w; 
-
+    PacmanDraw pacmanDraw;
+ 
     public Main(){
-        this.setLayout(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(900,900);
-        p = new pacman(30,30,true);
-
-        setPositionPacman(p);
-        this.setVisible(true);
-        
-        
-    }
-    public void setPositionPacman(pacman pacmanPos){
-        ImageIcon imageIcon = new ImageIcon("pacmanIcon.png");
-        JButton buttonPacman= new JButton();
-        buttonPacman.setBounds(p.getX(), p.getY(), 30, 30);
-        buttonPacman.setIcon(imageIcon);
-        add(buttonPacman);
+        this.pacmanDraw = new PacmanDraw();
+        addKeyListener(this);
+        this.setVisible(true);       
     }
 
-    public static void main(String[] args){
-        //p = new pacman(8, 8, true);
-        //f = new food(2, 1, true);
-        //g = new ghost (3, 1, true);
-        //w = new wall (4, 1, true);
-        
-        Main m = new Main(); 
+    @Override
+    public void keyPressed(KeyEvent event) {
     }
-    
 
+    @Override
+    public void keyReleased(KeyEvent event) {
+        if(event.getKeyCode()== KeyEvent.VK_RIGHT)
+            pacmanDraw.moveRight();
+        else if(event.getKeyCode()== KeyEvent.VK_LEFT)
+            pacmanDraw.moveLeft();
+        else if(event.getKeyCode()== KeyEvent.VK_DOWN)
+            pacmanDraw.moveDown();
+        else if(event.getKeyCode()== KeyEvent.VK_UP)
+            pacmanDraw.moveUp();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent event) {
+    }
+
+    public static void main(String[] args){       
+        Main frame = new Main();
+        frame.setResizable(false);
+        frame.setSize(900, 900);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(frame.pacmanDraw);
+        frame.pack();
+        frame.setVisible(true);
+        
+    }  
 }
