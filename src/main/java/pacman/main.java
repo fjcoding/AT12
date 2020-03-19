@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+<<<<<<< HEAD
 class Main extends JFrame implements KeyListener{
 
     PacmanDraw pacmanDraw ;
@@ -43,4 +44,23 @@ class Main extends JFrame implements KeyListener{
         frame.pack();
         frame.setVisible(true);       
     }  
+=======
+class Main extends Frame{
+
+    //attrib
+    private Pacman objectPacman;
+    private Dot objectDots;
+    private Ghost objectGhost;
+ 
+    public Main(){
+        this.setLayout(null);
+        this.setSize(200,200);
+        this.setVisible(true);
+    }
+
+    public static void main(String[] args){     
+        Main m = new Main();      
+    }
+    
+>>>>>>> 97cedee6a666f27deb44e15446b71e73060a97ec
 }
