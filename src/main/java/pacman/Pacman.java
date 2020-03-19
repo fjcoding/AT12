@@ -6,20 +6,20 @@ class Pacman extends Position{
     }
     
     //functions those add and substract pacman's positions	
-    public void down(){
-        super.y++;
+    public int down(){
+        return super.y += 30;
     }
     
-    public void right(){
-        super.x++;
+    public int right(){
+        return super.x += 30;
     }
     
-    public void left(){
-        super.x--;
+    public int left(){
+        return super.x -= 30;
     }
     
-    public void up(){
-        super.y--;
+    public int up(){
+        return super.y -= 30;
     }
 
     public boolean isEatable(Dot dotsPosition){
@@ -38,3 +38,4 @@ class Pacman extends Position{
             return false;
         }
     }
+}

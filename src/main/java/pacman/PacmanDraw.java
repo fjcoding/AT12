@@ -5,37 +5,39 @@ import javax.swing.JComponent;
 
 public class PacmanDraw extends JComponent {
 
-    public int x = 50;
-    public int y = 50;
+    
+    private Pacman pacman= new Pacman(60, 60, true);
+    public int x = pacman.x;
+    public int y = pacman.y;
     
     //Method to draw pacman in the frame
     public void paintComponent(Graphics g){
-        ImageIcon pacman = new ImageIcon("pacmanIcon.png");
-        Image pacmanImg = pacman.getImage();
+        ImageIcon pacmanIcon = new ImageIcon("pacmanIcon.png");
+        Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg,x,y,30,30,null);
     }
 
     //Method to move pacman to right 10 pixels
     public void moveRight(){
-        x = x + 10;
+        x = pacman.right();
         repaint();
     }
 
     //Method to move pacman to left 10 pixels
     public void moveLeft(){
-        x = x - 10;
+        x = pacman.left();
         repaint();
     }
 
     //Method to move pacman to down 10 pixels
     public void moveDown(){
-        y = y + 10;
+        y = pacman.down();
         repaint();
     }
 
     //Method to move pacman to up 10 pixels
     public void moveUp(){
-        y = y - 10;
+        y = pacman.up();
         repaint();
     }
 }
