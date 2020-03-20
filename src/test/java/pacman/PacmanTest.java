@@ -5,29 +5,25 @@ public class PacmanTest{
 	
 	@Test
 	public void testMoveUp(){
-		Pacman p = new Pacman(5, 5, true);
-		p.up();
-		assertEquals(4, p.getY());
+		Pacman pacman = new Pacman(60, 60, true);
+		assertEquals(30, pacman.up());
 	}
 	
 	@Test
 	public void testMoveDown(){
-		Pacman p = new Pacman(5, 5, true);
-		p.down();
-		assertEquals(6, p.getY());
+		Pacman pacman = new Pacman(60, 60, true);
+		assertEquals(90, pacman.down());
 	}
 	
 	@Test
 	public void testMoveLeft(){
-		Pacman p = new Pacman(5, 5, true);
-		p.left();
-		assertEquals(4, p.getX());
+		Pacman pacman = new Pacman(60, 60, true);
+		assertEquals(30, pacman.left());
 	}
 	
 	@Test
 	public void testMoveRight(){
-		Pacman p = new Pacman(5, 5, true);
-		p.right();
-		assertEquals(6, p.getX());
+		Pacman pacman = new Pacman(60, 60, true);
+		assertEquals(90, pacman.right());
 	}
 }

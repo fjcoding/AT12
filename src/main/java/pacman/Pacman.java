@@ -1,6 +1,7 @@
 class Pacman extends Position{
 
     //private int x, y;
+    // private List<Wall> wall;g
     public Pacman (int x, int y, boolean exist){
         super(x, y, exist);
     }

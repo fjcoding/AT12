@@ -15,9 +15,6 @@ class Main extends JFrame {
         this.setSize(900, 900);
         this.setVisible(true);       
     }
-
-
-
     public static void main(String[] args){       
         
         Main frame = new Main();

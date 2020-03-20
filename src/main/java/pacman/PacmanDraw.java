@@ -7,8 +7,8 @@ public class PacmanDraw extends JComponent {
 
     
     private Pacman pacman= new Pacman(60, 60, true);
-    public int x = pacman.x;
-    public int y = pacman.y;
+    public int x = pacman.getX();
+    public int y = pacman.getY();
     
     //Method to draw pacman in the frame
     public void paintComponent(Graphics g){
