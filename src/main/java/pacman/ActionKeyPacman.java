@@ -1,9 +1,9 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class ActionKeyPacman implements KeyListener{
-    private PacmanDraw pacmanDraw ;
-    public ActionKeyPacman(PacmanDraw pacmanDraw){
-        this.pacmanDraw = pacmanDraw;
+    private DrawComponents drawComponents ;
+    public ActionKeyPacman(DrawComponents drawComponents){
+        this.drawComponents = drawComponents;
     }
 
     @Override
@@ -13,13 +13,13 @@ public class ActionKeyPacman implements KeyListener{
     @Override
     public void keyReleased(KeyEvent event){
         if(event.getKeyCode() == KeyEvent.VK_RIGHT)
-            pacmanDraw.moveRight();
+        drawComponents.moveRight();
         else if(event.getKeyCode() == KeyEvent.VK_LEFT)
-            pacmanDraw.moveLeft();
+        drawComponents.moveLeft();
         else if(event.getKeyCode() == KeyEvent.VK_DOWN)
-            pacmanDraw.moveDown();
+        drawComponents.moveDown();
         else if(event.getKeyCode() == KeyEvent.VK_UP)
-            pacmanDraw.moveUp();
+        drawComponents.moveUp();
     }
 
     @Override
