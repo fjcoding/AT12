@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 public class DrawComponents extends JComponent {
 
-    private Pacman pacman= new Pacman(60, 60, true);
+    private Pacman pacman= new Pacman(30, 30, true);
     public int x = pacman.getX();
     public int y = pacman.getY();
     public ArrayList <Position> walls;

@@ -1,7 +1,9 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class ActionKeyPacman implements KeyListener{
-    private DrawComponents drawComponents ;
+    
+    private DrawComponents drawComponents;
+
     public ActionKeyPacman(DrawComponents drawComponents){
         this.drawComponents = drawComponents;
     }
