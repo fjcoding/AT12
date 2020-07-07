@@ -20,7 +20,7 @@ public class PacmanDotTest {
 	@Test
 	public void testGhostIsNotEatable() {
 		Pacman p = new Pacman(5, 5, true);
-		Ghost   g = new Ghost(5, 5, true);	
+		Ghost  g = new Ghost(5, 5, true);	
 		assertEquals(false,p.isEatable(g));	
 	}
 
