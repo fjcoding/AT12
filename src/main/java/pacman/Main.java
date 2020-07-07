@@ -5,9 +5,9 @@ import java.awt.event.KeyListener;
 
 class Main extends JFrame {
     //attrib
-    private Dot objectDots;
-    private Ghost objectGhost;
-    private DrawComponents drawComponents ;
+    private Pacman Pacman;
+    private Dot Dots;
+    private Ghost Ghost;
  
     public Main(){
         this.drawComponents = new DrawComponents();
