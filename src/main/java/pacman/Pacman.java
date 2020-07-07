@@ -140,7 +140,7 @@ class Pacman extends Position {
     }
 
     public boolean isEatable(Ghost ghostPosition){
-        if((super.getX() == ghostPosition.getX()) && (super.getY() == ghostPosition.getY()) && ghostPosition.getEatable()){
+        if((super.getX() == ghostPosition.getX()) && (super.getY() == ghostPosition.getY()) && ghostPosition.isEatable()){
             return true;		
         } else {
             super.exist = false;
