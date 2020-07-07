@@ -7,7 +7,7 @@ class Ghost extends Position{
         this.eatable = false;
     }
     
-    protected boolean getEatable(){
+    protected boolean isEatable(){
         return this.eatable;
     }
 
