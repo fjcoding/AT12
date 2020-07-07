@@ -32,16 +32,16 @@ public class Ghost extends Position implements Runnable {
 		super.exist = exist;
 		return true;
 	}
-	public boolean isEatable(){
+	public boolean isEatable() {
 		return this.eatable;
 	}
-	public void changeEatable(){
+	public void changeEatable() {
         this.eatable= true;
     }
-	public void moveUp(){
+	public void moveUp() {
 		super.y -= 30;
 	}
-	public void moveDown(){
+	public void moveDown() {
 		super.y += 30;
 	}
 	public void moveLeft(){
