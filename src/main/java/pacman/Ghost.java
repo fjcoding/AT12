@@ -1,18 +1,18 @@
 class Ghost extends Position{
     
-    private boolean eatable;    //it becomes the ghost eatable
+    private boolean isEatable;    //it becomes the ghost eatable
     
     public Ghost (int x, int y, boolean exist){
         super(x, y, exist);
-        this.eatable = false;
+        this.isEatable = false;
     }
     
     protected boolean isEatable(){
-        return this.eatable;
+        return this.isEatable;
     }
 
     protected void changeEatable(){
-        this.eatable= true;
+        this.isEatable = true;
     }
     
 }
