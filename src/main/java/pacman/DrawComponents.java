@@ -27,6 +27,7 @@ public class DrawComponents extends JComponent {
         Thread threadGhost2 = new Thread(ghost2);
         threadGhost2.start();
     }
+    
     //Method to draw pacman in the frame
     public void paintComponent(Graphics g) { 
         drawWall(g);
@@ -34,14 +35,14 @@ public class DrawComponents extends JComponent {
         Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg,x,y,30,30,null);
     }
-    public void drawWall(Graphics g) {
+    public void drawWall(Graphics g){
         
-        for (int i=0;i<walls.size(); i++) {
+        for (int i=0;i<walls.size(); i++){
             g.setColor(Color.BLUE);
             g.drawRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);  
         }
     }
-    public void drawGhosts(Graphics g) {
+    public void drawGhosts(Graphics g){
         xG = ghost1.getX();
         yG = ghost1.getY();
         xG2 = ghost2.getX();
