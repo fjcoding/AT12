@@ -27,4 +27,8 @@ public class ActionKeyPacman implements KeyListener{
     @Override
     public void keyTyped(KeyEvent event){
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ghost move in frame with threads
