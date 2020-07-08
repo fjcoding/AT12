@@ -23,7 +23,7 @@ public class PacmanTest{
 	
 	@Test
 	public void testMoveRight(){
-		Pacman pacman = new Pacman(60, 60, true);
-		assertEquals(90, pacman.right());
+		Pacman pacman = new Pacman(30, 30, true);
+		assertEquals(60, pacman.right()); 
 	}
 }
