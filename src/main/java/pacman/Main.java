@@ -1,33 +1,27 @@
-import java.awt.*;
-import java.util.ArrayList;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-class Main extends Frame{
-
+class Main extends JFrame {
     //attrib
-    private pacman p;
-    private food f;
-    private ghost g;
-    private ArrayList <wall> w; 
-
+    private Dot objectDots;
+    private Ghost objectGhost;
+    private DrawComponents drawComponents ;
+ 
     public Main(){
-        this.setLayout(null);
-        this.setSize(200,200);
-		this.setVisible(true);
-
-       // w = new ArrayList <wall>();     //create arraylist for outer wall
-        //fill outer wall with -
-        //Initialize object wall
-        
+        this.drawComponents = new DrawComponents();
+        this.addKeyListener(new ActionKeyPacman(drawComponents));
+        this.setSize(900, 900);
+        this.setVisible(true); 
     }
-
-    public static void main(String[] args){
-        //p = new pacman(8, 8, true);
-        //f = new food(2, 1, true);
-        //g = new ghost (3, 1, true);
-        //w = new wall (4, 1, true);
+    public static void main(String[] args){       
         
-        Main m = new Main(); 
-    }
-    
-
+        Main frame = new Main();
+        frame.setMinimumSize(new Dimension(900, 900));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(frame.drawComponents);
+        frame.pack();
+        frame.setVisible(true);       
+    }  
 }

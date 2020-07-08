@@ -1,33 +1,29 @@
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-public class PacmanTest {
+public class PacmanTest{
+	
 	@Test
 	public void testMoveUp(){
-		pacman p = new pacman(5,5, true);
-		p.up();
-		assertEquals(4,p.getY());
+		Pacman pacman = new Pacman(60, 60, true);
+		assertEquals(30, pacman.up());
 	}
 	
 	@Test
 	public void testMoveDown(){
-		pacman p = new pacman(5,5, true);
-		p.down();
-		assertEquals(6,p.getY());
+		Pacman pacman = new Pacman(60, 60, true);
+		assertEquals(90, pacman.down());
 	}
 	
 	@Test
 	public void testMoveLeft(){
-		pacman p = new pacman(5,5, true);
-		p.left();
-		assertEquals(4,p.getX());
+		Pacman pacman = new Pacman(60, 60, true);
+		assertEquals(30, pacman.left());
 	}
 	
 	@Test
 	public void testMoveRight(){
-		pacman p = new pacman(5,5, true);
-		p.right();
-		assertEquals(6,p.getX());
+		Pacman pacman = new Pacman(30, 30, true);
+		assertEquals(60, pacman.right()); 
 	}
 }
