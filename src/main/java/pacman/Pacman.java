@@ -9,7 +9,6 @@ class Pacman extends Position {
         walls = new ArrayList<Position>(); 
         addWall();
     }
-    
     //functions those add and substract pacman's positions	
     public int down() {
         if(existDistintPacman(x, y+30)) {
@@ -19,7 +18,7 @@ class Pacman extends Position {
         }
     }
     
-    public int right(){
+    public int right() {
         if(existDistintPacman(x+30, y)){
             return super.x = x;
         }else{
@@ -43,7 +42,7 @@ class Pacman extends Position {
         }
     }
 
-    public boolean existDistintPacman(int xx, int yy){
+    public boolean existDistintPacman(int xx, int yy) {
         boolean exist=false;
         for(Position i: walls){
             if(i.getX() ==xx && i.getY()==yy)
@@ -52,7 +51,7 @@ class Pacman extends Position {
         return exist;
     }
 
-    public void addWall(){
+    public void addWall() {
         
         for (int i=0; i<900; i+=30){
             walls.add(new Wall(0,i, true));//left
@@ -128,7 +127,7 @@ class Pacman extends Position {
             walls.add(new Wall(810,i,true));// column12
         }
     }
-    public ArrayList<Position> getWalls(){
+    public ArrayList<Position> getWalls() {
         return walls;
     }
     public boolean isEatable(Dot dotsPosition){
@@ -139,7 +138,7 @@ class Pacman extends Position {
             return false;
     }
 
-    public boolean isEatable(Ghost ghostPosition){
+    public boolean isEatable(Ghost ghostPosition) {
         if((super.getX() == ghostPosition.getX()) && (super.getY() == ghostPosition.getY()) && ghostPosition.isEatable()){
             return true;		
         } else {
