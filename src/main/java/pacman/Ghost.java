@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Ghost extends Position implements Runnable
-{
+public class Ghost extends Position implements Runnable {
 	private boolean eatable;
 	public ArrayList <Position> walls;
 	public Ghost (int x, int y,boolean exist) {
@@ -33,7 +32,7 @@ public class Ghost extends Position implements Runnable
 		super.exist = exist;
 		return true;
 	}
-	public boolean getEatable(){
+	public boolean isEatable(){
 		return this.eatable;
 	}
 	public void changeEatable(){
