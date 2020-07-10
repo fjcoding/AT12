@@ -27,7 +27,6 @@ public class DrawComponents extends JComponent {
     public void drawWall(Graphics g){
         
         for (int i=0;i<walls.size(); i++){
-            g.setFont(Color.BLACK);
             g.setColor(Color.BLUE);
             g.drawRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);  
         }
