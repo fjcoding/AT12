@@ -46,7 +46,7 @@ public class DrawComponents extends JComponent {
         yG = ghost1.getY();
         xG2 = ghost2.getX();
         yG2 = ghost2.getY();
-        ImageIcon ghostIcon = new ImageIcon("images/ghost.jpg");
+        ImageIcon ghostIcon = new ImageIcon("ghost.jpg");
         Image ghostImg = ghostIcon.getImage();
         g.drawImage(ghostImg, xG, yG, 30, 30, this);
         g.drawImage(ghostImg, xG2, yG2, 30, 30, this);
