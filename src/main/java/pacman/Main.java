@@ -10,9 +10,9 @@ import java.awt.event.KeyListener;
 
 class Main extends JFrame {
     //attrib
-    private Pacman Pacman;
-    private Dot Dots;
-    private Ghost Ghost;
+    private Pacman pacman;
+    private Dot dots;
+    private Ghost ghost;
     private DrawComponents drawComponents;
 
     public Main() {
