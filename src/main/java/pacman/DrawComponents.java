@@ -20,7 +20,7 @@ public class DrawComponents extends JComponent {
     //Method to draw pacman in the frame
     public void paintComponent(Graphics g) { 
         drawWall(g);
-        ImageIcon pacmanIcon = new ImageIcon("pacmanIcon.png");
+        ImageIcon pacmanIcon = new ImageIcon("pacman.gif");
         Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg,x,y,30,30,null);
     }
