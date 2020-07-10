@@ -8,13 +8,14 @@ class Main extends JFrame {
     private Pacman Pacman;
     private Dot Dots;
     private Ghost Ghost;
- 
+    private DrawComponents drawComponents;
     public Main() {
         this.drawComponents = new DrawComponents();
         this.addKeyListener(new ActionKeyPacman(drawComponents));
         this.setSize(900, 900);
         this.setVisible(true); 
     }
+
     public static void main(String[] args) {       
         
         Main frame = new Main();
