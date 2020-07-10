@@ -5,17 +5,18 @@ import java.awt.event.KeyListener;
 
 class Main extends JFrame {
     //attrib
-    private Dot objectDots;
-    private Ghost objectGhost;
-    private DrawComponents drawComponents ;
- 
-    public Main(){
+    private Pacman Pacman;
+    private Dot Dots;
+    private Ghost Ghost;
+    private DrawComponents drawComponents;
+    public Main() {
         this.drawComponents = new DrawComponents();
         this.addKeyListener(new ActionKeyPacman(drawComponents));
         this.setSize(900, 900);
         this.setVisible(true); 
     }
-    public static void main(String[] args){       
+
+    public static void main(String[] args) {       
         
         Main frame = new Main();
         frame.setMinimumSize(new Dimension(900, 900));

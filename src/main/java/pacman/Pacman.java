@@ -11,7 +11,7 @@ class Pacman extends Position {
     }
     
     //functions those add and substract pacman's positions	
-    public int down(){
+    public int down() {
         if(existDistintPacman(x, y+30)){
             return super.y = y;
         }else{
@@ -140,7 +140,7 @@ class Pacman extends Position {
     }
 
     public boolean isEatable(Ghost ghostPosition){
-        if((super.getX() == ghostPosition.getX()) && (super.getY() == ghostPosition.getY()) && ghostPosition.getEatable()){
+        if((super.getX() == ghostPosition.getX()) && (super.getY() == ghostPosition.getY()) && ghostPosition.isEatable()){
             return true;		
         } else {
             super.exist = false;
