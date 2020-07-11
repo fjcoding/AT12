@@ -26,6 +26,7 @@ class Main extends JFrame {
         frame.setMinimumSize(new Dimension(900, 900));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(frame.drawComponents);
+        frame.getContentPane().setBackground(Color.BLACK);
         frame.pack();
         frame.setVisible(true);
     }

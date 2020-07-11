@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 
 class Pacman extends Position {
-    protected ArrayList<Position> walls;
 
-    public Pacman(int x, int y, boolean exist) {
+    protected ArrayList <Position> walls;
+    protected ArrayList <Position> dots;
+
+    public Pacman (int x, int y, boolean exist) {
         super(x, y, exist);
         walls = new ArrayList<Position>();
         addWall();
+        dots = new ArrayList<Position>();
+        addDots();
     }
 
     //functions those add and substract pacman's positions
@@ -127,7 +131,32 @@ class Pacman extends Position {
         return walls;
     }
 
-    public boolean isEatable(Dot dotsPosition) {
+    public void addDots() {
+        boolean draw=true;
+        for(int iy=1;iy<29;iy++){
+            for(int ix=1;ix<29;ix++){
+                int i=0;
+                while(i<walls.size()){
+                    if((walls.get(i).getX()==ix*30)&&(walls.get(i).getY()==iy*30)){
+                        draw=false;
+                        break;
+                    }
+                    i++;
+                }
+                if(draw==true){
+                    dots.add(new Dot(ix*30,iy*30,true));
+                }
+                draw=true;
+            }
+        }
+        dots.add(new Dot(30,30,true));
+    }
+
+    public ArrayList<Position> getDots() {
+        return dots;
+    }
+
+    public boolean isEatable(Dot dotsPosition){
         if (
         (super.getX() == dotsPosition.getX()) &&
         (super.getY() == dotsPosition.getY()) &&
