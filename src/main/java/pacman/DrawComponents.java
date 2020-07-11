@@ -10,7 +10,7 @@ public class DrawComponents extends JComponent {
     public int x = pacman.getX();
     public int y = pacman.getY();
     public ArrayList <Position> walls;
-    public ArrayList <Position> dots;
+    public ArrayList <Dot> dots;
     public Ghost ghost1 = new Ghost(60, 90, true);
     public int xG = ghost1.getX();
     public int yG = ghost1.getY();

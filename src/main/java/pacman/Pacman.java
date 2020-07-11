@@ -3,13 +3,13 @@ import java.util.ArrayList;
 class Pacman extends Position {
 
     protected ArrayList <Position> walls;
-    protected ArrayList <Position> dots;
+    protected ArrayList <Dot> dots;
 
     public Pacman (int x, int y, boolean exist) {
         super(x, y, exist);
         walls = new ArrayList<Position>();
         addWall();
-        dots = new ArrayList<Position>();
+        dots = new ArrayList<Dot>();
         addDots();
     }
 
@@ -131,7 +131,7 @@ class Pacman extends Position {
         return walls;
     }
 
-    public void addDots() {
+    public void addDots(){
         boolean draw=true;
         for(int iy=1;iy<29;iy++){
             for(int ix=1;ix<29;ix++){
@@ -149,10 +149,14 @@ class Pacman extends Position {
                 draw=true;
             }
         }
-        dots.add(new Dot(30,30,true));
+        for(int i=0; i<dots.size();i++){
+            if((dots.get(i).getX()==1)&&(dots.get(i).getY()==1)){
+                dots.get(i).setSpecial();
+            }
+        }
     }
 
-    public ArrayList<Position> getDots() {
+    public ArrayList<Dot> getDots() {
         return dots;
     }
 
