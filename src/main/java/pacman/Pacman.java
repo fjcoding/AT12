@@ -149,11 +149,23 @@ class Pacman extends Position {
                 draw=true;
             }
         }
-        for(int i=0; i<dots.size();i++){
-            if((dots.get(i).getX()==1)&&(dots.get(i).getY()==1)){
-                dots.get(i).setSpecial();
-            }
-        }
+        dots.get(0).setSpecial();
+        dots.get(27).setSpecial();
+        dots.get(67).setSpecial();
+        dots.get(77).setSpecial();
+        dots.get(78).setSpecial();
+        dots.get(113).setSpecial();
+        dots.get(191).setSpecial();
+        dots.get(223).setSpecial();
+        dots.get(228).setSpecial();
+        dots.get(238).setSpecial();
+        dots.get(257).setSpecial();
+        dots.get(294).setSpecial();
+        dots.get(353).setSpecial();
+        dots.get(dots.size()-27).setSpecial();
+        dots.get(dots.size()-16).setSpecial();
+        dots.get(dots.size()-15).setSpecial();
+        dots.get(dots.size()-1).setSpecial();
     }
 
     public ArrayList<Dot> getDots() {

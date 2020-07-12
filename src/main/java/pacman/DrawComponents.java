@@ -49,7 +49,12 @@ public class DrawComponents extends JComponent {
     public void drawDots(Graphics g) {
         for (int i=0;i<dots.size(); i++) {
             g.setColor(Color.WHITE);
-            g.fillOval(dots.get(i).getX()+10, dots.get(i).getY()+10, 10, 10);
+            if(dots.get(i).isSpecialFood()==true){
+                g.fillOval(dots.get(i).getX()+5, dots.get(i).getY()+5, 20, 20);
+            }
+            else{
+                g.fillOval(dots.get(i).getX()+10, dots.get(i).getY()+10, 10, 10);
+            }
         }
     }
 
