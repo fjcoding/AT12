@@ -53,6 +53,15 @@ class Pacman extends Position {
         }
         return exist;
     }
+    //Verify if exist a dot in that position
+    public boolean existDot(int xx, int yy) {
+        boolean exist=false;
+        for(Position i: dots){
+            if(i.getX() ==xx && i.getY()==yy)
+                exist= true;
+        }
+        return exist;
+    }
 
     public void addWall() {
         for (int i = 0; i < 900; i += 30) {

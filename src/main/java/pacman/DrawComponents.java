@@ -49,10 +49,10 @@ public class DrawComponents extends JComponent {
     public void drawDots(Graphics g) {
         for (int i=0;i<dots.size(); i++) {
             g.setColor(Color.WHITE);
-            if(dots.get(i).isSpecialFood()==true){
+            if((dots.get(i).isSpecialFood()==true)&&(dots.get(i).exist==true)){
                 g.fillOval(dots.get(i).getX()+5, dots.get(i).getY()+5, 20, 20);
             }
-            else{
+            if(dots.get(i).exist==true){
                 g.fillOval(dots.get(i).getX()+10, dots.get(i).getY()+10, 10, 10);
             }
         }
@@ -69,32 +69,72 @@ public class DrawComponents extends JComponent {
         g.drawImage(ghostImg, xG2, yG2, 30, 30, this);
         repaint();
     }
-
-    //Method to move pacman to right 10 pixels
+  
+    //Method to move pacman to right 10 pixelsAnd verify if exist a dot or superdot
     public void moveRight() {
         x = pacman.right();
         y = y;
+        for (Dot i: dots) {
+        if((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y)){
+              i.exist=false;
+        }
+        if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)) {
+            i.exist=false;
+            ghost1.changeEatable();
+            ghost2.changeEatable();
+        }   
+      }
         repaint();
     }
 
-    //Method to move pacman to left 10 pixels
+    //Method to move pacman to left 10 pixels And verify if exist a dot or superdot
     public void moveLeft() {
         x = pacman.left();
         y = y;
+        for (Dot i: dots) {
+            if(pacman.existDot(x,y)&&(i.getX()==x && i.getY()==y)) {
+                  i.exist=false;
+            }
+            if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)){
+                i.exist=false;
+                ghost1.changeEatable();
+                ghost2.changeEatable();
+            }   
+          }
         repaint();
     }
 
-    //Method to move pacman to down 10 pixels
+    //Method to move pacman to down 10 pixels And verify if exist a dot or superdot
     public void moveDown() {
         y = pacman.down();
         x = x;
+        for (Dot i: dots) {
+            if(pacman.existDot(x,y)&&(i.getX()==x && i.getY()==y)) {
+                  i.exist=false;
+            }
+            if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)){
+                i.exist=false;
+                ghost1.changeEatable();
+                ghost2.changeEatable();
+            }   
+          }
         repaint();
     }
 
-    //Method to move pacman to up 10 pixels
+    //Method to move pacman to up 10 pixels And verify if exist a dot or superdot
     public void moveUp() {
         y = pacman.up();
         x = x;
+        for (Dot i: dots) {
+            if(pacman.existDot(x,y)&&(i.getX()==x && i.getY()==y)) {
+                  i.exist=false;
+            }
+            if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)) {
+                i.exist=false;
+                ghost1.changeEatable();
+                ghost2.changeEatable();
+            }   
+          }
         repaint();
     }
 }
