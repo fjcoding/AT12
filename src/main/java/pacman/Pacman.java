@@ -45,9 +45,9 @@ class Pacman extends Position {
         }
     }
 
-    public boolean existWall(int xx, int yy){
+    public boolean existWall(int xx, int yy) {
         boolean exist=false;
-        for(Position i: walls){
+        for(Position i: walls) {
             if(i.getX() ==xx && i.getY()==yy)
                 exist= true;
         }
