@@ -29,8 +29,8 @@ public class DrawComponents extends JComponent {
         ListWalls lWalls = new ListWalls();
         walls = lWalls.getWalls();
         for (int i=0;i<walls.size(); i++){
-            g.setColor(Color.BLUE);
-            g.drawRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);  
+            g.setColor(Color.GRAY);
+            g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);
         }
     }
     //Method to move pacman to right 10 pixels
