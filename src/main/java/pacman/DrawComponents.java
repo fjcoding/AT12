@@ -22,13 +22,13 @@ public class DrawComponents extends JComponent {
     public void drawPacman(Graphics g) {
         ImageIcon pacmanIcon = new ImageIcon("pacman.gif");
         Image pacmanImg = pacmanIcon.getImage();
-        g.drawImage(pacmanImg,x,y,30,30,null);
+        g.drawImage(pacmanImg, x, y, 30, 30, null);
     }
-    public void drawWalls(Graphics g){
+    public void drawWalls(Graphics g) { 
         ArrayList <Position> walls = new ArrayList<Position>();
         ListWalls lWalls = new ListWalls();
         walls = lWalls.getWalls();
-        for (int i=0;i<walls.size(); i++){
+        for (int i=0;i<walls.size(); i++) {
             g.setColor(Color.GRAY);
             g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);
         }
