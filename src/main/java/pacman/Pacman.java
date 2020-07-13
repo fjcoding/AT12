@@ -4,14 +4,14 @@ class Pacman extends Position {
     protected ArrayList<Position> walls;
     public ListWalls lWall;
 
-    public Pacman (int x, int y, boolean exist){
+    public Pacman (int x, int y, boolean exist) {
         super(x, y, exist);
         lWall = new ListWalls();
         walls = new ArrayList<Position>(); 
         walls= lWall.getWalls();
     }
     
-    public boolean die(){
+    public boolean die() {
         if(super.exist == true){
             super.exist = false;
            return true; 
