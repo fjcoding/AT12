@@ -10,8 +10,15 @@ class Pacman extends Position {
         walls = new ArrayList<Position>(); 
         walls= lWall.getWalls();
     }
-
-    //functions those add and substract pacman's positions
+    
+    public boolean die(){
+        if(super.exist == true){
+            super.exist = false;
+           return true; 
+        }   
+        return false;
+    }
+    //functions those add and substract pacman's positions	
     public int down() {
         if(existWall(x, y+30)){
             return super.y = y;
