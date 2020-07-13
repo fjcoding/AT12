@@ -6,10 +6,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 public class DrawComponents extends JComponent {
-    private Pacman pacman = new Pacman(30, 30, true);
+    private Pacman pacman= new Pacman(30, 30, true);
     public int x = pacman.getX();
     public int y = pacman.getY();
-    public ArrayList<Position> walls;
+    private String direction;
+    public ArrayList <Position> walls;
     public Ghost ghost1 = new Ghost(60, 90, true);
     public int xG = ghost1.getX();
     public int yG = ghost1.getY();
@@ -32,7 +33,7 @@ public class DrawComponents extends JComponent {
     public void paintComponent(Graphics g) { 
         drawWall(g);
         drawGhosts(g);
-        ImageIcon pacmanIcon = new ImageIcon("pacman.gif");
+        ImageIcon pacmanIcon = new ImageIcon(direction);
         Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg, x, y, 30, 30, null);
     }
@@ -61,6 +62,7 @@ public class DrawComponents extends JComponent {
         x = pacman.right();
         y = y;
         repaint();
+        direction="pacmanRight.gif";
     }
 
     //Method to move pacman to left 10 pixels
@@ -68,6 +70,7 @@ public class DrawComponents extends JComponent {
         x = pacman.left();
         y = y;
         repaint();
+        direction="pacmanLeft.gif";
     }
 
     //Method to move pacman to down 10 pixels
@@ -75,6 +78,7 @@ public class DrawComponents extends JComponent {
         y = pacman.down();
         x = x;
         repaint();
+        direction="pacmanDown.gif";
     }
 
     //Method to move pacman to up 10 pixels
@@ -82,5 +86,6 @@ public class DrawComponents extends JComponent {
         y = pacman.up();
         x = x;
         repaint();
+        direction="pacmanUp.gif";
     }
 }

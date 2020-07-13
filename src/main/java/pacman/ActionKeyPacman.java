@@ -9,21 +9,22 @@ public class ActionKeyPacman implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent event) {}
-
-    @Override
-    public void keyReleased(KeyEvent event) {
-        if (
-        event.getKeyCode() == KeyEvent.VK_RIGHT
-        ) drawComponents.moveRight(); else if (
-        event.getKeyCode() == KeyEvent.VK_LEFT
-        ) drawComponents.moveLeft(); else if (
-        event.getKeyCode() == KeyEvent.VK_DOWN
-        ) drawComponents.moveDown(); else if (
-        event.getKeyCode() == KeyEvent.VK_UP
-        ) drawComponents.moveUp();
+    public void keyPressed(KeyEvent event){
+        if(event.getKeyCode() == KeyEvent.VK_RIGHT)
+        drawComponents.moveRight();
+        else if(event.getKeyCode() == KeyEvent.VK_LEFT)
+        drawComponents.moveLeft();
+        else if(event.getKeyCode() == KeyEvent.VK_DOWN)
+        drawComponents.moveDown();
+        else if(event.getKeyCode() == KeyEvent.VK_UP)
+        drawComponents.moveUp();
     }
 
     @Override
-    public void keyTyped(KeyEvent event) {}
+    public void keyReleased(KeyEvent event){ 
+    }
+
+    @Override
+    public void keyTyped(KeyEvent event){
+    }
 }
