@@ -16,10 +16,11 @@ public class DrawComponents extends JComponent {
     public Ghost ghost2 = new Ghost(60, 90, true);
     public int xG2 = ghost2.getX();
     public int yG2 = ghost2.getY();
+    public ListWalls listWalls;
 
     public DrawComponents() {
-        walls = new ArrayList<Position>();
-        walls = pacman.getWalls();
+        listWalls = new ListWalls();
+        walls = listWalls.getWalls();
         ghost1 = new Ghost(60, 90, true, walls);
         Thread threadGhost1 = new Thread(ghost1);
         threadGhost1.start();
@@ -30,17 +31,23 @@ public class DrawComponents extends JComponent {
 
     //Method to draw pacman in the frame
     public void paintComponent(Graphics g) { 
-        drawWall(g);
+        drawWalls(g);
         drawGhosts(g);
+        drawPacman(g);
+    }
+    public void drawPacman(Graphics g) {
         ImageIcon pacmanIcon = new ImageIcon("pacman.gif");
         Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg, x, y, 30, 30, null);
     }
 
-    public void drawWall(Graphics g) {
-        for (int i = 0; i < walls.size(); i++) {
-        g.setColor(Color.BLUE);
-        g.drawRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);
+    public void drawWalls(Graphics g) { 
+        ArrayList <Position> walls = new ArrayList<Position>();
+        ListWalls lWalls = new ListWalls();
+        walls = lWalls.getWalls();
+        for (int i=0;i<walls.size(); i++) {
+            g.setColor(Color.GRAY);
+            g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);
         }
     }
 
