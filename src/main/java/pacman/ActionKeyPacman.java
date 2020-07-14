@@ -8,7 +8,7 @@ public class ActionKeyPacman implements KeyListener {
     
     private final DrawComponents drawComponents;
     private int keyRight, keyLeft, keyUp, keyDown;
-    Timer timer = new Timer(200, new ActionListener(){
+    Timer timer = new Timer(200, new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent event) {
             if(keyRight == 1 )

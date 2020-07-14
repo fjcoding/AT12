@@ -62,7 +62,7 @@ public class DrawComponents extends JComponent {
         x = pacman.right();
         y = y;
         repaint();
-        direction="pacmanRight.gif";
+        direction = "pacmanRight.gif";
     }
 
     //Method to move pacman to left 10 pixels
@@ -70,7 +70,7 @@ public class DrawComponents extends JComponent {
         x = pacman.left();
         y = y;
         repaint();
-        direction="pacmanLeft.gif";
+        direction = "pacmanLeft.gif";
     }
 
     //Method to move pacman to down 10 pixels
@@ -78,7 +78,7 @@ public class DrawComponents extends JComponent {
         y = pacman.down();
         x = x;
         repaint();
-        direction="pacmanDown.gif";
+        direction = "pacmanDown.gif";
     }
 
     //Method to move pacman to up 10 pixels
@@ -86,6 +86,6 @@ public class DrawComponents extends JComponent {
         y = pacman.up();
         x = x;
         repaint();
-        direction="pacmanUp.gif";
+        direction = "pacmanUp.gif";
     }
 }
