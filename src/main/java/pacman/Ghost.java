@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Ghost extends Position implements Runnable {
+public class Ghost extends Position {
     private boolean eatable;
     public ArrayList<Position> walls;
 
@@ -49,6 +49,21 @@ public class Ghost extends Position implements Runnable {
         this.eatable = true;
     }
 
+    public void die() {
+        this.exist = false;
+    }
+
+    public boolean existPacmanEatable(Pacman pacman) {
+        if(pacman.exist == true && pacman.getX() == this.x && pacman.getY() == this.getY()) {
+            return true;
+        }
+        else return false;
+    }
+    public void eatPacman(Pacman pacman) {
+        pacman.die();
+        this.exist = false;
+    }
+
     public void moveUp() {
         super.y -= 30;
     }
@@ -93,44 +108,62 @@ public class Ghost extends Position implements Runnable {
         return true;
     }
 
+    public void searchRoute(Pacman pacman)
+    {
+        int dir = new Random().nextInt(4);
+
+        switch (dir) {
+        case 0:
+            if (isPosibleMoveDown(walls)) {
+                moveDown();
+                if(existPacmanEatable(pacman)) eatPacman(pacman);
+            }
+            break;
+        case 1:
+            if (isPosibleMoveUp(walls)) {
+                moveUp();
+                if(existPacmanEatable(pacman)) eatPacman(pacman);
+            }
+            break;
+        case 2:
+            if (isPosibleMoveLeft(walls)) {
+                moveLeft();
+                if(existPacmanEatable(pacman)) eatPacman(pacman);
+            }
+            break;
+        case 3:
+            if (isPosibleMoveRight(walls)) {
+                moveRight();
+                if(existPacmanEatable(pacman)) eatPacman(pacman);
+            }
+            break;
+        }
+    }
+
     public void searchRoute() {
         int dir = new Random().nextInt(4);
 
         switch (dir) {
         case 0:
             if (isPosibleMoveDown(walls)) {
-            moveDown();
+                moveDown();
             }
             break;
         case 1:
             if (isPosibleMoveUp(walls)) {
-            moveUp();
+                moveUp();
             }
             break;
         case 2:
             if (isPosibleMoveLeft(walls)) {
-            moveLeft();
+                moveLeft();
             }
             break;
         case 3:
-            if (isPosibleMoveRight(walls)) moveRight();
+            if (isPosibleMoveRight(walls)) {
+                moveRight();
+            }
             break;
         }
-    }
-
-    @Override
-    public void run() {
-        while (exist) {
-        searchRoute();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ex) {
-            System.err.println(ex);
-        }
-        }
-    }
-
-    public void stopRun() {
-        exist = false;
     }
 }

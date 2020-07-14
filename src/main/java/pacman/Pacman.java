@@ -10,7 +10,17 @@ class Pacman extends Position {
         walls = new ArrayList<Position>(); 
         walls= lWall.getWalls();
     }
+    public boolean getExist() {
+        return this.exist;
+    }
 
+    public void die() {
+        this.exist = false;  
+    }
+
+    public void live() {
+        this.exist = true;
+    }
     //functions those add and substract pacman's positions
     public int down() {
         if(existWall(x, y+30)){
@@ -53,7 +63,6 @@ class Pacman extends Position {
         return exist;
     }
 
-    
     public boolean isEatable(Dot dotsPosition){
         if((super.getX() == dotsPosition.getX()) && (super.getY() == dotsPosition.getY()) && dotsPosition.exist){
             dotsPosition.exist = false;
