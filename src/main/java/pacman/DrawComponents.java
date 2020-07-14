@@ -70,15 +70,15 @@ public class DrawComponents extends JComponent {
         repaint();
     }
   
-    //Method to move pacman to right 10 pixelsAnd verify if exist a dot or superdot
+    //Method to move pacman to right 10 pixelsAnd Check if there is a dot or superdot
     public void moveRight() {
         x = pacman.right();
         y = y;
         for (Dot i: dots) {
-        if((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y)){
+        if((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y)) {
               i.exist=false;
         }
-        if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)) {
+        if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)) {
             i.exist=false;
             ghost1.changeEatable();
             ghost2.changeEatable();
@@ -87,15 +87,15 @@ public class DrawComponents extends JComponent {
         repaint();
     }
 
-    //Method to move pacman to left 10 pixels And verify if exist a dot or superdot
+    //Method to move pacman to left 10 pixels And Check if there is a dot or superdot
     public void moveLeft() {
         x = pacman.left();
         y = y;
         for (Dot i: dots) {
-            if(pacman.existDot(x,y)&&(i.getX()==x && i.getY()==y)) {
+            if(pacman.existDot(x,y)&&(i.getX() == x && i.getY() == y)) {
                   i.exist=false;
             }
-            if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)){
+            if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)){
                 i.exist=false;
                 ghost1.changeEatable();
                 ghost2.changeEatable();
@@ -104,15 +104,15 @@ public class DrawComponents extends JComponent {
         repaint();
     }
 
-    //Method to move pacman to down 10 pixels And verify if exist a dot or superdot
+    //Method to move pacman to down 10 pixels And Check if there is a dot or superdot
     public void moveDown() {
         y = pacman.down();
         x = x;
         for (Dot i: dots) {
-            if(pacman.existDot(x,y)&&(i.getX()==x && i.getY()==y)) {
+            if(pacman.existDot(x,y)&&(i.getX() == x && i.getY() == y)) {
                   i.exist=false;
             }
-            if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)){
+            if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)){
                 i.exist=false;
                 ghost1.changeEatable();
                 ghost2.changeEatable();
@@ -121,15 +121,15 @@ public class DrawComponents extends JComponent {
         repaint();
     }
 
-    //Method to move pacman to up 10 pixels And verify if exist a dot or superdot
+    //Method to move pacman to up 10 pixels And Check if there is a dot or superdot
     public void moveUp() {
         y = pacman.up();
         x = x;
         for (Dot i: dots) {
-            if(pacman.existDot(x,y)&&(i.getX()==x && i.getY()==y)) {
+            if(pacman.existDot(x,y)&&(i.getX() == x && i.getY() == y)) {
                   i.exist=false;
             }
-            if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)) {
+            if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)) {
                 i.exist=false;
                 ghost1.changeEatable();
                 ghost2.changeEatable();
