@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 class Pacman extends Position {
-
-    protected ArrayList <Position> walls;
+    protected ArrayList<Position> walls;
     public ListWalls lWall;
 
     public Pacman (int x, int y, boolean exist){
@@ -11,8 +10,8 @@ class Pacman extends Position {
         walls = new ArrayList<Position>(); 
         walls= lWall.getWalls();
     }
-    
-    //functions those add and substract pacman's positions	
+
+    //functions those add and substract pacman's positions
     public int down() {
         if(existWall(x, y+30)){
             return super.y = y;
@@ -60,14 +59,15 @@ class Pacman extends Position {
             dotsPosition.exist = false;
             return true;
         }
-            return false;
+        return false;
     }
 
-    public boolean isEatable(Ghost ghostPosition){
-        if((super.getX() == ghostPosition.getX()) && (super.getY() == ghostPosition.getY()) && ghostPosition.isEatable()){
-            return true;		
+    public boolean isEatable(Ghost ghostPosition) {
+        if ((super.getX() == ghostPosition.getX()) && 
+            (super.getY() == ghostPosition.getY()) &&
+             ghostPosition.isEatable()) {
+        return true;
         } else {
-
             super.exist = false;
             return false;
         }
