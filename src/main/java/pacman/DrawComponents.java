@@ -41,19 +41,19 @@ public class DrawComponents extends JComponent {
     }
 
     public void drawWall(Graphics g) {
-        for (int i=0;i<walls.size(); i++) {
+        for (int i = 0; i < walls.size(); i++) {
             g.setColor(Color.BLUE);
             g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);  
         }
     }
     public void drawDots(Graphics g) {
-        for (int i=0;i<dots.size(); i++) {
+        for (int i = 0; i < dots.size(); i++) {
             g.setColor(Color.WHITE);
-            if((dots.get(i).isSpecialFood()==true)&&(dots.get(i).exist==true)){
-                g.fillOval(dots.get(i).getX()+5, dots.get(i).getY()+5, 20, 20);
+            if((dots.get(i).isSpecialFood() == true) && (dots.get(i).exist == true)) {
+                g.fillOval(dots.get(i).getX() + 5, dots.get(i).getY() + 5, 20, 20);
             }
-            if(dots.get(i).exist==true){
-                g.fillOval(dots.get(i).getX()+10, dots.get(i).getY()+10, 10, 10);
+            if(dots.get(i).exist == true) {
+                g.fillOval(dots.get(i).getX() + 10, dots.get(i).getY() + 10, 10, 10);
             }
         }
     }

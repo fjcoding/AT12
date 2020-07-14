@@ -53,12 +53,12 @@ class Pacman extends Position {
         }
         return exist;
     }
-    //Verify if exist a dot in that position
+    //Check if there is a dot in that position
     public boolean existDot(int xx, int yy) {
-        boolean exist=false;
-        for(Position i: dots){
-            if(i.getX() ==xx && i.getY()==yy)
-                exist= true;
+        boolean exist = false;
+        for(Position i : dots){
+            if(i.getX() == xx && i.getY() == yy)
+                exist = true;
         }
         return exist;
     }
@@ -140,22 +140,22 @@ class Pacman extends Position {
         return walls;
     }
 
-    public void addDots(){
-        boolean draw=true;
-        for(int iy=1;iy<29;iy++){
-            for(int ix=1;ix<29;ix++){
-                int i=0;
-                while(i<walls.size()){
-                    if((walls.get(i).getX()==ix*30)&&(walls.get(i).getY()==iy*30)){
-                        draw=false;
+    public void addDots() {
+        boolean draw = true;
+        for(int iy = 1; iy < 29; iy++) {
+            for(int ix = 1; ix < 29; ix++) {
+                int i = 0;
+                while(i < walls.size()) {
+                    if((walls.get(i).getX() == ix * 30) && (walls.get(i).getY() == iy * 30)) {
+                        draw = false;
                         break;
                     }
                     i++;
                 }
-                if(draw==true){
-                    dots.add(new Dot(ix*30,iy*30,true));
+                if(draw == true) {
+                    dots.add(new Dot(ix * 30, iy * 30, true));
                 }
-                draw=true;
+                draw = true;
             }
         }
         dots.get(0).setSpecial();
@@ -164,17 +164,17 @@ class Pacman extends Position {
         dots.get(77).setSpecial();
         dots.get(78).setSpecial();
         dots.get(113).setSpecial();
-        dots.get(191).setSpecial();
+        dots.get(178).setSpecial();
         dots.get(223).setSpecial();
         dots.get(228).setSpecial();
         dots.get(238).setSpecial();
         dots.get(257).setSpecial();
         dots.get(294).setSpecial();
         dots.get(353).setSpecial();
-        dots.get(dots.size()-27).setSpecial();
-        dots.get(dots.size()-16).setSpecial();
-        dots.get(dots.size()-15).setSpecial();
-        dots.get(dots.size()-1).setSpecial();
+        dots.get(dots.size() - 27).setSpecial();
+        dots.get(dots.size() - 16).setSpecial();
+        dots.get(dots.size() - 15).setSpecial();
+        dots.get(dots.size() - 1).setSpecial();
     }
 
     public ArrayList<Dot> getDots() {
