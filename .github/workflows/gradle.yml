@@ -22,8 +22,9 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew test
-    - name: Stylecode
-      uses: actions/upload-artifact@v1
+    - name: Style Code Report
+      if: failure()
+      uses: actions/upload-artifact@v2
       with:
-        name: app
-        path: AT12/build/reports/checkstyle/checkstyle.html
+        name: CheckStyle
+        path: build/reports/checkstyle/checkstyle.html
