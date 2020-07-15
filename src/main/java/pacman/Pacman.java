@@ -158,6 +158,7 @@ class Pacman extends Position {
                 draw = true;
             }
         }
+        //The next Lines change isSpecial attribute of Dot to true, at specific positions.
         dots.get(0).setSpecial();
         dots.get(27).setSpecial();
         dots.get(67).setSpecial();

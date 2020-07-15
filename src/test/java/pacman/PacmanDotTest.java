@@ -27,7 +27,6 @@ public class PacmanDotTest {
 	@Test
 	public void testFoodIsNotSpecial() {
 		Dot f = new Dot(5, 5, false);
-		f.setNotSpecial();
 		assertEquals(false, f.isSpecialFood());		
 	}
 

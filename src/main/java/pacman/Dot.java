@@ -11,13 +11,9 @@ class Dot extends Position {
         return this.isSpecial;
     }
 
-    public boolean setNotSpecial(){
-        this.isSpecial=false;
-        return true;
+    public void setSpecial(){
+        this.isSpecial=true;
     }
 
-    public boolean setSpecial(){
-        this.isSpecial=true;
-        return true;
-    }
+    //maybe it can be useful to create a setNotSpecial() function
 }

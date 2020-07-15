@@ -46,14 +46,17 @@ public class DrawComponents extends JComponent {
             g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);  
         }
     }
+
     public void drawDots(Graphics g) {
         for (int i = 0; i < dots.size(); i++) {
             g.setColor(Color.WHITE);
-            if((dots.get(i).isSpecialFood() == true) && (dots.get(i).exist == true)) {
-                g.fillOval(dots.get(i).getX() + 5, dots.get(i).getY() + 5, 20, 20);
-            }
-            if(dots.get(i).exist == true) {
-                g.fillOval(dots.get(i).getX() + 10, dots.get(i).getY() + 10, 10, 10);
+            if(dots.get(i).exist) {
+                if(dots.get(i).isSpecialFood()) {
+                    g.fillOval(dots.get(i).getX() + 5, dots.get(i).getY() + 5, 20, 20);
+                }
+                else {
+                    g.fillOval(dots.get(i).getX() + 10, dots.get(i).getY() + 10, 10, 10);
+                }
             }
         }
     }
@@ -74,16 +77,16 @@ public class DrawComponents extends JComponent {
     public void moveRight() {
         x = pacman.right();
         y = y;
-        for (Dot i: dots) {
-        if((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y)){
-              i.exist=false;
+        for (Dot dot: dots) {
+            if((pacman.existDot(x,y))&&(dot.getX()==x && dot.getY()==y)){
+                dot.exist=false;
+            }
+            if (((pacman.existDot(x,y))&&(dot.getX()==x && dot.getY()==y))&&(dot.isSpecial)) {
+                dot.exist=false;
+                ghost1.changeEatable();
+                ghost2.changeEatable();
+            }   
         }
-        if (((pacman.existDot(x,y))&&(i.getX()==x && i.getY()==y))&&(i.isSpecial)) {
-            i.exist=false;
-            ghost1.changeEatable();
-            ghost2.changeEatable();
-        }   
-      }
         repaint();
     }
 
