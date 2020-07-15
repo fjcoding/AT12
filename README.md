@@ -12,7 +12,7 @@
 
 ## Run test and CheckStyle
 ```bash
-gradle test
+./gradlew test
 ```
 If **BUILD FAILED**  
 open the file **checkstyle.html** 
@@ -24,17 +24,17 @@ Solve the problems and try again **gradle test**
 
 ## Run only CheckStyle
 ```bash
-gradle checkstyle
+./gradlew checkstyle
 ```
 
 ## Only Run
 ```bash
-gradle run
+./gradlew run
 ```
 
 # How to create build ?
 
 ## Run
 ```bash
-gradle build
+./gradlew build
 ```
