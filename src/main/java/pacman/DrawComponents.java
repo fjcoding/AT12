@@ -77,12 +77,12 @@ public class DrawComponents extends JComponent {
     public void moveRight() {
         x = pacman.right();
         y = y;
-        for (Dot i: dots) {
-        if((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y)) {
-              i.exist=false;
+        for (Dot dot : dots) {
+        if((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) {
+              dot.exist = false;
         }
-        if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)) {
-            i.exist=false;
+        if (((pacman.existDot(x,y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecial)) {
+            dot.exist = false;
             ghost1.changeEatable();
             ghost2.changeEatable();
         }   
@@ -94,12 +94,12 @@ public class DrawComponents extends JComponent {
     public void moveLeft() {
         x = pacman.left();
         y = y;
-        for (Dot i: dots) {
-            if(pacman.existDot(x,y)&&(i.getX() == x && i.getY() == y)) {
-                  i.exist=false;
+        for (Dot dot : dots) {
+            if(pacman.existDot(x,y) && (dot.getX() == x && dot.getY() == y)) {
+                dot.exist = false;
             }
-            if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)){
-                i.exist=false;
+            if (((pacman.existDot(x,y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecial)){
+                dot.exist = false;
                 ghost1.changeEatable();
                 ghost2.changeEatable();
             }   
@@ -111,12 +111,12 @@ public class DrawComponents extends JComponent {
     public void moveDown() {
         y = pacman.down();
         x = x;
-        for (Dot i: dots) {
-            if(pacman.existDot(x,y)&&(i.getX() == x && i.getY() == y)) {
-                  i.exist=false;
+        for (Dot dot : dots) {
+            if(pacman.existDot(x,y) && (dot.getX() == x && dot.getY() == y)) {
+                dot.exist = false;
             }
-            if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)){
-                i.exist=false;
+            if (((pacman.existDot(x,y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecial)){
+                dot.exist = false;
                 ghost1.changeEatable();
                 ghost2.changeEatable();
             }   
@@ -128,12 +128,12 @@ public class DrawComponents extends JComponent {
     public void moveUp() {
         y = pacman.up();
         x = x;
-        for (Dot i: dots) {
-            if(pacman.existDot(x,y)&&(i.getX() == x && i.getY() == y)) {
-                  i.exist=false;
+        for (Dot dot: dots) {
+            if(pacman.existDot(x,y) && (dot.getX() == x && dot.getY() == y)) {
+                dot.exist = false;
             }
-            if (((pacman.existDot(x,y))&&(i.getX() == x && i.getY() == y))&&(i.isSpecial)) {
-                i.exist=false;
+            if (((pacman.existDot(x,y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecial)) {
+                dot.exist=false;
                 ghost1.changeEatable();
                 ghost2.changeEatable();
             }   
