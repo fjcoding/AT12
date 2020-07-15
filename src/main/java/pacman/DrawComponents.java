@@ -124,7 +124,7 @@ public class DrawComponents extends JComponent {
         repaint();
     }
 
-    //Method to move pacman to up 10 pixels And Check if there is a dot or superdot
+    //Method to move pacman to up 10 pixels And Check if there is a dot or  superdot
     public void moveUp() {
         y = pacman.up();
         x = x;
