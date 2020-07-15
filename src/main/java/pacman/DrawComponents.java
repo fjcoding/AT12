@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
@@ -21,6 +20,7 @@ public class DrawComponents extends JComponent {
     public int yG2 = ghost2.getY();
     public ListWalls listWalls;
     public Timer timer;
+
     public DrawComponents() {
         listWalls = new ListWalls();
         walls = listWalls.getWalls();
@@ -46,7 +46,7 @@ public class DrawComponents extends JComponent {
     }
 
     public void drawPacman(Graphics g) {
-        if(pacman.getExist()){
+        if(pacman.getExist()) {
             ImageIcon pacmanIcon = new ImageIcon("pacman.gif");
             Image pacmanImg = pacmanIcon.getImage();
             g.drawImage(pacmanImg, x, y, 30, 30, null);
@@ -57,7 +57,7 @@ public class DrawComponents extends JComponent {
         ArrayList <Position> walls = new ArrayList<Position>();
         ListWalls lWalls = new ListWalls();
         walls = lWalls.getWalls();
-        for (int i=0;i<walls.size(); i++) {
+        for (int i = 0; i < walls.size(); i++) {
             g.setColor(Color.GRAY);
             g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);
         }

@@ -59,6 +59,7 @@ public class Ghost extends Position {
         }
         else return false;
     }
+
     public void eatPacman(Pacman pacman) {
         pacman.die();
         this.exist = false;
@@ -82,59 +83,66 @@ public class Ghost extends Position {
 
     public boolean isPosibleMoveDown(ArrayList<Position> walls) {
         for (Position i : walls) {
-        if (i.getX() == this.x && i.getY() == this.y + 30) return false;
+            if (i.getX() == this.x && i.getY() == this.y + 30) 
+                return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveUp(ArrayList<Position> walls) {
         for (Position i : walls) {
-        if (i.getX() == this.x && i.getY() == this.y - 30) return false;
+            if (i.getX() == this.x && i.getY() == this.y - 30) 
+                return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveLeft(ArrayList<Position> walls) {
         for (Position i : walls) {
-        if (i.getX() == this.x - 30 && i.getY() == this.y) return false;
+            if (i.getX() == this.x - 30 && i.getY() == this.y) 
+                return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveRight(ArrayList<Position> walls) {
         for (Position i : walls) {
-        if (i.getX() == this.x + 30 && i.getY() == this.y) return false;
+            if (i.getX() == this.x + 30 && i.getY() == this.y) 
+                return false;
         }
         return true;
     }
 
-    public void searchRoute(Pacman pacman)
-    {
+    public void searchRoute(Pacman pacman) {
         int dir = new Random().nextInt(4);
 
         switch (dir) {
         case 0:
             if (isPosibleMoveDown(walls)) {
                 moveDown();
-                if(existPacmanEatable(pacman)) eatPacman(pacman);
+                if (existPacmanEatable(pacman)) 
+                    eatPacman(pacman);
             }
             break;
         case 1:
             if (isPosibleMoveUp(walls)) {
                 moveUp();
-                if(existPacmanEatable(pacman)) eatPacman(pacman);
+                if (existPacmanEatable(pacman)) 
+                    eatPacman(pacman);
             }
             break;
         case 2:
             if (isPosibleMoveLeft(walls)) {
                 moveLeft();
-                if(existPacmanEatable(pacman)) eatPacman(pacman);
+                if (existPacmanEatable(pacman)) 
+                    eatPacman(pacman);
             }
             break;
         case 3:
             if (isPosibleMoveRight(walls)) {
                 moveRight();
-                if(existPacmanEatable(pacman)) eatPacman(pacman);
+                if (existPacmanEatable(pacman)) 
+                    eatPacman(pacman);
             }
             break;
         }
