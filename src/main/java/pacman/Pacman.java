@@ -12,7 +12,7 @@ class Pacman extends Position {
     }
     
     public boolean die() {
-        if(super.exist == true){
+        if(super.exist == true) {
             super.exist = false;
            return true; 
         }   
@@ -20,7 +20,7 @@ class Pacman extends Position {
     }
     //functions those add and substract pacman's positions	
     public int down() {
-        if(existWall(x, y+30)){
+        if(existWall(x, y+30)) {
             return super.y = y;
         }else{
             return super.y += 30;
@@ -28,7 +28,7 @@ class Pacman extends Position {
     }
     
     public int right(){
-        if(existWall(x+30, y)){
+        if(existWall(x+30, y)) {
             return super.x = x;
         }else{
             return super.x += 30;
@@ -36,7 +36,7 @@ class Pacman extends Position {
     }
     
     public int left(){
-        if(existWall(x-30, y)){
+        if(existWall(x-30, y)) {
             return super.x = x;
         }else{
             return super.x -= 30;
@@ -44,7 +44,7 @@ class Pacman extends Position {
     }
     
     public int up(){
-        if(existWall(x, y-30)){
+        if(existWall(x, y-30)) {
             return super.y = y;
         }else{
             return super.y -= 30;
@@ -61,8 +61,8 @@ class Pacman extends Position {
     }
 
     
-    public boolean isEatable(Dot dotsPosition){
-        if((super.getX() == dotsPosition.getX()) && (super.getY() == dotsPosition.getY()) && dotsPosition.exist){
+    public boolean isEatable(Dot dotsPosition) {
+        if((super.getX() == dotsPosition.getX()) && (super.getY() == dotsPosition.getY()) && dotsPosition.exist) {
             dotsPosition.exist = false;
             return true;
         }
