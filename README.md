@@ -8,3 +8,33 @@
 1. Good commits
 1. Code quality
 
+# Steps for to run
+
+## Run test and CheckStyle
+```bash
+gradle test
+```
+If **BUILD FAILD**  
+open the file **checkstyle.html** 
+```bash
+build/reports/checkstyle/checkstyle.html
+```
+Solve the problems and try again **gradle test**
+
+
+## Run only CheckStyle
+```bash
+gradle checkstyle
+```
+
+## Only Run
+```bash
+gradle run
+```
+
+# How to create build ?
+
+## Run
+```bash
+gradle build
+```
