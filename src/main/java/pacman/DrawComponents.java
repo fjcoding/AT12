@@ -20,6 +20,7 @@ public class DrawComponents extends JComponent {
     public ListWalls listWalls;
 
     public DrawComponents() {
+        direction = "pacman.gif";
         listWalls = new ListWalls();
         walls = listWalls.getWalls();
         ghost1 = new Ghost(60, 90, true, walls);
