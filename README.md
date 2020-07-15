@@ -14,7 +14,7 @@
 ```bash
 gradle test
 ```
-If **BUILD FAILD**  
+If **BUILD FAILED**  
 open the file **checkstyle.html** 
 ```bash
 build/reports/checkstyle/checkstyle.html
