@@ -53,11 +53,11 @@ class Pacman extends Position {
         }
         return exist;
     }
-    //Check if there is a dot in that position
-    public boolean existDot(int xx, int yy) {
+    //Check if there is a dot in x and y position
+    public boolean existDot(int positionx, int positiony) {
         boolean exist = false;
         for(Position i : dots){
-            if(i.getX() == xx && i.getY() == yy)
+            if(i.getX() == positionx && i.getY() == positiony)
                 exist = true;
         }
         return exist;

@@ -7,13 +7,19 @@ class Dot extends Position {
         this.isSpecial = false;
     }
     
-    public boolean isSpecialFood(){
+    public boolean isSpecialDot(){
         return this.isSpecial;
     }
 
     public void setSpecial(){
         this.isSpecial=true;
     }
+    
+    public boolean setExist(boolean exist) {
+        super.exist = exist;
+        return true;
+    }
+
 
     //maybe it can be useful to create a setNotSpecial() function
 }
