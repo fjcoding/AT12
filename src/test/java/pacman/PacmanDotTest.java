@@ -21,13 +21,13 @@ public class PacmanDotTest {
 	public void testFoodIsSpecial() {
 		Dot f = new Dot(5, 5, false);
 		f.setSpecial();
-		assertEquals(true, f.isSpecialFood());		
+		assertEquals(true, f.isSpecialDot());		
 	}
 
 	@Test
 	public void testFoodIsNotSpecial() {
 		Dot f = new Dot(5, 5, false);
-		assertEquals(false, f.isSpecialFood());		
+		assertEquals(false, f.isSpecialDot());		
 	}
 
 	@Test
