@@ -28,3 +28,5 @@ task Checkstyle(type: Checkstyle) {
     include '**/*.java'
     classpath = rootProject.files()
 }
+
+test.finalizedBy("Checkstyle")
