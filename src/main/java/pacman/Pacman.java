@@ -14,7 +14,7 @@ class Pacman extends Position {
     public boolean die() {
         if(super.exist == true) {
             super.exist = false;
-           return true; 
+            return true; 
         }   
         return false;
     }
