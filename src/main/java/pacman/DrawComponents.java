@@ -6,19 +6,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 public class DrawComponents extends JComponent {
-    private Pacman pacman= new Pacman(30, 30, true);
-    public int x = pacman.getX();
-    public int y = pacman.getY();
-    public ArrayList <Position> walls;
-    public ArrayList <Dot> dots;
+
+    private Pacman pacman = new Pacman(30, 30, true);
+    private int x = pacman.getX();
+    private int y = pacman.getY();
     private String direction;
-    public Ghost ghost1 = new Ghost(60, 90, true);
-    public int xG = ghost1.getX();
-    public int yG = ghost1.getY();
-    public Ghost ghost2 = new Ghost(60, 90, true);
-    public int xG2 = ghost2.getX();
-    public int yG2 = ghost2.getY();
-    public ListWalls listWalls;
+    private ArrayList<Position> walls;
+    public ArrayList <Dot> dots;
+    private Ghost ghost1 = new Ghost(60, 90, true);
+    private int xG = ghost1.getX();
+    private int yG = ghost1.getY();
+    private Ghost ghost2 = new Ghost(60, 90, true);
+    private int xG2 = ghost2.getX();
+    private int yG2 = ghost2.getY();
+    private ListWalls listWalls;
 
     public DrawComponents() {
         dots = pacman.getDots();
@@ -33,7 +34,6 @@ public class DrawComponents extends JComponent {
         threadGhost2.start();
     }
 
-    //Method to draw pacman in the frame
     public void paintComponent(Graphics g) { 
         drawWall(g);
         drawGhosts(g);
@@ -65,6 +65,10 @@ public class DrawComponents extends JComponent {
                     g.fillOval(dot.getX() + 10, dot.getY() + 10, 10, 10);
                 }
             }
+    public void drawWalls(Graphics g) { 
+        for (int i=0; i<walls.size(); i++) {
+            g.setColor(Color.GRAY);
+            g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);
         }
     }
 
@@ -84,6 +88,8 @@ public class DrawComponents extends JComponent {
     public void moveRight() {
         x = pacman.right();
         y = y;
+        repaint();
+        direction = "pacmanRight.gif";
         for (Dot dot : dots) {
         if((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) {
             dot.setExist(false);
@@ -94,14 +100,14 @@ public class DrawComponents extends JComponent {
             ghost2.changeEatable();
         }   
       }
-        repaint();
-        direction = "pacmanRight.gif";
     }
 
     //Method to move pacman to left 10 pixels And Check if there is a dot or superdot
     public void moveLeft() {
         x = pacman.left();
         y = y;
+        repaint();
+        direction = "pacmanLeft.gif";
         for (Dot dot : dots) {
             if(pacman.existDot(x,y) && (dot.getX() == x && dot.getY() == y)) {
                 dot.setExist(false);
@@ -112,14 +118,14 @@ public class DrawComponents extends JComponent {
                 ghost2.changeEatable();
             }   
           }
-        repaint();
-        direction = "pacmanLeft.gif";
     }
 
     //Method to move pacman to down 10 pixels And Check if there is a dot or superdot
     public void moveDown() {
         y = pacman.down();
         x = x;
+        repaint();
+        direction = "pacmanDown.gif";
         for (Dot dot : dots) {
             if(pacman.existDot(x,y) && (dot.getX() == x && dot.getY() == y)) {
                 dot.setExist(false);
@@ -130,14 +136,14 @@ public class DrawComponents extends JComponent {
                 ghost2.changeEatable();
             }   
           }
-        repaint();
-        direction = "pacmanDown.gif";
     }
 
     //Method to move pacman to up 10 pixels And Check if there is a dot or  superdot
     public void moveUp() {
         y = pacman.up();
         x = x;
+        repaint();
+        direction = "pacmanUp.gif";
         for (Dot dot: dots) {
             if(pacman.existDot(x,y) && (dot.getX() == x && dot.getY() == y)) {
                 dot.setExist(false);
@@ -148,7 +154,5 @@ public class DrawComponents extends JComponent {
                 ghost2.changeEatable();
             }   
           }
-        repaint();
-        direction = "pacmanUp.gif";
     }
 }

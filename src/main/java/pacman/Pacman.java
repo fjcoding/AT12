@@ -23,41 +23,62 @@ class Pacman extends Position {
     }
     //functions those add and substract pacman's positions	
     public int down() {
+<<<<<<< HEAD
         if(existWall(x, y+30)) {
+=======
+        if (existWall(x, y+30)) {
+>>>>>>> Code Refactoring using Google Java Style Guide
             return super.y = y;
-        }else{
+        } else {
             return super.y += 30;
         }
     }
     
+<<<<<<< HEAD
     public int right(){
         if(existWall(x+30, y)) {
+=======
+    public int right() {
+        if (existWall(x+30, y)) {
+>>>>>>> Code Refactoring using Google Java Style Guide
             return super.x = x;
-        }else{
+        } else {
             return super.x += 30;
         }
     }
     
+<<<<<<< HEAD
     public int left(){
         if(existWall(x-30, y)) {
+=======
+    public int left() {
+        if (existWall(x-30, y)) {
+>>>>>>> Code Refactoring using Google Java Style Guide
             return super.x = x;
-        }else{
+        } else {
             return super.x -= 30;
         }
     }
     
+<<<<<<< HEAD
     public int up(){
         if(existWall(x, y-30)) {
+=======
+    public int up() {
+        if (existWall(x, y-30)) {
+>>>>>>> Code Refactoring using Google Java Style Guide
             return super.y = y;
-        }else{
+        } else {
             return super.y -= 30;
         }
     }
 
     public boolean existWall(int xx, int yy) {
-        boolean exist=false;
-        for(Position i: walls) {
-            if(i.getX() ==xx && i.getY()==yy)
+        ListWalls lWall = new ListWalls();
+        ArrayList<Position> walls = lWall.getWalls();
+        boolean exist = false;
+        for (Position wall: walls) {
+            if (wall.getX()==xx && wall.getY()==yy)
                 exist= true;
         }
         return exist;
@@ -125,10 +146,10 @@ class Pacman extends Position {
     }
 
     public boolean isEatable(Ghost ghostPosition) {
-        if ((super.getX() == ghostPosition.getX()) && 
-            (super.getY() == ghostPosition.getY()) &&
+        if ((super.getX()==ghostPosition.getX()) && 
+            (super.getY()==ghostPosition.getY()) &&
              ghostPosition.isEatable()) {
-        return true;
+            return true;
         } else {
             super.exist = false;
             return false;

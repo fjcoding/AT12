@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ghost extends Position implements Runnable {
+
     private boolean eatable;
-    public ArrayList<Position> walls;
+    private ArrayList<Position> walls;
 
     public Ghost(int x, int y, boolean exist) {
         super(x, y, exist);
@@ -66,29 +67,33 @@ public class Ghost extends Position implements Runnable {
     }
 
     public boolean isPosibleMoveDown(ArrayList<Position> walls) {
-        for (Position i : walls) {
-        if (i.getX() == this.x && i.getY() == this.y + 30) return false;
+        for (Position wall : walls) {
+            if (wall.getX()==this.x && wall.getY()==this.y+30) 
+                return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveUp(ArrayList<Position> walls) {
-        for (Position i : walls) {
-        if (i.getX() == this.x && i.getY() == this.y - 30) return false;
+        for (Position wall : walls) {
+            if (wall.getX()==this.x && wall.getY()==this.y-30) 
+                return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveLeft(ArrayList<Position> walls) {
-        for (Position i : walls) {
-        if (i.getX() == this.x - 30 && i.getY() == this.y) return false;
+        for (Position wall : walls) {
+            if (wall.getX()==this.x-30 && wall.getY()==this.y) 
+                return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveRight(ArrayList<Position> walls) {
-        for (Position i : walls) {
-        if (i.getX() == this.x + 30 && i.getY() == this.y) return false;
+        for (Position wall : walls) {
+            if (wall.getX()==this.x+30 && wall.getY()==this.y) 
+                return false;
         }
         return true;
     }
@@ -97,23 +102,25 @@ public class Ghost extends Position implements Runnable {
         int dir = new Random().nextInt(4);
 
         switch (dir) {
-        case 0:
-            if (isPosibleMoveDown(walls)) {
-            moveDown();
-            }
+            case 0:
+                if (isPosibleMoveDown(walls)) {
+                    moveDown();
+                } 
             break;
-        case 1:
-            if (isPosibleMoveUp(walls)) {
-            moveUp();
-            }
+            case 1:
+                if (isPosibleMoveUp(walls)) {
+                    moveUp();
+                }
             break;
-        case 2:
-            if (isPosibleMoveLeft(walls)) {
-            moveLeft();
-            }
+            case 2:
+                if (isPosibleMoveLeft(walls)) {
+                    moveLeft();
+                }
             break;
-        case 3:
-            if (isPosibleMoveRight(walls)) moveRight();
+            case 3:
+                if (isPosibleMoveRight(walls)) {
+                    moveRight();
+                }
             break;
         }
     }
@@ -121,12 +128,12 @@ public class Ghost extends Position implements Runnable {
     @Override
     public void run() {
         while (exist) {
-        searchRoute();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ex) {
-            System.err.println(ex);
-        }
+            searchRoute();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                System.err.println(ex);
+            }
         }
     }
 

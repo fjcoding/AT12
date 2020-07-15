@@ -1,17 +1,12 @@
-import java.awt.*;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 class Main extends JFrame {
-    //attrib
-    private Pacman pacman;
-    private Dot dots;
-    private Ghost ghost;
+ 
     private DrawComponents drawComponents;
 
     public Main() {
