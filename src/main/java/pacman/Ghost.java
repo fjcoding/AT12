@@ -33,7 +33,11 @@ public class Ghost extends Position {
         walls = wallsExtern;
     }
 
-    public void setX(int x) {
+    /**
+     *
+     * @param x
+     */
+    public void setX(final int x) {
         super.x = x;
     }
 
