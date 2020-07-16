@@ -33,19 +33,7 @@ public class Ghost extends Position {
         walls = wallsExtern;
     }
 
-    /**
-     *
-     * @return boolean exist
-     */
-    public boolean getExist() {
-        return exist;
-    }
-
-    /**
-     *
-     * @param x
-     */
-    public void setX(final int x) {
+    public void setX(int x) {
         super.x = x;
     }
 

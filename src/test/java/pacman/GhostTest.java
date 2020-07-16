@@ -51,7 +51,7 @@ public class GhostTest {
 		Ghost g = new Ghost(5, 5, true);
 		Pacman p = new Pacman(5, 5, true);
 		g.eatPacman(p);
-		//assertEquals(false, p.getExist());
-		assertEquals(false, g.getExist());
+		assertEquals(false, p.doesExist());
+		assertEquals(false, g.doesExist());
 	}
 }
