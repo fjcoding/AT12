@@ -1,9 +1,9 @@
 class Position {
-    
-    protected int x;	     // positionInX
-    protected int y;		 // positionInY
-    protected boolean exist; // possible change itExists
-    protected String symbol;
+
+    private int x;	     // positionInX
+    private	 // positionInY
+    private boolean exist; // possible change itExists
+    private symbol;
     
     public Position(int x, int y, boolean exist) {
         this.x = x;
