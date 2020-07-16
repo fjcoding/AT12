@@ -25,4 +25,8 @@ class Position {
     public int getY() {
         return  this.y;
     }
+
+    public boolean doesExist() {
+        return exist;
+    }
 }
