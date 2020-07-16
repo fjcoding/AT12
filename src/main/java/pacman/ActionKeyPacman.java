@@ -7,24 +7,22 @@ import javax.swing.Timer;
 public class ActionKeyPacman implements KeyListener {
     
     private final DrawComponents drawComponents;
-    private int keyRight, keyLeft, keyUp, keyDown;
+    private boolean keyRight, keyLeft, keyUp, keyDown;
     Timer timer = new Timer(200, new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent event) {
-            if(keyRight == 1 )
+            if (keyRight)
                 drawComponents.moveRight();
-            if(keyLeft == 1 )
+            if (keyLeft)
                 drawComponents.moveLeft();
-            if(keyUp == 1 )
+            if (keyUp)
                 drawComponents.moveUp();
-            if(keyDown == 1 )
+            if (keyDown)
                 drawComponents.moveDown();
         }
     });
 
-    public ActionKeyPacman(
-    final DrawComponents drawComponents)
-    {
+    public ActionKeyPacman(DrawComponents drawComponents) {
         this.drawComponents = drawComponents;
     }
 
@@ -33,34 +31,30 @@ public class ActionKeyPacman implements KeyListener {
         timer.start();
         final int key = event.getKeyCode();
         if (key == KeyEvent.VK_RIGHT) {
-            keyUp = 0;
-            keyDown = 0;
-            keyRight = 1;
-            keyLeft = 0;
-        }
-        else if (key == KeyEvent.VK_LEFT) {
-            keyUp = 0;
-            keyDown = 0;
-            keyRight = 0;
-            keyLeft = 1;
-        }
-        else if (key == KeyEvent.VK_DOWN) {
-            keyUp = 0;
-            keyDown = 1;
-            keyRight = 0;
-            keyLeft = 0;
-        } 
-        else if (key == KeyEvent.VK_UP) {
-            keyUp = 1;
-            keyDown = 0;
-            keyRight = 0;
-            keyLeft = 0;
+            keyUp = false;
+            keyDown = false;
+            keyRight = true;
+            keyLeft = false;
+        } else if (key == KeyEvent.VK_LEFT) {
+            keyUp = false;
+            keyDown = false;
+            keyRight = false;
+            keyLeft = true;
+        } else if (key == KeyEvent.VK_DOWN) {
+            keyUp = false;
+            keyDown = true;
+            keyRight = false;
+            keyLeft = false;
+        } else if (key == KeyEvent.VK_UP) {
+            keyUp = true;
+            keyDown = false;
+            keyRight = false;
+            keyLeft = false;
         }
     }
 
     @Override
     public void keyReleased(final KeyEvent event) {
-
     }
 
     @Override
