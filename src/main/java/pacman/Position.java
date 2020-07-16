@@ -1,28 +1,28 @@
 class Position {
 
-    protected int x;	       // positionInX
-    protected int y;		   // positionInY
-    protected boolean exist; // possible change itExists
-    protected String symbol;
+    private int x;	       // positionInX
+    private int y;		   // positionInY
+    private boolean exist; // possible change itExists
+    private String symbol;
 
-    public Position(int x, int y, boolean exist) {
+    Position(final int x, final int y, final boolean exist) {
         this.x = x;
         this.y = y;
-        this.exist = exist;		
+        this.exist = exist;
     }
 
-    public Position(int x, int y, boolean exist, String symbol) {
+    Position(final int x, final int y, final boolean exist, final String symbol) {
         this.x = x;
         this.y = y;
         this.exist = exist;
         this.symbol = symbol;
     }
 
-    public int getX() {
+    private int getX() {
         return  this.x;
     }
 
-    public int getY() {
+    private int getY() {
         return  this.y;
     }
 
