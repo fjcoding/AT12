@@ -2,9 +2,8 @@ import java.util.ArrayList;
 
 public class Ghost extends Position {
     private boolean eatable;
-    //private ListWalls lWall = new ListWalls();
-    //private ArrayList<Position> walls = lWall.getWalls();
-    private ArrayList<Position> walls;
+    private ListWalls lWall = new ListWalls();
+    private ArrayList<Position> walls = lWall.getWalls();
     private String direccion;
     private String noPDir;
     private String irDir;
