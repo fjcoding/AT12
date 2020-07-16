@@ -1,9 +1,9 @@
 class Position {
 
-    private int x;	     // positionInX
-    private	 // positionInY
+    private int x;	       // positionInX
+    private int y;		   // positionInY
     private boolean exist; // possible change itExists
-    private symbol;
+    private String symbol;
     
     public Position(int x, int y, boolean exist) {
         this.x = x;
