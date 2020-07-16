@@ -24,10 +24,6 @@ public class Ghost extends Position {
         this.walls = walls;
     }
 
-    public boolean getExist() {
-        return exist;
-    }
-
     public void setX(int x) {
         super.x = x;
     }
