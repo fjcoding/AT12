@@ -18,6 +18,19 @@ public class PacmanDotTest {
 	}
 
 	@Test
+	public void testFoodIsSpecial() {
+		Dot f = new Dot(5, 5, false);
+		f.setSpecial();
+		assertEquals(true, f.isSpecialDot());		
+	}
+
+	@Test
+	public void testFoodIsNotSpecial() {
+		Dot f = new Dot(5, 5, false);
+		assertEquals(false, f.isSpecialDot());		
+	}
+
+	@Test
 	public void testGhostIsNotEatable() {
 		Pacman p = new Pacman(5, 5, true);
 		Ghost  g = new Ghost(5, 5, true);	

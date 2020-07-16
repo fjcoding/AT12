@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 class Pacman extends Position {
+    protected ArrayList <Dot> dots;
     protected ArrayList<Position> walls;
     public ListWalls lWall;
 
@@ -9,6 +10,8 @@ class Pacman extends Position {
         lWall = new ListWalls();
         walls = new ArrayList<Position>(); 
         walls= lWall.getWalls();
+        dots = new ArrayList<Dot>();
+        addDots();
     }
     
     public boolean die() {
@@ -59,12 +62,64 @@ class Pacman extends Position {
         }
         return exist;
     }
-
+    //Check if there is a dot in x and y position
+    public boolean existDot(int positionx, int positiony) {
+        boolean exist = false;
+        for(Position i : dots){
+            if(i.getX() == positionx && i.getY() == positiony)
+                exist = true;
+        }
+        return exist;
+    }
     
-    public boolean isEatable(Dot dotsPosition) {
-        if((super.getX() == dotsPosition.getX()) && (super.getY() == dotsPosition.getY()) && dotsPosition.exist) {
-            dotsPosition.exist = false;
-            return true;
+    public void addDots() {
+        boolean draw = true;
+        for(int iy = 1; iy < 29; iy++) {
+            for(int ix = 1; ix < 29; ix++) {
+                for(Position wall : walls) {
+                    if((wall.getX() == ix * 30) && (wall.getY() == iy * 30)) {
+                        draw = false;
+                        break;
+                    }
+                }
+                if(draw == true) {
+                    dots.add(new Dot(ix * 30, iy * 30, true));
+                }
+                draw = true;
+            }
+        }
+        //The next lines change isSpecial attribute of Dot to true, at specific positions.
+        dots.get(0).setSpecial();
+        dots.get(27).setSpecial();
+        dots.get(67).setSpecial();
+        dots.get(77).setSpecial();
+        dots.get(78).setSpecial();
+        dots.get(113).setSpecial();
+        dots.get(178).setSpecial();
+        dots.get(223).setSpecial();
+        dots.get(228).setSpecial();
+        dots.get(238).setSpecial();
+        dots.get(257).setSpecial();
+        dots.get(294).setSpecial();
+        dots.get(353).setSpecial();
+        dots.get(dots.size() - 27).setSpecial();
+        dots.get(dots.size() - 16).setSpecial();
+        dots.get(dots.size() - 15).setSpecial();
+        dots.get(dots.size() - 1).setSpecial();
+    }
+
+    public ArrayList<Dot> getDots() {
+        return dots;
+    }
+
+    public boolean isEatable(Dot dotsPosition){
+        if (
+        (super.getX() == dotsPosition.getX()) &&
+        (super.getY() == dotsPosition.getY()) &&
+        dotsPosition.exist
+        ) {
+        dotsPosition.exist = false;
+        return true;
         }
         return false;
     }
