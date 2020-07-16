@@ -3,22 +3,26 @@ import java.util.Random;
 
 public class Ghost extends Position {
     private boolean eatable;
-    ListWalls lWall = new ListWalls();
-    ArrayList<Position> walls = lWall.getWalls();
+    private ListWalls lWall = new ListWalls();
+    private ArrayList<Position> walls = lWall.getWalls();
     private String direccion;
     private String noPDir;
     private String irDir;
     private String ruta;
     private boolean atascado = false;
-    private int randomDir = new Random().nextInt(4);
-    
+    final static private int WALK_DISTANCE = 30;
+    final static private int NUM_POSIBLE_RUTES = 4;
+    final static private int DOWN = 0;
+    final static private int UP = 1;
+    final static private int LEFT = 2;
+    final static private int RIGHT = 3;
 
     public Ghost(int x, int y, boolean exist) {
         super(x, y, exist);
         this.eatable = false;
     }
 
-    public Ghost(int x, int y, boolean exist, ArrayList<Position> walls) {
+    public Ghost(int x, int y, boolean exist, final ArrayList<Position> walls) {
         super(x, y, exist);
         this.eatable = false;
         this.walls = walls;
@@ -62,10 +66,10 @@ public class Ghost extends Position {
     }
 
     public boolean existPacmanEatable(Pacman pacman) {
-        if(pacman.exist == true && pacman.getX() == this.x && pacman.getY() == this.getY()) {
+        if (pacman.exist == true && pacman.getX() == this.x && pacman.getY() == this.getY()) {
             return true;
         }
-        else return false;
+        return false;
     }
 
     public void eatPacman(Pacman pacman) {
@@ -74,119 +78,129 @@ public class Ghost extends Position {
     }
 
     public void moveUp() {
-        super.y -= 30;
+        super.y -= WALK_DISTANCE;
     }
 
     public void moveDown() {
-        super.y += 30;
+        super.y += WALK_DISTANCE;
     }
 
     public void moveLeft() {
-        super.x -= 30;
+        super.x -= WALK_DISTANCE;
     }
 
     public void moveRight() {
-        super.x += 30;
+        super.x += WALK_DISTANCE;
     }
 
-    public boolean isPosibleMoveDown(ArrayList<Position> walls) {
+    public boolean isPosibleMoveDown(final ArrayList<Position> walls) {
         for (Position wall : walls) {
-            if (wall.getX()==this.x && wall.getY()==this.y+30) 
+            if (wall.getX() == this.x && wall.getY() == this.y + WALK_DISTANCE) {
                 return false;
+            }
         }
         return true;
     }
 
-    public boolean isPosibleMoveUp(ArrayList<Position> walls) {
+    public boolean isPosibleMoveUp(final ArrayList<Position> walls) {
         for (Position wall : walls) {
-            if (wall.getX()==this.x && wall.getY()==this.y-30) 
+            if (wall.getX() == this.x && wall.getY() == this.y - WALK_DISTANCE) {
                 return false;
+            }
         }
         return true;
     }
 
-    public boolean isPosibleMoveLeft(ArrayList<Position> walls) {
+    public boolean isPosibleMoveLeft(final ArrayList<Position> walls) {
         for (Position wall : walls) {
-            if (wall.getX()==this.x-30 && wall.getY()==this.y) 
+            if (wall.getX() == this.x - WALK_DISTANCE && wall.getY() == this.y) {
                 return false;
+            }
         }
         return true;
     }
 
-    public boolean isPosibleMoveRight(ArrayList<Position> walls) {
+    public boolean isPosibleMoveRight(final ArrayList<Position> walls) {
         for (Position wall : walls) {
-            if (wall.getX()==this.x+30 && wall.getY()==this.y) 
+            if (wall.getX() == this.x + WALK_DISTANCE && wall.getY() == this.y) {
                 return false;
+            }
         }
         return true;
     }
 
     public void searchRoute(Pacman pacman) {
-        int dir = new Random().nextInt(4);
+        int nextMove = new Random().nextInt(NUM_POSIBLE_RUTES);
 
-        switch (dir) {
-        case 0:
+        switch (nextMove) {
+        case DOWN:
             if (isPosibleMoveDown(walls)) {
                 moveDown();
-                if (existPacmanEatable(pacman)) 
+                if (existPacmanEatable(pacman)) {
                     eatPacman(pacman);
+                }
             }
             break;
-        case 1:
+        case UP:
             if (isPosibleMoveUp(walls)) {
                 moveUp();
-                if (existPacmanEatable(pacman)) 
+                if (existPacmanEatable(pacman)) {
                     eatPacman(pacman);
+                }
             }
             break;
-        case 2:
+        case LEFT:
             if (isPosibleMoveLeft(walls)) {
                 moveLeft();
-                if (existPacmanEatable(pacman)) 
+                if (existPacmanEatable(pacman)) {
                     eatPacman(pacman);
+                }
             }
             break;
-        case 3:
+        case RIGHT:
             if (isPosibleMoveRight(walls)) {
                 moveRight();
-                if (existPacmanEatable(pacman)) 
+                if (existPacmanEatable(pacman)) {
                     eatPacman(pacman);
+                }
             }
+            break;
+        default:
             break;
         }
     }
 
     public void searchRoute() {
-        int dir = new Random().nextInt(4);
+        int nextMove = new Random().nextInt(NUM_POSIBLE_RUTES);
 
-        switch (dir) {
-        case 0:
+        switch (nextMove) {
+        case DOWN:
             if (isPosibleMoveDown(walls)) {
                 moveDown();
             }
             break;
-        case 1:
+        case UP:
             if (isPosibleMoveUp(walls)) {
                 moveUp();
             }
             break;
-        case 2:
+        case LEFT:
             if (isPosibleMoveLeft(walls)) {
                 moveLeft();
             }
             break;
-        case 3:
+        case RIGHT:
             if (isPosibleMoveRight(walls)) {
                 moveRight();
             }
             break;
+        default:
+            break;
         }
     }
-    //modificaion avanzar de los fantasmas..................................................
 
-    
-
-    public String getDirecctionX(){
+    //modificaion recorrido de los fantasmas..................................................
+    public String getDirecctionX() {
         if (isPosibleMoveRight(walls)) {
             direccion = "right";
         } else {
@@ -196,7 +210,7 @@ public class Ghost extends Position {
         }
         return direccion;
     }
-    public String getDirecctionY(){
+    public String getDirecctionY() {
         if (isPosibleMoveUp(walls)) {
             direccion = "up";
         } else {
@@ -207,7 +221,7 @@ public class Ghost extends Position {
         return direccion;
     }
 
-    public void atascado() {//atascadomy cruce ene x
+    public void atascado() {
         switch (direccion) {
         case "down":
             if (isPosibleMoveDown(walls)) {
