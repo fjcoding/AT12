@@ -20,4 +20,3 @@ class Dot extends Position {
         return true;
     }
 }
-}

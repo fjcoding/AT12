@@ -23,50 +23,31 @@ class Pacman extends Position {
     }
     //functions those add and substract pacman's positions	
     public int down() {
-<<<<<<< HEAD
-        if(existWall(x, y+30)) {
-=======
         if (existWall(x, y+30)) {
->>>>>>> Code Refactoring using Google Java Style Guide
             return super.y = y;
         } else {
             return super.y += 30;
         }
     }
     
-<<<<<<< HEAD
-    public int right(){
-        if(existWall(x+30, y)) {
-=======
     public int right() {
         if (existWall(x+30, y)) {
->>>>>>> Code Refactoring using Google Java Style Guide
             return super.x = x;
         } else {
             return super.x += 30;
         }
     }
     
-<<<<<<< HEAD
-    public int left(){
-        if(existWall(x-30, y)) {
-=======
     public int left() {
         if (existWall(x-30, y)) {
->>>>>>> Code Refactoring using Google Java Style Guide
             return super.x = x;
         } else {
             return super.x -= 30;
         }
     }
     
-<<<<<<< HEAD
-    public int up(){
-        if(existWall(x, y-30)) {
-=======
     public int up() {
         if (existWall(x, y-30)) {
->>>>>>> Code Refactoring using Google Java Style Guide
             return super.y = y;
         } else {
             return super.y -= 30;

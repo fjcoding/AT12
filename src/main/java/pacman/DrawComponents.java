@@ -65,10 +65,6 @@ public class DrawComponents extends JComponent {
                     g.fillOval(dot.getX() + 10, dot.getY() + 10, 10, 10);
                 }
             }
-    public void drawWalls(Graphics g) { 
-        for (int i=0; i<walls.size(); i++) {
-            g.setColor(Color.GRAY);
-            g.fillRect(walls.get(i).getX(), walls.get(i).getY(), 30, 30);
         }
     }
 
