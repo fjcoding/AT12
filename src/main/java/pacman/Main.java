@@ -1,17 +1,13 @@
-import java.awt.*;
 import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 class Main extends JFrame {
-    //attrib
-    private Pacman pacman;
-    private Dot dots;
-    private Ghost ghost;
+ 
     private DrawComponents drawComponents;
 
     public Main() {
@@ -26,6 +22,7 @@ class Main extends JFrame {
         frame.setMinimumSize(new Dimension(900, 900));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(frame.drawComponents);
+        frame.getContentPane().setBackground(Color.BLACK);
         frame.pack();
         frame.setVisible(true);
     }

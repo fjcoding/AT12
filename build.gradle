@@ -1,7 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'checkstyle'
 
-mainClassName = 'binaries.Main'
+mainClassName = 'Main'
 
 repositories {
     mavenCentral()
@@ -17,3 +18,15 @@ test {
         exceptionFormat "full"
     }
 }
+
+checkstyle {
+    toolVersion '8.34'
+}
+
+task Checkstyle(type: Checkstyle) {
+    source 'src/main/java'
+    include '**/*.java'
+    classpath = rootProject.files()
+}
+
+test.finalizedBy("Checkstyle")
