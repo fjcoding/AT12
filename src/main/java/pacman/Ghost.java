@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.ListCellRenderer;
-
 public class Ghost extends Position {
     private boolean eatable;
     ListWalls lWall = new ListWalls();
@@ -92,32 +90,32 @@ public class Ghost extends Position {
     }
 
     public boolean isPosibleMoveDown(ArrayList<Position> walls) {
-        for (Position i : walls) {
-            if (i.getX() == this.x && i.getY() == this.y + 30) 
+        for (Position wall : walls) {
+            if (wall.getX()==this.x && wall.getY()==this.y+30) 
                 return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveUp(ArrayList<Position> walls) {
-        for (Position i : walls) {
-            if (i.getX() == this.x && i.getY() == this.y - 30) 
+        for (Position wall : walls) {
+            if (wall.getX()==this.x && wall.getY()==this.y-30) 
                 return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveLeft(ArrayList<Position> walls) {
-        for (Position i : walls) {
-            if (i.getX() == this.x - 30 && i.getY() == this.y) 
+        for (Position wall : walls) {
+            if (wall.getX()==this.x-30 && wall.getY()==this.y) 
                 return false;
         }
         return true;
     }
 
     public boolean isPosibleMoveRight(ArrayList<Position> walls) {
-        for (Position i : walls) {
-            if (i.getX() == this.x + 30 && i.getY() == this.y) 
+        for (Position wall : walls) {
+            if (wall.getX()==this.x+30 && wall.getY()==this.y) 
                 return false;
         }
         return true;
