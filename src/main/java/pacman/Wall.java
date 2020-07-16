@@ -1,10 +1,8 @@
 class Wall extends Position {
-    
-    public Wall (int x, int y, boolean exist) {
+    Wall(final int x, final int y, final boolean exist) {
         super(x, y, exist);
     }
-
-    public Wall (int x, int y, boolean exist, String symbol) {
-        super(x, y, exist, symbol);
-    }  
+    Wall(final int x, final int y, final boolean exist, final String symbol) {
+       super(x, y, exist, symbol);
+   }
 }
