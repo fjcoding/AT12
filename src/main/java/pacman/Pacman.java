@@ -144,13 +144,11 @@ class Pacman extends Position {
         boolean draw = true;
         for(int iy = 1; iy < 29; iy++) {
             for(int ix = 1; ix < 29; ix++) {
-                int i = 0;
-                while(i < walls.size()) {
-                    if((walls.get(i).getX() == ix * 30) && (walls.get(i).getY() == iy * 30)) {
+                for(Position wall : walls) {
+                    if((wall.getX() == ix * 30) && (wall.getY() == iy * 30)) {
                         draw = false;
                         break;
                     }
-                    i++;
                 }
                 if(draw == true) {
                     dots.add(new Dot(ix * 30, iy * 30, true));
@@ -158,7 +156,7 @@ class Pacman extends Position {
                 draw = true;
             }
         }
-        //The next Lines change isSpecial attribute of Dot to true, at specific positions.
+        //The next lines change isSpecial attribute of Dot to true, at specific positions.
         dots.get(0).setSpecial();
         dots.get(27).setSpecial();
         dots.get(67).setSpecial();
