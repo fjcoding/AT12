@@ -6,22 +6,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 public class DrawComponents extends JComponent {
-    private Pacman pacman = new Pacman(30, 30, true);
+    private Pacman pacman= new Pacman(30, 30, true);
     public int x = pacman.getX();
     public int y = pacman.getY();
     public ArrayList <Position> walls;
     public ArrayList <Dot> dots;
+    private String direction;
     public Ghost ghost1 = new Ghost(60, 90, true);
     public int xG = ghost1.getX();
     public int yG = ghost1.getY();
     public Ghost ghost2 = new Ghost(60, 90, true);
     public int xG2 = ghost2.getX();
     public int yG2 = ghost2.getY();
+    public ListWalls listWalls;
 
     public DrawComponents() {
-        walls = new ArrayList<Position>();
-        walls = pacman.getWalls();
         dots = pacman.getDots();
+        direction = "pacman.gif";
+        listWalls = new ListWalls();
+        walls = listWalls.getWalls();
         ghost1 = new Ghost(60, 90, true, walls);
         Thread threadGhost1 = new Thread(ghost1);
         threadGhost1.start();
@@ -31,11 +34,15 @@ public class DrawComponents extends JComponent {
     }
 
     //Method to draw pacman in the frame
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) { 
         drawWall(g);
         drawGhosts(g);
+        drawPacman(g);
         drawDots(g);
-        ImageIcon pacmanIcon = new ImageIcon("pacman.gif");
+    }
+    
+    public void drawPacman(Graphics g) {
+        ImageIcon pacmanIcon = new ImageIcon(DrawComponents.class.getResource(direction));
         Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg, x, y, 30, 30, null);
     }
@@ -66,7 +73,7 @@ public class DrawComponents extends JComponent {
         yG = ghost1.getY();
         xG2 = ghost2.getX();
         yG2 = ghost2.getY();
-        ImageIcon ghostIcon = new ImageIcon("ghost.jpg");
+        ImageIcon ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost.jpg"));
         Image ghostImg = ghostIcon.getImage();
         g.drawImage(ghostImg, xG, yG, 30, 30, this);
         g.drawImage(ghostImg, xG2, yG2, 30, 30, this);
@@ -88,6 +95,7 @@ public class DrawComponents extends JComponent {
         }   
       }
         repaint();
+        direction = "pacmanRight.gif";
     }
 
     //Method to move pacman to left 10 pixels And Check if there is a dot or superdot
@@ -105,6 +113,7 @@ public class DrawComponents extends JComponent {
             }   
           }
         repaint();
+        direction = "pacmanLeft.gif";
     }
 
     //Method to move pacman to down 10 pixels And Check if there is a dot or superdot
@@ -122,6 +131,7 @@ public class DrawComponents extends JComponent {
             }   
           }
         repaint();
+        direction = "pacmanDown.gif";
     }
 
     //Method to move pacman to up 10 pixels And Check if there is a dot or  superdot
@@ -139,5 +149,6 @@ public class DrawComponents extends JComponent {
             }   
           }
         repaint();
+        direction = "pacmanUp.gif";
     }
 }
