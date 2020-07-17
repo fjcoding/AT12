@@ -326,14 +326,11 @@ public class Ghost extends Position {
         if (pacman.getY() > this.getY()) {
             direccion = "down";
         } else {
-            System.out.println(" change Y X" + changeDireccionGhostX(pacman));
             if (isPosibleMove(changeDireccionGhostX(pacman))) {
             direccion = changeDireccionGhostX(pacman);
             } else {
             atascado = true;
             irDir = changeDireccionGhostX(pacman);
-            //atascado();
-
             }
         }
         }

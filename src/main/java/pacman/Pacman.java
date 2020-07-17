@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 
 class Pacman extends Position {
+    private boolean eatable;
     protected ArrayList <Dot> dots;
     protected ArrayList<Position> walls;
     public ListWalls lWall;
 
     public Pacman (int x, int y, boolean exist) {
         super(x, y, exist);
+        eatable = true;
         lWall = new ListWalls();
         walls = new ArrayList<Position>(); 
         walls= lWall.getWalls();
@@ -14,6 +16,18 @@ class Pacman extends Position {
         addDots();
     }
     
+    public boolean isEatable() {
+        return this.eatable;
+    }
+
+    public void setNotEatable() {
+        this.eatable = false;
+    }
+
+    public void setEatable() {
+        this.eatable = true;
+    }
+
     public void die() {
         this.exist = false;
     }
