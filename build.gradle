@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'checkstyle'
+apply plugin: 'jacoco'
 
 mainClassName = 'Main'
 
@@ -21,12 +22,20 @@ test {
 
 checkstyle {
     toolVersion '8.34'
+    configFile file('config/checkstyle/checkstyle.xml')
+    checkstyleMain.source = "src/main/"
+    checkstyleMain.excludes = ["**/src/test/**"]
 }
 
-task Checkstyle(type: Checkstyle) {
-    source 'src/main/java'
-    include '**/*.java'
-    classpath = rootProject.files()
+checkstyleMain {
+    source ='src/main/java'
 }
 
-test.finalizedBy("Checkstyle")
+checkstyleTest {
+    source ='src/main/java'
+}
+
+check.dependsOn jacocoTestReport
+
+test.finalizedBy("checkstyleMain")
+test.finalizedBy("jacocoTestReport")
