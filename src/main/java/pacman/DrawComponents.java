@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Timer;
+//import javax.swing.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -17,46 +18,89 @@ public class DrawComponents extends JComponent {
     public static final int GHOST2_POSITION_Y = 120;
     public static final long DELAY_TIMER = 3000;
     public static final long PERIOD_TIMER = 200;
+    public static final long PERIOD_TIMER_GHOST = 500;
     public static final int WIDHT_PACMAN = 30;
     public static final int HEIGHT_PACMAN = 30;
     public static final int WIDHT_WALL = 30;
     public static final int HEIGHT_WALL = 30;
     public static final int WIDHT_GHOST = 30;
     public static final int HEIGHT_GHOST = 30;
+    public static final int POS_GHOST_1_X = 30;
+    public static final int POS_GHOST_2_Y = 180;
+    public static final int POS_GHOST_3_Y = 60;
+    public static final int POS_GHOST_4_X = 210;
     public static final int DOT_SHIFT = 10;
     public static final int SPECIAL_DOT_SHIFT = 5;
     public static final int DOT_SIZE = 10;
     public static final int SPECIAL_DOT_SIZE = 20;
-
+    public static final int POSITION_GAMEOVER = 100;
+    public static final int SIZE_GAMEOVER = 600;
+    public static final int TIME_TO_CHANGE_GHOST = 50;
     private Pacman pacman = new Pacman(WIDTH_FRAME, HEIGHT_FRAME, true);
     private int x = pacman.getX();
     private int y = pacman.getY();
     private String direction;
+    private static final int CANT_GHOST = 4;
+    private static final int TIME_GHOST_IS_EATABLE = 3;
     private ArrayList<Position> walls;
     private ArrayList<Dot> dots;
-    private Ghost ghost1 = new Ghost(GHOST1_POSITION_X, GHOST1_POSITION_Y, true);
-    private int xG = ghost1.getX();
-    private int yG = ghost1.getY();
-    private Ghost ghost2 = new Ghost(GHOST2_POSITION_X, GHOST2_POSITION_Y, true);
-    private int xG2 = ghost2.getX();
-    private int yG2 = ghost2.getY();
+    private ArrayList<Ghost> ghosts;
     private ListWalls listWalls;
     private Timer timer;
+    private int seconds = 0;
 
     public DrawComponents() {
         dots = pacman.getDots();
-        direction = "pacman.gif";
+        direction = "pacman.png";
         listWalls = new ListWalls();
         walls = listWalls.getWalls();
         timer = new Timer();
+        ghosts = new ArrayList<Ghost>();
+        for (int i = 1; i <= CANT_GHOST; i++) {
+            if (i % 2 == 0) {
+                ghosts.add(new Ghost(i * POS_GHOST_1_X, i * POS_GHOST_2_Y, true));
+            } else {
+                ghosts.add(new Ghost(i * POS_GHOST_4_X, i * POS_GHOST_3_Y, true));
+            }
+        }
+        TimerTask taskScapeGhost = new TimerTask() {
+            @Override
+            public void run() {
+                if (!pacman.isEatable()) {
+                    for (Ghost ghost : ghosts) {
+                        //ruta de escape
+                        if (ghost.doesExist()) {
+                            ghost.searchRouteGhost(pacman);
+                        }
+                        seconds++;
+                    }
+                    repaint();
+                }
+                if (seconds > TIME_TO_CHANGE_GHOST) {
+                    pacman.setEatable();
+                    for (Ghost ghost : ghosts) {
+                        //ruta de escape
+                        if (ghost.doesExist()) {
+                            ghost.setEatable(false);
+                        }
+                    }
+                }
+            }
+        };
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                ghost1.searchRouteGhost(pacman);
-                ghost2.searchRouteGhost(pacman);
-                repaint();
+                if (pacman.isEatable()) {
+                    for (Ghost ghost : ghosts) {
+                        if (ghost.doesExist()) {
+                            ghost.searchRouteGhost(pacman);
+                        }
+                    }
+                    repaint();
+                }
             }
         };
+        timer.schedule(taskScapeGhost, DELAY_TIMER, PERIOD_TIMER_GHOST);
         timer.schedule(task, DELAY_TIMER, PERIOD_TIMER);
     }
 
@@ -65,18 +109,36 @@ public class DrawComponents extends JComponent {
      */
     public void paintComponent(final Graphics g) {
         drawWall(g);
+        drawDots(g);
         drawGhosts(g);
         drawPacman(g);
-        drawDots(g);
     }
 
     /**
-     * Method to draw a pacman
+     * Method to add components to the frame
+     */
+    public void drawGameOver(final Graphics g) {
+        ImageIcon gameOver = new ImageIcon(
+        DrawComponents.class.getResource("gameOver.jpg")
+        );
+        Image gameOverImg = gameOver.getImage();
+        g.drawImage(gameOverImg, POSITION_GAMEOVER, POSITION_GAMEOVER, SIZE_GAMEOVER, SIZE_GAMEOVER, null);
+    }
+
+    /**
+     * Method to add components to the frame
      */
     public void drawPacman(final Graphics g) {
-        ImageIcon pacmanIcon = new ImageIcon(DrawComponents.class.getResource(direction));
+        if (pacman.doesExist()) {
+            ImageIcon pacmanIcon = new ImageIcon(
+            DrawComponents.class.getResource(direction)
+        );
         Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg, x, y, WIDHT_PACMAN, HEIGHT_PACMAN, null);
+        } else {
+            timer.cancel();
+            drawGameOver(g);
+        }
     }
 
     /**
@@ -111,39 +173,64 @@ public class DrawComponents extends JComponent {
                 }
             }
         }
-        }
+    }
 
     /**
      * Method to draw ghosts
      */
     public void drawGhosts(final Graphics g) {
-        xG = ghost1.getX();
-        yG = ghost1.getY();
-        xG2 = ghost2.getX();
-        yG2 = ghost2.getY();
-        ImageIcon ghostIcon1 = new ImageIcon(DrawComponents.class.getResource("ghost1.png"));
-        ImageIcon ghostIcon2 = new ImageIcon(DrawComponents.class.getResource("ghost2.png"));
-        Image ghostImg1 = ghostIcon2.getImage();
-        Image ghostImg2 = ghostIcon2.getImage();
-        g.drawImage(ghostImg1, xG, yG, WIDHT_GHOST, HEIGHT_GHOST, this);
-        g.drawImage(ghostImg2, xG2, yG2, WIDHT_GHOST, HEIGHT_GHOST, this);
+        if (pacman.isEatable()) {
+            for (Ghost ghost : ghosts) {
+                if (ghost.doesExist()) {
+                    ImageIcon ghostIcon = new ImageIcon(
+                    DrawComponents.class.getResource("ghost2.png")
+                    );
+                    Image ghostImg = ghostIcon.getImage();
+                    g.drawImage(ghostImg, ghost.getX(), ghost.getY(), WIDHT_GHOST, HEIGHT_GHOST, this);
+                }
+            }
+        } else {
+            for (Ghost ghost : ghosts) {
+                if (ghost.doesExist()) {
+                    ImageIcon ghostIcon = new ImageIcon(
+                        DrawComponents.class.getResource("ghost1.png")
+                    );
+                    Image ghostImg = ghostIcon.getImage();
+                    g.drawImage(ghostImg, ghost.getX(), ghost.getY(), WIDHT_GHOST, HEIGHT_GHOST, this);
+                }
+            }
+        }
     }
 
     /**
-     * Method to move pacman to right 10 SHIFTsAnd Check if there is a dot or superdot
+     * Method to move pacman to right 10 SHIFTs And Check if there is a dot or superdot
      */
     public void moveRight() {
-        x = pacman.right();
-        repaint();
-        direction = "pacmanRight.gif";
-        for (Dot dot : dots) {
-            if ((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) {
+        if (pacman.doesExist()) {
+            x = pacman.right();
+            repaint();
+            direction = "pacmanRight.gif";
+            for (Dot dot : dots) {
+                if ((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) {
                 dot.doesnotExist();
+                }
+                if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
+                    dot.doesnotExist();
+                    pacman.setNotEatable();
+                    seconds = 0;
+                    for (Ghost ghost : ghosts) {
+                        ghost.changeEatable();
+                    }
+                }
             }
-            if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.doesnotExist();
-                ghost1.changeEatable();
-                ghost2.changeEatable();
+        }
+        for (Ghost ghost : ghosts) {
+            if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
+                if (!ghost.isEatable()) {
+                    pacman.die();
+                } else {
+                    ghost.die();
+                }
             }
         }
     }
@@ -152,17 +239,31 @@ public class DrawComponents extends JComponent {
      * Method to move pacman to left 10 SHIFTs And Check if there is a dot or superdot
      */
     public void moveLeft() {
-        x = pacman.left();
-        repaint();
-        direction = "pacmanLeft.gif";
-        for (Dot dot : dots) {
-            if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
-                dot.doesnotExist();
+        if (pacman.doesExist()) {
+            x = pacman.left();
+            repaint();
+            direction = "pacmanLeft.gif";
+            for (Dot dot : dots) {
+                if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
+                    dot.doesnotExist();
+                }
+                if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
+                    dot.doesnotExist();
+                    pacman.setNotEatable();
+                    seconds = 0;
+                    for (Ghost ghost : ghosts) {
+                        ghost.changeEatable();
+                    }
+                }
             }
-            if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.doesnotExist();
-                ghost1.changeEatable();
-                ghost2.changeEatable();
+        }
+        for (Ghost ghost : ghosts) {
+            if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
+                if (!ghost.isEatable()) {
+                    pacman.die();
+                } else {
+                    ghost.die();
+                }
             }
         }
     }
@@ -171,18 +272,32 @@ public class DrawComponents extends JComponent {
      * Method to move pacman to down 10 SHIFTs And Check if there is a dot or superdot
      */
     public void moveDown() {
-        y = pacman.down();
-        repaint();
-        direction = "pacmanDown.gif";
-        for (Dot dot : dots) {
-            if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
-                dot.doesnotExist();
+        if (pacman.doesExist()) {
+            y = pacman.down();
+            repaint();
+            direction = "pacmanDown.gif";
+            for (Dot dot : dots) {
+                if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
+                    dot.doesnotExist();
+                }
+                if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
+                    dot.doesnotExist();
+                    pacman.setNotEatable();
+                    seconds = 0;
+                    for (Ghost ghost : ghosts) {
+                        ghost.changeEatable();
+                    }
+                }
             }
-            if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.doesnotExist();
-                ghost1.changeEatable();
-                ghost2.changeEatable();
+        }
+        for (Ghost ghost : ghosts) {
+        if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
+            if (!ghost.isEatable()) {
+                pacman.die();
+            } else {
+                ghost.die();
             }
+        }
         }
     }
 
@@ -190,17 +305,31 @@ public class DrawComponents extends JComponent {
      * Method to move pacman to up 10 SHIFTs And Check if there is a dot or  superdot
      */
     public void moveUp() {
-        y = pacman.up();
-        repaint();
-        direction = "pacmanUp.gif";
-        for (Dot dot: dots) {
-            if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
+        if (pacman.doesExist()) {
+            y = pacman.up();
+            repaint();
+            direction = "pacmanUp.gif";
+            for (Dot dot : dots) {
+                if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
                 dot.doesnotExist();
+                }
+                if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
+                dot.doesnotExist();
+                pacman.setNotEatable();
+                seconds = 0;
+                for (Ghost ghost : ghosts) {
+                    ghost.changeEatable();
+                }
+                }
             }
-            if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.doesnotExist();
-                ghost1.changeEatable();
-                ghost2.changeEatable();
+        }
+        for (Ghost ghost : ghosts) {
+            if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
+                if (!ghost.isEatable()) {
+                    pacman.die();
+                } else {
+                    ghost.die();
+                }
             }
         }
     }

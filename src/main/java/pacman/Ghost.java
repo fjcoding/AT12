@@ -82,13 +82,27 @@ public class Ghost extends Position {
 
     /**
      *
+     * @return changeEatable
+     */
+    public void setEatable(final boolean doesEatable) {
+        this.eatable = doesEatable;
+    }
+
+    /**
+     *
+     * @return die
+     */
+    public void die() {
+        super.doesnotExist();
+    }
+
+    /**
+     *
      * @return existPacmanEatable
      */
     public boolean existPacmanEatable(final Pacman pacman) {
-        if (
-        pacman.doesExist() && pacman.getX() == super.getX() && pacman.getY() == super.getY()
-        ) {
-        return true;
+        if (pacman.doesExist() && pacman.getX() == super.getX() && pacman.getY() == super.getY()) {
+            return true;
         }
         return false;
     }
@@ -275,7 +289,7 @@ public class Ghost extends Position {
         default:
             break;
         }
-    }
+}
 
     /**
      *
@@ -283,19 +297,19 @@ public class Ghost extends Position {
      */
     public String changeDireccionGhostX(final Pacman pacman) {
         if (pacman.getX() > this.getX()) {
-        direccion = "right";
-        return direccion;
-        } else {
-        if (pacman.getX() < this.getX()) {
-            direccion = "left";
+            direccion = "right";
             return direccion;
-        } else if (isPosibleMove(changeDireccionGhostY(pacman))) {
-            direccion = changeDireccionGhostY(pacman);
-        } else {
-            atascado = true;
-            irDir = changeDireccionGhostY(pacman);
-            //atascado();
-        }
+            } else {
+            if (pacman.getX() < this.getX()) {
+                direccion = "left";
+                return direccion;
+            } else if (isPosibleMove(changeDireccionGhostY(pacman))) {
+                direccion = changeDireccionGhostY(pacman);
+            } else {
+                atascado = true;
+                irDir = changeDireccionGhostY(pacman);
+                //atascado();
+            }
         }
         return direccion;
     }
@@ -305,19 +319,19 @@ public class Ghost extends Position {
      * @return string direction Y
      */
     public String changeDireccionGhostY(final Pacman pacman) {
-        if (pacman.getY() < this.getY()) {
-        direccion = "up";
-        } else {
         if (pacman.getY() > this.getY()) {
             direccion = "down";
-        } else {
-            if (isPosibleMove(changeDireccionGhostX(pacman))) {
-            direccion = changeDireccionGhostX(pacman);
             } else {
-            atascado = true;
-            irDir = changeDireccionGhostX(pacman);
+            if (pacman.getY() < this.getY()) {
+                direccion = "up";
+            } else {
+                if (isPosibleMove(changeDireccionGhostX(pacman))) {
+                direccion = changeDireccionGhostX(pacman);
+                } else {
+                atascado = true;
+                irDir = changeDireccionGhostX(pacman);
+                }
             }
-        }
         }
         return direccion;
     }
@@ -353,21 +367,24 @@ public class Ghost extends Position {
      */
     public String ruta(final Pacman pacman) {
         if (atascado) {
-        atascado();
+            atascado();
         } else {
-        String sigDX = changeDireccionGhostX(pacman);
-        String sigDY = changeDireccionGhostY(pacman);
-        if (isPosibleMove(sigDX)) {
-            direccion = sigDX;
-        } else {
-            if (isPosibleMove(sigDY)) {
-            direccion = sigDY;
+            if (isEatable()) {
+                direccion = eatableChangeRuta(pacman);
             } else {
-            atascado = true;
+                final String sigDX = changeDireccionGhostX(pacman);
+                final String sigDY = changeDireccionGhostY(pacman);
+                if (isPosibleMove(sigDX)) {
+                    direccion = sigDX;
+                } else {
+                    if (isPosibleMove(sigDY)) {
+                        direccion = sigDY;
+                    } else {
+                        atascado = true;
+                    }
+                }
             }
         }
-        }
-
         return direccion;
     }
 
@@ -376,44 +393,114 @@ public class Ghost extends Position {
      *  searchRouteGhost
      */
     public void searchRouteGhost(final Pacman pacman) {
-        direccion = ruta(pacman);
-
-        switch (direccion) {
-        case "down":
-            if (isPosibleMoveDown(walls)) {
-            moveDown();
-
-            if (existPacmanEatable(pacman)) {
-                eatPacman(pacman);
+        if (this.doesExist()) {
+            direccion = ruta(pacman);
+            switch (direccion) {
+            case "down":
+                if (isPosibleMoveDown(walls)) {
+                    moveDown();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                }
+                break;
+            case "up":
+                if (isPosibleMoveUp(walls)) {
+                    moveUp();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                }
+                break;
+            case "left":
+                if (isPosibleMoveLeft(walls)) {
+                    moveLeft();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                }
+                break;
+            case "right":
+                if (isPosibleMoveRight(walls)) {
+                moveRight();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
             }
-            }
-            break;
-        case "up":
-            if (isPosibleMoveUp(walls)) {
-            moveUp();
-            if (existPacmanEatable(pacman)) {
-                eatPacman(pacman);
-            }
-            }
-            break;
-        case "left":
-            if (isPosibleMoveLeft(walls)) {
-            moveLeft();
-            if (existPacmanEatable(pacman)) {
-                eatPacman(pacman);
-            }
-            }
-            break;
-        case "right":
-            if (isPosibleMoveRight(walls)) {
-            moveRight();
-            if (existPacmanEatable(pacman)) {
-                eatPacman(pacman);
-            }
-            }
-            break;
-        default:
-            break;
         }
+    }
+
+    /**
+     *
+     * @return existPacmanEatable
+     */
+    public boolean existGhostEatable(final Pacman pacman) {
+        if (this.doesExist() && pacman.getX() == this.getX() && pacman.getY() == this.getY()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return eatPacman
+     */
+    public void eatGhost() {
+        die();
+    }
+
+    /**
+     *
+     * @return eatableChangeRuta
+     */
+    public String eatableChangeRuta(final Pacman pacman) {
+        final String posPX = changeDireccionGhostX(pacman);
+        final String posPY = changeDireccionGhostY(pacman);
+        String dirGX = "left";
+        String dirGY = "up";
+        if (posPX.equals("left")) {
+            dirGX = "right";
+        }
+        if (posPY.equals("up")) {
+            dirGY = "down";
+        }
+        if (isPosibleMove(dirGX)) {
+            direccion = dirGX;
+        } else {
+            if (isPosibleMove(dirGY)) {
+                direccion = dirGY;
+            } else {
+                atascado = true;
+            }
+        }
+        return direccion;
     }
 }
