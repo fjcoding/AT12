@@ -38,3 +38,12 @@ Solve the problems and try again **gradle test**
 ```bash
 ./gradlew build
 ```
+# Test Coverage 
+```bash
+./gradlew build jacocoTestReport
+```
+Open the file **index.html**
+
+```bash
+build/reports/jacoco/test/html/index.html
+``` 

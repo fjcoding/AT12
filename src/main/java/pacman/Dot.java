@@ -11,8 +11,12 @@ class Dot extends Position {
     public void setSpecial() {
         this.isSpecial = true;
     }
-    public boolean setExist(final boolean exist) {
-        super.exist = exist;
-        return true;
+
+    public boolean doesExist() {
+        return super.doesExist();
+    }
+
+    public boolean doesnotExist() {
+        return super.doesnotExist();
     }
 }

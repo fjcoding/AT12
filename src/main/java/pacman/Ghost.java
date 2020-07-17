@@ -37,7 +37,7 @@ public class Ghost extends Position {
      * @param x
      */
     public void setX(final int x) {
-        super.x = x;
+        super.setX(x);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Ghost extends Position {
      * @param y
      */
     public void setY(final int y) {
-        super.y = y;
+        super.setY(y);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Ghost extends Position {
      * @return x
      */
     public int getX() {
-        return super.x;
+        return super.getX();
     }
 
     /**
@@ -61,16 +61,7 @@ public class Ghost extends Position {
      * @return y
      */
     public int getY() {
-        return super.y;
-    }
-
-    /**
-     *
-     * @return exist
-     */
-    public boolean setExist(final boolean exist) {
-        super.exist = exist;
-        return true;
+        return super.getY();
     }
 
     /**
@@ -83,7 +74,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return changeEatable
+     * changeEatable
      */
     public void changeEatable() {
         this.eatable = true;
@@ -102,7 +93,7 @@ public class Ghost extends Position {
      * @return die
      */
     public void die() {
-        this.exist = false;
+        super.doesnotExist();
     }
 
     /**
@@ -110,7 +101,7 @@ public class Ghost extends Position {
      * @return existPacmanEatable
      */
     public boolean existPacmanEatable(final Pacman pacman) {
-        if (pacman.doesExist() && pacman.getX() == this.x && pacman.getY() == this.getY()) {
+        if (pacman.doesExist() && pacman.getX() == super.getX() && pacman.getY() == super.getY()) {
             return true;
         }
         return false;
@@ -118,43 +109,43 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return eatPacman
+     *  eatPacman
      */
     public void eatPacman(final Pacman pacman) {
         pacman.die();
-        this.exist = false;
+        this.doesnotExist();
     }
 
     /**
      *
-     * @return moveUp
+     *  moveUp
      */
     public void moveUp() {
-        super.y -= WALK_DISTANCE;
+        super.setY(super.getY() - WALK_DISTANCE);
     }
 
     /**
      *
-     * @return moveDown
+     *  moveDown
      */
     public void moveDown() {
-        super.y += WALK_DISTANCE;
+        super.setY(super.getY() + WALK_DISTANCE);
     }
 
     /**
      *
-     * @return moveLeft
+     *  moveLeft
      */
     public void moveLeft() {
-        super.x -= WALK_DISTANCE;
+        super.setX(super.getX() - WALK_DISTANCE);
     }
 
     /**
      *
-     * @return moveRight
+     *  moveRight
      */
     public void moveRight() {
-        super.x += WALK_DISTANCE;
+        super.setX(super.getX() + WALK_DISTANCE);
     }
 
     /**
@@ -163,9 +154,9 @@ public class Ghost extends Position {
      */
     public boolean isPosibleMoveDown(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-            if (wall.getX() == this.x && wall.getY() == this.y + WALK_DISTANCE) {
-                return false;
-            }
+        if (wall.getX() == super.getX() && wall.getY() == super.getY() + WALK_DISTANCE) {
+            return false;
+        }
         }
         return true;
     }
@@ -176,9 +167,9 @@ public class Ghost extends Position {
      */
     public boolean isPosibleMoveUp(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-            if (wall.getX() == this.x && wall.getY() == this.y - WALK_DISTANCE) {
-                return false;
-            }
+        if (wall.getX() == super.getX() && wall.getY() == super.getY() - WALK_DISTANCE) {
+            return false;
+        }
         }
         return true;
     }
@@ -189,9 +180,9 @@ public class Ghost extends Position {
      */
     public boolean isPosibleMoveLeft(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-            if (wall.getX() == this.x - WALK_DISTANCE && wall.getY() == this.y) {
-                return false;
-            }
+        if (wall.getX() == super.getX() - WALK_DISTANCE && wall.getY() == super.getY()) {
+            return false;
+        }
         }
         return true;
     }
@@ -202,7 +193,7 @@ public class Ghost extends Position {
      */
     public boolean isPosibleMoveRight(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x + WALK_DISTANCE && wall.getY() == this.y) {
+        if (wall.getX() == super.getX() + WALK_DISTANCE && wall.getY() == super.getY()) {
             return false;
         }
         }
@@ -211,7 +202,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return getDirecctionX
+     * @return string direction X
      */
 
     public String getDirecctionX() {
@@ -227,7 +218,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return getDirecctionY
+     * @return string direction y
      */
 
     public String getDirecctionY() {
@@ -243,7 +234,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return atascado
+     * atascado
      */
     public void atascado() {
         switch (direccion) {
@@ -302,7 +293,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return changeDireccionGhostX
+     * @return string direction X
      */
     public String changeDireccionGhostX(final Pacman pacman) {
         if (pacman.getX() > this.getX()) {
@@ -325,7 +316,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return changeDireccionGhostY
+     * @return string direction Y
      */
     public String changeDireccionGhostY(final Pacman pacman) {
         if (pacman.getY() > this.getY()) {
@@ -347,7 +338,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return isPosibleMove
+     * @return boolean isPosibleMove
      */
     public boolean isPosibleMove(final String sigtDir) {
         boolean result = false;
@@ -372,7 +363,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return ruta
+     * @return string ruta
      */
     public String ruta(final Pacman pacman) {
         if (atascado) {
@@ -399,7 +390,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return searchRouteGhost
+     *  searchRouteGhost
      */
     public void searchRouteGhost(final Pacman pacman) {
         if (this.doesExist()) {
