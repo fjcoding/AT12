@@ -89,13 +89,8 @@ public class DrawComponents extends JComponent {
         Image pacmanImg = pacmanIcon.getImage();
         g.drawImage(pacmanImg, x, y, 30, 30, null);
         } else {
-<<<<<<< HEAD
             timer.cancel();
             drawGameOver(g);            
-=======
-        drawGameOver(g);
-        timer.cancel();
->>>>>>> 7b3e95bee3e3a007009acbd6aeefa8de3e38005a
         }
     }
 
