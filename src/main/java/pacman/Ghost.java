@@ -74,18 +74,10 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return changeEatable
+     * changeEatable
      */
     public void changeEatable() {
         this.eatable = true;
-    }
-
-    /**
-     *
-     * @return die
-     */
-    public void die() {
-        super.doesnotExist();
     }
 
     /**
@@ -103,7 +95,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return eatPacman
+     *  eatPacman
      */
     public void eatPacman(final Pacman pacman) {
         pacman.die();
@@ -112,7 +104,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return moveUp
+     *  moveUp
      */
     public void moveUp() {
         super.setY(super.getY() - WALK_DISTANCE);
@@ -120,7 +112,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return moveDown
+     *  moveDown
      */
     public void moveDown() {
         super.setY(super.getY() + WALK_DISTANCE);
@@ -128,7 +120,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return moveLeft
+     *  moveLeft
      */
     public void moveLeft() {
         super.setX(super.getX() - WALK_DISTANCE);
@@ -136,7 +128,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return moveRight
+     *  moveRight
      */
     public void moveRight() {
         super.setX(super.getX() + WALK_DISTANCE);
@@ -196,7 +188,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return getDirecctionX
+     * @return string direction X
      */
 
     public String getDirecctionX() {
@@ -212,7 +204,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return getDirecctionY
+     * @return string direction y
      */
 
     public String getDirecctionY() {
@@ -228,7 +220,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return atascado
+     * atascado
      */
     public void atascado() {
         switch (direccion) {
@@ -287,7 +279,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return changeDireccionGhostX
+     * @return string direction X
      */
     public String changeDireccionGhostX(final Pacman pacman) {
         if (pacman.getX() > this.getX()) {
@@ -310,7 +302,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return changeDireccionGhostY
+     * @return string direction Y
      */
     public String changeDireccionGhostY(final Pacman pacman) {
         if (pacman.getY() < this.getY()) {
@@ -319,14 +311,11 @@ public class Ghost extends Position {
         if (pacman.getY() > this.getY()) {
             direccion = "down";
         } else {
-            System.out.println(" change Y X" + changeDireccionGhostX(pacman));
             if (isPosibleMove(changeDireccionGhostX(pacman))) {
             direccion = changeDireccionGhostX(pacman);
             } else {
             atascado = true;
             irDir = changeDireccionGhostX(pacman);
-            //atascado();
-
             }
         }
         }
@@ -335,7 +324,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return isPosibleMove
+     * @return boolean isPosibleMove
      */
     public boolean isPosibleMove(final String sigtDir) {
         boolean result = false;
@@ -360,7 +349,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return ruta
+     * @return string ruta
      */
     public String ruta(final Pacman pacman) {
         if (atascado) {
@@ -384,7 +373,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return searchRouteGhost
+     *  searchRouteGhost
      */
     public void searchRouteGhost(final Pacman pacman) {
         direccion = ruta(pacman);

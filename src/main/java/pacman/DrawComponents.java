@@ -111,7 +111,7 @@ public class DrawComponents extends JComponent {
                 }
             }
         }
-    }
+        }
 
     /**
      * Method to draw ghosts

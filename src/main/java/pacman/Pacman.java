@@ -34,14 +34,6 @@ class Pacman extends Position {
         addDots();
     }
 
-    public boolean die() {
-        if (super.doesExist()) {
-            super.doesnotExist();
-            return true;
-        }
-        return false;
-    }
-
     public int down() {
         if (!existWall(super.getX(), super.getY() + positionDimension)) {
             super.setY(super.getY() + positionDimension);

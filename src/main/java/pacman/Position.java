@@ -42,4 +42,10 @@ class Position {
         this.exist = false;
         return this.exist;
     }
+    public void die() {
+        this.exist = false;
+    }
+    public void live() {
+        this.exist = true;
+    }
 }
