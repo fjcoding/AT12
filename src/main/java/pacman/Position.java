@@ -18,15 +18,28 @@ class Position {
         this.symbol = kindOfSymbol;
     }
 
-    private int getX() {
+    public int getX() {
         return  this.x;
     }
 
-    private int getY() {
+    public int getY() {
         return  this.y;
+    }
+
+    public void setX(final int xx) {
+        this.x = xx;
+    }
+
+    public void setY(final int yy) {
+        this.y = yy;
     }
 
     public boolean doesExist() {
         return exist;
+    }
+
+    public boolean doesnotExist() {
+        this.exist = false;
+        return this.exist;
     }
 }

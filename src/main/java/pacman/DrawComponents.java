@@ -103,7 +103,7 @@ public class DrawComponents extends JComponent {
             dotPositionX = dot.getX() + DOT_SHIFT;
             dotPositionY = dot.getY() + DOT_SHIFT;
             g.setColor(Color.WHITE);
-            if (dot.exist) {
+            if (dot.doesExist()) {
                 if (dot.isSpecialDot()) {
                     g.fillOval(specialDotPositionX, specialDotPositionY, SPECIAL_DOT_SIZE, SPECIAL_DOT_SIZE);
                 } else {
@@ -138,10 +138,10 @@ public class DrawComponents extends JComponent {
         direction = "pacmanRight.gif";
         for (Dot dot : dots) {
             if ((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) {
-                dot.setExist(false);
+                dot.doesnotExist();
             }
             if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.setExist(false);
+                dot.doesnotExist();
                 ghost1.changeEatable();
                 ghost2.changeEatable();
             }
@@ -157,10 +157,10 @@ public class DrawComponents extends JComponent {
         direction = "pacmanLeft.gif";
         for (Dot dot : dots) {
             if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
-                dot.setExist(false);
+                dot.doesnotExist();
             }
             if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.setExist(false);
+                dot.doesnotExist();
                 ghost1.changeEatable();
                 ghost2.changeEatable();
             }
@@ -176,10 +176,10 @@ public class DrawComponents extends JComponent {
         direction = "pacmanDown.gif";
         for (Dot dot : dots) {
             if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
-                dot.setExist(false);
+                dot.doesnotExist();
             }
             if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.setExist(false);
+                dot.doesnotExist();
                 ghost1.changeEatable();
                 ghost2.changeEatable();
             }
@@ -195,10 +195,10 @@ public class DrawComponents extends JComponent {
         direction = "pacmanUp.gif";
         for (Dot dot: dots) {
             if (pacman.existDot(x, y) && (dot.getX() == x && dot.getY() == y)) {
-                dot.setExist(false);
+                dot.doesnotExist();
             }
             if (((pacman.existDot(x, y)) && (dot.getX() == x && dot.getY() == y)) && (dot.isSpecialDot())) {
-                dot.setExist(false);
+                dot.doesnotExist();
                 ghost1.changeEatable();
                 ghost2.changeEatable();
             }
