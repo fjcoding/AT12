@@ -35,39 +35,39 @@ class Pacman extends Position {
     }
 
     public boolean die() {
-        if (super.exist) {
-            super.exist = false;
+        if (super.doesExist()) {
+            super.doesnotExist();
             return true;
         }
         return false;
     }
 
     public int down() {
-        if (!existWall(x, y + positionDimension)) {
-            super.y += positionDimension;
+        if (!existWall(super.getX(), super.getY() + positionDimension)) {
+            super.setY(super.getY() + positionDimension);
         }
-        return super.y;
+        return super.getY();
     }
 
     public int right() {
-        if (!existWall(x + positionDimension, y)) {
-            super.x += positionDimension;
+        if (!existWall(super.getX() + positionDimension, super.getY())) {
+            super.setX(super.getX() + positionDimension);
         }
-        return super.x;
+        return super.getX();
     }
 
     public int left() {
-        if (!existWall(x - positionDimension, y)) {
-            super.x -= positionDimension;
+        if (!existWall(super.getX() - positionDimension, super.getY())) {
+            super.setX(super.getX() - positionDimension);
         }
-        return super.x;
+        return super.getX();
     }
 
     public int up() {
-        if (!existWall(x, y - positionDimension)) {
-            super.y -= positionDimension;
+        if (!existWall(super.getX(), super.getY() - positionDimension)) {
+            super.setY(super.getY() - positionDimension);
         }
-        return super.y;
+        return super.getY();
     }
 
     public boolean existWall(final int xx, final int yy) {
@@ -137,9 +137,9 @@ class Pacman extends Position {
         &&
         (super.getY() == dotsPosition.getY())
         &&
-        dotsPosition.exist
+        dotsPosition.doesExist()
         ) {
-            dotsPosition.exist = false;
+            dotsPosition.doesnotExist();
             return true;
         }
         return false;
@@ -155,7 +155,7 @@ class Pacman extends Position {
         ) {
             return true;
         } else {
-            super.exist = false;
+            super.doesnotExist();
             return false;
         }
     }

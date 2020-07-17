@@ -7,6 +7,6 @@ public class WallsTest {
 		Wall w = new Wall(5, 5, true);		
         assertEquals(5,w.getX());
         assertEquals(5,w.getY());	
-        assertEquals(true,w.exist);
+        assertEquals(true,w.doesExist());
 	}
 }
