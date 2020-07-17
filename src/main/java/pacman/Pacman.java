@@ -1,10 +1,9 @@
-package pacman;
 import java.util.ArrayList;
 
 class Pacman extends Position {
     private ArrayList<Dot> dots;
     private ListWalls lWall = new ListWalls();
-    private ArrayList<Position> walls = lWall.getWalls();;
+    private ArrayList<Position> walls = lWall.getWalls();
     private final int positionDimension = 30;
     private final int frameXSize = 30;
     private final int frameYSize = 30;
@@ -21,10 +20,10 @@ class Pacman extends Position {
     private final int indexOfSpecialDot10 = 257;
     private final int indexOfSpecialDot11 = 294;
     private final int indexOfSpecialDot12 = 353;
-    private final int indexOfSpecialDot13 = dots.size() - 27;
-    private final int indexOfSpecialDot14 = dots.size() - 16;
-    private final int indexOfSpecialDot15 = dots.size() - 15;
-    private final int indexOfSpecialDot16 = dots.size() - 1;
+    private final int indexOfSpecialDot13 = 300;
+    private final int indexOfSpecialDot14 = 301;
+    private final int indexOfSpecialDot15 = 302;
+    private final int indexOfSpecialDot16 = 303;
 
     Pacman(final int x, final int y, final boolean exist) {
         super(x, y, exist);
@@ -44,36 +43,28 @@ class Pacman extends Position {
     }
 
     public int down() {
-        if (existWall(x, y + positionDimension)) {
-            super.y = y;
-        } else {
+        if (!existWall(x, y + positionDimension)) {
             super.y += positionDimension;
         }
         return super.y;
     }
 
     public int right() {
-        if (existWall(x + positionDimension, y)) {
-            super.x = x;
-        } else {
+        if (!existWall(x + positionDimension, y)) {
             super.x += positionDimension;
         }
         return super.x;
     }
 
     public int left() {
-        if (existWall(x - positionDimension, y)) {
-            super.x = x;
-        } else {
+        if (!existWall(x - positionDimension, y)) {
             super.x -= positionDimension;
         }
         return super.x;
     }
 
     public int up() {
-        if (existWall(x, y - positionDimension)) {
-            super.y = y;
-        } else {
+        if (!existWall(x, y - positionDimension)) {
             super.y -= positionDimension;
         }
         return super.y;
