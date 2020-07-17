@@ -91,6 +91,14 @@ public class Ghost extends Position {
 
     /**
      *
+     * @return changeEatable
+     */
+    public void setEatable(boolean doesEatable) {
+        this.eatable = doesEatable;
+    }
+
+    /**
+     *
      * @return die
      */
     public void die() {
@@ -290,7 +298,7 @@ public class Ghost extends Position {
         default:
             break;
         }
-    }
+}
 
     /**
      *
@@ -298,19 +306,19 @@ public class Ghost extends Position {
      */
     public String changeDireccionGhostX(final Pacman pacman) {
         if (pacman.getX() > this.getX()) {
-        direccion = "right";
-        return direccion;
-        } else {
-        if (pacman.getX() < this.getX()) {
-            direccion = "left";
+            direccion = "right";
             return direccion;
-        } else if (isPosibleMove(changeDireccionGhostY(pacman))) {
-            direccion = changeDireccionGhostY(pacman);
-        } else {
-            atascado = true;
-            irDir = changeDireccionGhostY(pacman);
-            //atascado();
-        }
+            } else {
+            if (pacman.getX() < this.getX()) {
+                direccion = "left";
+                return direccion;
+            } else if (isPosibleMove(changeDireccionGhostY(pacman))) {
+                direccion = changeDireccionGhostY(pacman);
+            } else {
+                atascado = true;
+                irDir = changeDireccionGhostY(pacman);
+                //atascado();
+            }
         }
         return direccion;
     }
@@ -320,19 +328,19 @@ public class Ghost extends Position {
      * @return changeDireccionGhostY
      */
     public String changeDireccionGhostY(final Pacman pacman) {
-        if (pacman.getY() < this.getY()) {
-        direccion = "up";
-        } else {
         if (pacman.getY() > this.getY()) {
             direccion = "down";
-        } else {
-            if (isPosibleMove(changeDireccionGhostX(pacman))) {
-            direccion = changeDireccionGhostX(pacman);
             } else {
-            atascado = true;
-            irDir = changeDireccionGhostX(pacman);
+            if (pacman.getY() < this.getY()) {
+                direccion = "up";
+            } else {
+                if (isPosibleMove(changeDireccionGhostX(pacman))) {
+                direccion = changeDireccionGhostX(pacman);
+                } else {
+                atascado = true;
+                irDir = changeDireccionGhostX(pacman);
+                }
             }
-        }
         }
         return direccion;
     }
@@ -394,44 +402,69 @@ public class Ghost extends Position {
      * @return searchRouteGhost
      */
     public void searchRouteGhost(final Pacman pacman) {
-        direccion = ruta(pacman);
-
-        switch (direccion) {
-        case "down":
-            if (isPosibleMoveDown(walls)) {
-            moveDown();
-
-                if (existPacmanEatable(pacman)) {
-                    eatPacman(pacman);
+        if (this.doesExist()) {
+            direccion = ruta(pacman);
+            switch (direccion) {
+            case "down":
+                if (isPosibleMoveDown(walls)) {
+                    moveDown();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                    
                 }
+                break;
+            case "up":
+                if (isPosibleMoveUp(walls)) {
+                    moveUp();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                }
+                break;
+            case "left":
+                if (isPosibleMoveLeft(walls)) {
+                    moveLeft();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                }
+                break;
+            case "right":
+                if (isPosibleMoveRight(walls)) {
+                moveRight();
+                    if (isEatable()) {
+                        if (existGhostEatable(pacman)) {
+                            eatGhost();
+                        }
+                    } else {
+                        if (existPacmanEatable(pacman)) {
+                            eatPacman(pacman);
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
             }
-            break;
-        case "up":
-            if (isPosibleMoveUp(walls)) {
-            moveUp();
-            if (existPacmanEatable(pacman)) {
-                eatPacman(pacman);
-            }
-            }
-            break;
-        case "left":
-            if (isPosibleMoveLeft(walls)) {
-            moveLeft();
-            if (existPacmanEatable(pacman)) {
-                eatPacman(pacman);
-            }
-            }
-            break;
-        case "right":
-            if (isPosibleMoveRight(walls)) {
-            moveRight();
-            if (existPacmanEatable(pacman)) {
-                eatPacman(pacman);
-            }
-            }
-            break;
-        default:
-            break;
         }
     }
 
@@ -440,7 +473,7 @@ public class Ghost extends Position {
      * @return existPacmanEatable
      */
     public boolean existGhostEatable(final Pacman pacman) {
-        if (pacman.doesExist() && pacman.getX() == this.x && pacman.getY() == this.getY()) {
+        if (this.doesExist() && pacman.getX() == this.getX() && pacman.getY() == this.getY()) {
             return true;
         }
         return false;

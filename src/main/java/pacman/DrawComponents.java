@@ -13,7 +13,7 @@ public class DrawComponents extends JComponent {
     private int x = pacman.getX();
     private int y = pacman.getY();
     private String direction;
-    private final int CANT_GHOST = 3;
+    private final int CANT_GHOST = 4;
     private final int TIME_GHOST_IS_EATABLE = 3;
     private ArrayList<Position> walls;
     public ArrayList<Dot> dots;
@@ -30,7 +30,10 @@ public class DrawComponents extends JComponent {
         walls = listWalls.getWalls();
         timer = new Timer();
         for (int i = 1; i <= CANT_GHOST; i++) {
-        ghosts.add(new Ghost(i * 30, i * 180, true));
+            if ( i % 2 == 0 )
+                ghosts.add(new Ghost(i * 30, i * 180, true));
+            else
+                ghosts.add(new Ghost(i * 210, i * 60, true));
         }
       
         TimerTask taskScapeGhost = new TimerTask() {
@@ -39,14 +42,22 @@ public class DrawComponents extends JComponent {
             public void run() {
                 if(!pacman.isEatable()){
                     for (Ghost ghost : ghosts) {
-                    //ruta de escape
-                    ghost.searchRouteGhost(pacman);
-                    seconds++;
+                        //ruta de escape
+                        if (ghost.doesExist()) {
+                            ghost.searchRouteGhost(pacman);
+                        }
+                        seconds++;
+                    }
+                    repaint();
                 }
-                repaint();
-                }
-                if(seconds == 30){
+                if( seconds > 50){
                     pacman.setEatable();
+                    for (Ghost ghost : ghosts) {
+                        //ruta de escape
+                        if (ghost.doesExist()) {
+                            ghost.setEatable(false);
+                        }
+                    }
                 }
             }
         };
@@ -56,13 +67,15 @@ public class DrawComponents extends JComponent {
         public void run() {
             if(pacman.isEatable()) {
                 for (Ghost ghost : ghosts) {
-                    ghost.searchRouteGhost(pacman);
+                    if (ghost.doesExist()) {
+                        ghost.searchRouteGhost(pacman);
+                    }
                 }
                 repaint();
             } 
         }
         };
-        timer.schedule(task, 3000, 500);
+        timer.schedule(task, 3000, 200);
         timer.schedule(taskScapeGhost, 3000, 500);
     }
 
@@ -115,25 +128,29 @@ public class DrawComponents extends JComponent {
     }
 
     public void drawGhosts(Graphics g) {
-        if(pacman.isEatable()){
+        if(pacman.isEatable()){//
             for (Ghost ghost : ghosts) {
-            posXghost = ghost.getX();
-            posYghost = ghost.getY();
-            ImageIcon ghostIcon = new ImageIcon(
-                PacmanDraw.class.getResource("ghost2.png")
-            );
-            Image ghostImg = ghostIcon.getImage();
-            g.drawImage(ghostImg, posXghost, posYghost, 30, 30, this);
+                if (ghost.doesExist()) {
+                    posXghost = ghost.getX();
+                    posYghost = ghost.getY();
+                    ImageIcon ghostIcon = new ImageIcon(
+                    PacmanDraw.class.getResource("ghost2.png")
+                    );
+                    Image ghostImg = ghostIcon.getImage();
+                    g.drawImage(ghostImg, posXghost, posYghost, 30, 30, this);
+                }
             }
         } else {
             for (Ghost ghost : ghosts) {
-            posXghost = ghost.getX();
-            posYghost = ghost.getY();
-            ImageIcon ghostIcon = new ImageIcon(
-                PacmanDraw.class.getResource("ghost1.png")
-            );
-            Image ghostImg = ghostIcon.getImage();
-            g.drawImage(ghostImg, posXghost, posYghost, 30, 30, this);
+                if (ghost.doesExist()) {
+                    posXghost = ghost.getX();
+                    posYghost = ghost.getY();
+                    ImageIcon ghostIcon = new ImageIcon(
+                        PacmanDraw.class.getResource("ghost1.png")
+                    );
+                    Image ghostImg = ghostIcon.getImage();
+                    g.drawImage(ghostImg, posXghost, posYghost, 30, 30, this);
+                }
             }
         }
     }
@@ -164,7 +181,11 @@ public class DrawComponents extends JComponent {
         }
         for (Ghost ghost : ghosts) {
             if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
-                pacman.die();
+                if(!ghost.isEatable()) {
+                    pacman.die();
+                } else {
+                    ghost.die();
+                }
             }
         }
     }
@@ -195,7 +216,11 @@ public class DrawComponents extends JComponent {
         }
         for (Ghost ghost : ghosts) {
             if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
-                pacman.die();
+                if(!ghost.isEatable()) {
+                    pacman.die();
+                } else {
+                    ghost.die();
+                }
             }
         }
     }
@@ -226,7 +251,11 @@ public class DrawComponents extends JComponent {
         }
         for (Ghost ghost : ghosts) {
         if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
-            pacman.die();
+            if(!ghost.isEatable()) {
+                pacman.die();
+            } else {
+                ghost.die();
+            }
         }
         }
     }
@@ -257,7 +286,11 @@ public class DrawComponents extends JComponent {
         }
         for (Ghost ghost : ghosts) {
         if (pacman.getX() == ghost.getX() && pacman.getY() == ghost.getY()) {
-            pacman.die();
+            if(!ghost.isEatable()) {
+                pacman.die();
+            } else {
+                ghost.die();
+            }
         }
         }
     }
