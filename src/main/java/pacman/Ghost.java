@@ -1,129 +1,196 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Ghost extends Position {
     private boolean eatable;
-    ListWalls lWall = new ListWalls();
-    ArrayList<Position> walls = lWall.getWalls();
+    private ListWalls lWall = new ListWalls();
+    private ArrayList<Position> walls = lWall.getWalls();
     private String direccion;
     private String noPDir;
     private String irDir;
     private String ruta;
     private boolean atascado = false;
-    private int randomDir = new Random().nextInt(4);
+    private static final int WALK_DISTANCE = 30;
+    private static final int NUM_POSIBLE_RUTES = 4;
+    private static final int DOWN = 0;
+    private static final int UP = 1;
+    private static final int LEFT = 2;
+    private static final int RIGHT = 3;
 
-    public Ghost(int x, int y, boolean exist) {
+    public Ghost(final int x, final int y, final boolean exist) {
         super(x, y, exist);
         this.eatable = false;
     }
 
-    public Ghost(int x, int y, boolean exist, ArrayList<Position> walls) {
+    public Ghost(
+        final int x,
+        final int y,
+        final boolean exist,
+        final ArrayList<Position> wallsExtern
+    ) {
         super(x, y, exist);
         this.eatable = false;
-        this.walls = walls;
+        walls = wallsExtern;
     }
 
-    public boolean getExist() {
-        return exist;
+    /**
+     *
+     * @param x
+     */
+    public void setX(final int x) {
+        super.setX(x);
     }
 
-    public void setX(int x) {
-        super.x = x;
+    /**
+     *
+     * @param y
+     */
+    public void setY(final int y) {
+        super.setY(y);
     }
 
-    public void setY(int y) {
-        super.y = y;
-    }
-
+    /**
+     *
+     * @return x
+     */
     public int getX() {
-        return super.x;
+        return super.getX();
     }
 
+    /**
+     *
+     * @return y
+     */
     public int getY() {
-        return super.y;
+        return super.getY();
     }
 
-    public boolean setExist(boolean exist) {
-        super.exist = exist;
-        return true;
-    }
-
+    /**
+     *
+     * @return isEatable
+     */
     public boolean isEatable() {
         return this.eatable;
     }
 
+    /**
+     *
+     * changeEatable
+     */
     public void changeEatable() {
         this.eatable = true;
     }
 
-    public void die() {
-        this.exist = false;
-    }
-
-    public void live() {
-        this.exist = true;
-    }
-
-    public boolean existPacmanEatable(Pacman pacman) {
+    /**
+     *
+     * @return existPacmanEatable
+     */
+    public boolean existPacmanEatable(final Pacman pacman) {
         if (
-        pacman.exist == true &&
-        pacman.getX() == this.x &&
-        pacman.getY() == this.getY()
+        pacman.doesExist() && pacman.getX() == super.getX() && pacman.getY() == super.getY()
         ) {
         return true;
-        } else return false;
+        }
+        return false;
     }
 
-    public void eatPacman(Pacman pacman) {
+    /**
+     *
+     *  eatPacman
+     */
+    public void eatPacman(final Pacman pacman) {
         pacman.die();
-        this.exist = false;
+        this.doesnotExist();
     }
 
+    /**
+     *
+     *  moveUp
+     */
     public void moveUp() {
-        super.y -= 30;
+        super.setY(super.getY() - WALK_DISTANCE);
     }
 
+    /**
+     *
+     *  moveDown
+     */
     public void moveDown() {
-        super.y += 30;
+        super.setY(super.getY() + WALK_DISTANCE);
     }
 
+    /**
+     *
+     *  moveLeft
+     */
     public void moveLeft() {
-        super.x -= 30;
+        super.setX(super.getX() - WALK_DISTANCE);
     }
 
+    /**
+     *
+     *  moveRight
+     */
     public void moveRight() {
-        super.x += 30;
+        super.setX(super.getX() + WALK_DISTANCE);
     }
 
-    public boolean isPosibleMoveDown(ArrayList<Position> walls) {
+    /**
+     *
+     * @return isPosibleMoveDown
+     */
+    public boolean isPosibleMoveDown(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x && wall.getY() == this.y + 30) return false;
+        if (wall.getX() == super.getX() && wall.getY() == super.getY() + WALK_DISTANCE) {
+            return false;
+        }
         }
         return true;
     }
 
-    public boolean isPosibleMoveUp(ArrayList<Position> walls) {
+    /**
+     *
+     * @return isPosibleMoveUp
+     */
+    public boolean isPosibleMoveUp(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x && wall.getY() == this.y - 30) return false;
+        if (wall.getX() == super.getX() && wall.getY() == super.getY() - WALK_DISTANCE) {
+            return false;
+        }
         }
         return true;
     }
 
-    public boolean isPosibleMoveLeft(ArrayList<Position> walls) {
+    /**
+     *
+     * @return isPosibleMoveLeft
+     */
+    public boolean isPosibleMoveLeft(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x - 30 && wall.getY() == this.y) return false;
+        if (wall.getX() == super.getX() - WALK_DISTANCE && wall.getY() == super.getY()) {
+            return false;
+        }
         }
         return true;
     }
 
-    public boolean isPosibleMoveRight(ArrayList<Position> walls) {
+    /**
+     *
+     * @return isPosibleMoveRight
+     */
+    public boolean isPosibleMoveRight(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x + 30 && wall.getY() == this.y) return false;
+        if (wall.getX() == super.getX() + WALK_DISTANCE && wall.getY() == super.getY()) {
+            return false;
+        }
         }
         return true;
     }
 
-    //modificaion avanzar de los fantasmas.....
+    /**
+     *
+     * @return string direction X
+     */
+
     public String getDirecctionX() {
         if (isPosibleMoveRight(walls)) {
         direccion = "right";
@@ -134,6 +201,11 @@ public class Ghost extends Position {
         }
         return direccion;
     }
+
+    /**
+     *
+     * @return string direction y
+     */
 
     public String getDirecctionY() {
         if (isPosibleMoveUp(walls)) {
@@ -146,7 +218,11 @@ public class Ghost extends Position {
         return direccion;
     }
 
-    public void atascado() { //atascadomy cruce ene x
+    /**
+     *
+     * atascado
+     */
+    public void atascado() {
         switch (direccion) {
         case "down":
             if (isPosibleMoveDown(walls)) {
@@ -196,15 +272,23 @@ public class Ghost extends Position {
             direccion = getDirecctionY();
             }
             break;
+        default:
+            break;
         }
     }
 
-    public String changeDireccionGhostX(Pacman pacman) {
+    /**
+     *
+     * @return string direction X
+     */
+    public String changeDireccionGhostX(final Pacman pacman) {
         if (pacman.getX() > this.getX()) {
-        return direccion = "right";
+        direccion = "right";
+        return direccion;
         } else {
         if (pacman.getX() < this.getX()) {
-            return direccion = "left";
+            direccion = "left";
+            return direccion;
         } else if (isPosibleMove(changeDireccionGhostY(pacman))) {
             direccion = changeDireccionGhostY(pacman);
         } else {
@@ -216,7 +300,11 @@ public class Ghost extends Position {
         return direccion;
     }
 
-    public String changeDireccionGhostY(Pacman pacman) {
+    /**
+     *
+     * @return string direction Y
+     */
+    public String changeDireccionGhostY(final Pacman pacman) {
         if (pacman.getY() < this.getY()) {
         direccion = "up";
         } else {
@@ -234,7 +322,11 @@ public class Ghost extends Position {
         return direccion;
     }
 
-    public boolean isPosibleMove(String sigtDir) {
+    /**
+     *
+     * @return boolean isPosibleMove
+     */
+    public boolean isPosibleMove(final String sigtDir) {
         boolean result = false;
         switch (sigtDir) {
         case "down":
@@ -249,11 +341,17 @@ public class Ghost extends Position {
         case "right":
             result = isPosibleMoveRight(walls);
             break;
+        default:
+            break;
         }
         return result;
     }
 
-    public String ruta(Pacman pacman) {
+    /**
+     *
+     * @return string ruta
+     */
+    public String ruta(final Pacman pacman) {
         if (atascado) {
         atascado();
         } else {
@@ -262,43 +360,59 @@ public class Ghost extends Position {
         if (isPosibleMove(sigDX)) {
             direccion = sigDX;
         } else {
-            if (isPosibleMove(sigDY)) direccion = sigDY; else atascado = true;
-            /*  sigtDXA = changeDireccionGhostX(pacman);
-                        sigtDYA = changeDireccionGhostX(pacman); */
-
+            if (isPosibleMove(sigDY)) {
+            direccion = sigDY;
+            } else {
+            atascado = true;
+            }
         }
         }
 
         return direccion;
     }
 
-    public void searchRouteGhost(Pacman pacman) {
+    /**
+     *
+     *  searchRouteGhost
+     */
+    public void searchRouteGhost(final Pacman pacman) {
         direccion = ruta(pacman);
 
         switch (direccion) {
         case "down":
             if (isPosibleMoveDown(walls)) {
             moveDown();
-            if (existPacmanEatable(pacman)) eatPacman(pacman);
+
+            if (existPacmanEatable(pacman)) {
+                eatPacman(pacman);
+            }
             }
             break;
         case "up":
             if (isPosibleMoveUp(walls)) {
             moveUp();
-            if (existPacmanEatable(pacman)) eatPacman(pacman);
+            if (existPacmanEatable(pacman)) {
+                eatPacman(pacman);
+            }
             }
             break;
         case "left":
             if (isPosibleMoveLeft(walls)) {
             moveLeft();
-            if (existPacmanEatable(pacman)) eatPacman(pacman);
+            if (existPacmanEatable(pacman)) {
+                eatPacman(pacman);
+            }
             }
             break;
         case "right":
             if (isPosibleMoveRight(walls)) {
             moveRight();
-            if (existPacmanEatable(pacman)) eatPacman(pacman);
+            if (existPacmanEatable(pacman)) {
+                eatPacman(pacman);
             }
+            }
+            break;
+        default:
             break;
         }
     }

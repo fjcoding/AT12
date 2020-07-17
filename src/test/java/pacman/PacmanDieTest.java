@@ -8,6 +8,6 @@ public class PacmanDieTest {
     public void testPacmanDie() {
         Pacman p = new Pacman(5, 5, true);
         p.die();
-        assertFalse(p.getExist());
+        assertFalse(p.doesExist());
     }
 }

@@ -39,14 +39,14 @@ public class GhostTest {
     public void testDie() {
         Ghost ghost = new Ghost(5, 5, true);
         ghost.die();
-        assertFalse(ghost.getExist());
+        assertFalse(ghost.doesExist());
     }
 
     @Test
     public void testLive() {
         Ghost ghost = new Ghost(5, 5, false);
         ghost.live();
-        assertTrue(ghost.getExist());
+        assertTrue(ghost.doesExist());
     }
 
     @Test
@@ -62,44 +62,44 @@ public class GhostTest {
         Ghost ghost = new Ghost(5, 15, true);
         Pacman pacman = new Pacman(5, 5, true);
         ghost.eatPacman(pacman);
-        assertFalse(pacman.getExist());
+        assertFalse(pacman.doesExist());
     }
 
     @Test
     public void testIsPosibleMoveDown() {
-        Ghost ghost = new Ghost(60, 60, true);
+        Ghost ghost = new Ghost(60, 90, true);
         assertTrue(ghost.isPosibleMoveDown(walls));
     }
 
     @Test
     public void testIsPosibleMoveUp() {
-        Ghost ghost = new Ghost(60, 60, true);
-        assertFalse(ghost.isPosibleMoveUp(walls));
+        Ghost ghost = new Ghost(120, 90, true);
+        assertTrue(ghost.isPosibleMoveUp(walls));
     }
 
     @Test
     public void testIsPosibleMoveRight() {
-        Ghost ghost = new Ghost(60, 60, true);
+        Ghost ghost = new Ghost(60, 90, true);
         assertTrue(ghost.isPosibleMoveRight(walls));
     }
 
     @Test
-    public void testIsPosibleMoveLest() {
-        Ghost ghost = new Ghost(60, 60, true);
-        assertFalse(ghost.isPosibleMoveLeft(walls));
+    public void testIsPosibleMoveLeft() {
+        Ghost ghost = new Ghost(90, 90, true);
+        assertTrue(ghost.isPosibleMoveLeft(walls));
     }
 
     @Test
     public void testGetDirectionX() {
-        Ghost ghost = new Ghost(60, 60, true);
+        Ghost ghost = new Ghost(90, 90, true);
         String expected = "right";
         assertEquals(expected, ghost.getDirecctionX());
     }
 
     @Test
     public void testGetDirectionY() {
-        Ghost ghost = new Ghost(60, 60, true);
-        String expected = "down";
+        Ghost ghost = new Ghost(60, 90, true);
+        String expected = "up";
         assertEquals(expected, ghost.getDirecctionY());
     }
 }
