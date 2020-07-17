@@ -121,8 +121,8 @@ public class DrawComponents extends JComponent {
         yG = ghost1.getY();
         xG2 = ghost2.getX();
         yG2 = ghost2.getY();
-        ImageIcon ghostIcon1 = new ImageIcon(PacmanDraw.class.getResource("ghost.jpg"));
-        ImageIcon ghostIcon2 = new ImageIcon(PacmanDraw.class.getResource("ghost.jpg"));
+        ImageIcon ghostIcon1 = new ImageIcon(DrawComponents.class.getResource("ghost1.png"));
+        ImageIcon ghostIcon2 = new ImageIcon(DrawComponents.class.getResource("ghost2.png"));
         Image ghostImg1 = ghostIcon2.getImage();
         Image ghostImg2 = ghostIcon2.getImage();
         g.drawImage(ghostImg1, xG, yG, WIDHT_GHOST, HEIGHT_GHOST, this);
