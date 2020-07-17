@@ -14,12 +14,8 @@ class Pacman extends Position {
         addDots();
     }
     
-    public boolean die() {
-        if(super.exist == true) {
-            super.exist = false;
-            return true; 
-        }   
-        return false;
+    public void die() {
+        this.exist = false;
     }
     //functions those add and substract pacman's positions	
     public int down() {

@@ -102,10 +102,8 @@ public class Ghost extends Position {
      * @return existPacmanEatable
      */
     public boolean existPacmanEatable(final Pacman pacman) {
-        if (
-        pacman.exist && pacman.getX() == this.x && pacman.getY() == this.getY()
-        ) {
-        return true;
+        if (pacman.doesExist() && pacman.getX() == this.x && pacman.getY() == this.getY()) {
+            return true;
         }
         return false;
     }
@@ -157,9 +155,9 @@ public class Ghost extends Position {
      */
     public boolean isPosibleMoveDown(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x && wall.getY() == this.y + WALK_DISTANCE) {
-            return false;
-        }
+            if (wall.getX() == this.x && wall.getY() == this.y + WALK_DISTANCE) {
+                return false;
+            }
         }
         return true;
     }
@@ -170,9 +168,9 @@ public class Ghost extends Position {
      */
     public boolean isPosibleMoveUp(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x && wall.getY() == this.y - WALK_DISTANCE) {
-            return false;
-        }
+            if (wall.getX() == this.x && wall.getY() == this.y - WALK_DISTANCE) {
+                return false;
+            }
         }
         return true;
     }
@@ -183,9 +181,9 @@ public class Ghost extends Position {
      */
     public boolean isPosibleMoveLeft(final ArrayList<Position> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == this.x - WALK_DISTANCE && wall.getY() == this.y) {
-            return false;
-        }
+            if (wall.getX() == this.x - WALK_DISTANCE && wall.getY() == this.y) {
+                return false;
+            }
         }
         return true;
     }
