@@ -93,7 +93,7 @@ public class Ghost extends Position {
      *
      * @return changeEatable
      */
-    public void setEatable(boolean doesEatable) {
+    public void setEatable(final boolean doesEatable) {
         this.eatable = doesEatable;
     }
 
@@ -417,7 +417,6 @@ public class Ghost extends Position {
                             eatPacman(pacman);
                         }
                     }
-                    
                 }
                 break;
             case "up":

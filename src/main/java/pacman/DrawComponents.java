@@ -13,8 +13,8 @@ public class DrawComponents extends JComponent {
     private int x = pacman.getX();
     private int y = pacman.getY();
     private String direction;
-    private final int CANT_GHOST = 4;
-    private final int TIME_GHOST_IS_EATABLE = 3;
+    private static final int CANT_GHOST = 4;
+    private static final int TIME_GHOST_IS_EATABLE = 3;
     private ArrayList<Position> walls;
     public ArrayList<Dot> dots;
     private int posXghost;
@@ -30,14 +30,14 @@ public class DrawComponents extends JComponent {
         walls = listWalls.getWalls();
         timer = new Timer();
         for (int i = 1; i <= CANT_GHOST; i++) {
-            if ( i % 2 == 0 )
+            if ( i % 2 == 0 ){
                 ghosts.add(new Ghost(i * 30, i * 180, true));
-            else
+            } else {
                 ghosts.add(new Ghost(i * 210, i * 60, true));
+            }
         }
       
         TimerTask taskScapeGhost = new TimerTask() {
-            
             @Override
             public void run() {
                 if(!pacman.isEatable()){
@@ -50,7 +50,7 @@ public class DrawComponents extends JComponent {
                     }
                     repaint();
                 }
-                if( seconds > 50){
+                if ( seconds > 50){
                     pacman.setEatable();
                     for (Ghost ghost : ghosts) {
                         //ruta de escape
@@ -65,7 +65,7 @@ public class DrawComponents extends JComponent {
         TimerTask task = new TimerTask() {
         @Override
         public void run() {
-            if(pacman.isEatable()) {
+            if (pacman.isEatable()) {
                 for (Ghost ghost : ghosts) {
                     if (ghost.doesExist()) {
                         ghost.searchRouteGhost(pacman);
