@@ -76,7 +76,7 @@ class Pacman extends Position {
         }
     }
 
-    public String move(String type) {
+    public String move(final String type) {
         String direction = "";
         switch (type) {
             case "left":
