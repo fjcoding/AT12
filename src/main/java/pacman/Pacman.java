@@ -52,32 +52,53 @@ class Pacman extends Position {
         this.doesnotExist();
     }
 
-    public int down() {
+    public void down() {
         if (!existWall(super.getX(), super.getY() + positionDimension)) {
             super.setY(super.getY() + positionDimension);
         }
-        return super.getY();
     }
 
-    public int right() {
+    public void right() {
         if (!existWall(super.getX() + positionDimension, super.getY())) {
             super.setX(super.getX() + positionDimension);
         }
-        return super.getX();
     }
 
-    public int left() {
+    public void left() {
         if (!existWall(super.getX() - positionDimension, super.getY())) {
             super.setX(super.getX() - positionDimension);
         }
-        return super.getX();
     }
 
-    public int up() {
+    public void up() {
         if (!existWall(super.getX(), super.getY() - positionDimension)) {
             super.setY(super.getY() - positionDimension);
         }
-        return super.getY();
+    }
+
+    public String move(String type) {
+        String direction = "";
+        switch (type) {
+            case "left":
+                left();
+                direction = "pacmanLeft.gif";
+                break;
+            case "right":
+                right();
+                direction = "pacmanRight.gif";
+                break;
+            case "up":
+                up();
+                direction = "pacmanUp.gif";
+                break;
+            case "down":
+                down();
+                direction = "pacmanDown.gif";
+                break;
+            default:
+                break;
+        }
+        return direction;
     }
 
     public boolean existWall(final int xx, final int yy) {

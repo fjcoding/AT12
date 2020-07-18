@@ -3,8 +3,8 @@ public class Creator {
 
     private static final int CANT_GHOST = 4;
     public static final int POS_GHOST_1_X = 30;
-    public static final int POS_GHOST_2_Y = 180;
-    public static final int POS_GHOST_3_Y = 60;
+    public static final int POS_GHOST_2_Y = 150;
+    public static final int POS_GHOST_3_Y = 90;
     public static final int POS_GHOST_4_X = 210;
     private ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
 
