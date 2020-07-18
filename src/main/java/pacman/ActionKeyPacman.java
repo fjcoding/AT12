@@ -20,17 +20,17 @@ public class ActionKeyPacman implements KeyListener {
      */
     @Override
         public void actionPerformed(final ActionEvent event) {
-            if (keyRight) {
-                drawComponents.moveRight();
-            }
             if (keyLeft) {
-                drawComponents.moveLeft();
+                drawComponents.move(0);
+            }
+            if (keyRight) {
+                drawComponents.move(1);
             }
             if (keyUp) {
-                drawComponents.moveUp();
+                drawComponents.move(2);
             }
             if (keyDown) {
-                drawComponents.moveDown();
+                drawComponents.move(3);
             }
         }
     });

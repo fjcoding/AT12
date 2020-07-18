@@ -169,4 +169,30 @@ class Pacman extends Position {
             return false;
         }
     }
+
+    public int pacmanEatDot(final Dot dot,final ArrayList<Ghost> ghosts, final int seconds){
+        if (existDot(dot.getX(), dot.getY())) {
+            dot.doesnotExist();
+            if (dot.isSpecialDot()){
+                setNotEatable();
+                for (Ghost ghost : ghosts) {
+                    ghost.changeEatable();
+                }
+                return 0;
+            }
+        }
+        return seconds;
+    }
+
+    public void pacmanEatGhosts(ArrayList<Ghost> ghosts){
+        for (Ghost ghost : ghosts) {
+            if (getX() == ghost.getX() && getY() == ghost.getY()) {
+                if (!ghost.isEatable()) {
+                    die();
+                } else {
+                    ghost.die();
+                }
+            }
+        }
+    }
 }
