@@ -7,7 +7,11 @@ public class Creator {
     public static final int POS_GHOST_3_Y = 60;
     public static final int POS_GHOST_4_X = 210;
     private ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
-    public ArrayList<Ghost> createGhots() {
+
+   /**
+    *  Create ghost on arraylist
+   */
+    public ArrayList<Ghost> createGhost() {
         for (int i = 1; i <= CANT_GHOST; i++) {
             if (i % 2 == 0) {
                 ghosts.add(new Ghost(i * POS_GHOST_1_X, i * POS_GHOST_2_Y, true));

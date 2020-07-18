@@ -170,10 +170,10 @@ class Pacman extends Position {
         }
     }
 
-    public int pacmanEatDot(final Dot dot,final ArrayList<Ghost> ghosts, final int seconds){
+    public int pacmanEatDot(final Dot dot, final ArrayList<Ghost> ghosts, final int seconds) {
         if (existDot(dot.getX(), dot.getY()) && dot.doesExist()) {
             dot.doesnotExist();
-            if (dot.isSpecialDot()){
+            if (dot.isSpecialDot()) {
                 setNotEatable();
                 for (Ghost ghost : ghosts) {
                     ghost.changeEatable();
@@ -184,7 +184,7 @@ class Pacman extends Position {
         return seconds;
     }
 
-    public void pacmanEatGhosts(ArrayList<Ghost> ghosts){
+    public void pacmanEatGhosts(final ArrayList<Ghost> ghosts) {
         for (Ghost ghost : ghosts) {
             if (getX() == ghost.getX() && getY() == ghost.getY()) {
                 if (!ghost.isEatable()) {

@@ -35,11 +35,15 @@ public class DrawComponents extends JComponent {
     private static final int TIME_GHOST_IS_EATABLE = 3;
     private ArrayList<Position> walls;
     private ArrayList<Dot> dots;
-    private Creator Creator;
+    private Creator creator;
     private ArrayList<Ghost> ghosts;
     private ListWalls listWalls;
     private Timer timer;
     private int seconds = 0;
+    public static final int CASE_ZERO = 0;
+    public static final int CASE_ONE = 1;
+    public static final int CASE_TWO = 2;
+    public static final int CASE_THREE = 3;
 
     public DrawComponents() {
         dots = pacman.getDots();
@@ -47,8 +51,8 @@ public class DrawComponents extends JComponent {
         listWalls = new ListWalls();
         walls = listWalls.getWalls();
         timer = new Timer();
-        Creator = new Creator();
-        ghosts = Creator.createGhots();
+        creator = new Creator();
+        ghosts = creator.createGhost();
         TimerTask taskScapeGhost = new TimerTask() {
             @Override
             public void run() {
@@ -195,28 +199,28 @@ public class DrawComponents extends JComponent {
     public void move(final int type) {
         if (pacman.doesExist()) {
             switch (type) {
-                case 0:
+                case CASE_ZERO:
                     x = pacman.left();
                     direction = "pacmanLeft.gif";
                     break;
-                case 1:
+                case CASE_ONE:
                     x = pacman.right();
                     direction = "pacmanRight.gif";
                     break;
-                case 2:
+                case CASE_TWO:
                     y = pacman.up();
                     direction = "pacmanUp.gif";
                     break;
-                case 3:
+                case CASE_THREE:
                     y = pacman.down();
                     direction = "pacmanDown.gif";
                     break;
                 default:
                     break;
             }
-            for (Dot dot : dots){
+            for (Dot dot : dots) {
                 if (pacman.getX() == dot.getX() && pacman.getY() == dot.getY()) {
-                    seconds=pacman.pacmanEatDot(dot, ghosts, seconds);
+                    seconds = pacman.pacmanEatDot(dot, ghosts, seconds);
                     break;
                 }
             }
