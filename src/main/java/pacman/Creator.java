@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class GhostCreator {
+public class Creator {
 
     private static final int CANT_GHOST = 4;
     public static final int POS_GHOST_1_X = 30;

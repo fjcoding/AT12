@@ -171,7 +171,7 @@ class Pacman extends Position {
     }
 
     public int pacmanEatDot(final Dot dot,final ArrayList<Ghost> ghosts, final int seconds){
-        if (existDot(dot.getX(), dot.getY())) {
+        if (existDot(dot.getX(), dot.getY()) && dot.doesExist()) {
             dot.doesnotExist();
             if (dot.isSpecialDot()){
                 setNotEatable();

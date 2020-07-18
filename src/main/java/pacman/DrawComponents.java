@@ -35,7 +35,7 @@ public class DrawComponents extends JComponent {
     private static final int TIME_GHOST_IS_EATABLE = 3;
     private ArrayList<Position> walls;
     private ArrayList<Dot> dots;
-    private GhostCreator ghostCreator;
+    private Creator Creator;
     private ArrayList<Ghost> ghosts;
     private ListWalls listWalls;
     private Timer timer;
@@ -47,8 +47,8 @@ public class DrawComponents extends JComponent {
         listWalls = new ListWalls();
         walls = listWalls.getWalls();
         timer = new Timer();
-        ghostCreator = new GhostCreator();
-        ghosts = ghostCreator.createGhots();
+        Creator = new Creator();
+        ghosts = Creator.createGhots();
         TimerTask taskScapeGhost = new TimerTask() {
             @Override
             public void run() {
