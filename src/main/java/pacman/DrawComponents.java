@@ -40,10 +40,10 @@ public class DrawComponents extends JComponent {
     private ListWalls listWalls;
     private Timer timer;
     private int seconds = 0;
-    public static final int CASE_ZERO = 0;
-    public static final int CASE_ONE = 1;
-    public static final int CASE_TWO = 2;
-    public static final int CASE_THREE = 3;
+    public static final int CASE_LEFT = 0;
+    public static final int CASE_RIGHT = 1;
+    public static final int CASE_UP = 2;
+    public static final int CASE_DOWN = 3;
 
     public DrawComponents() {
         dots = pacman.getDots();
@@ -199,19 +199,19 @@ public class DrawComponents extends JComponent {
     public void move(final int type) {
         if (pacman.doesExist()) {
             switch (type) {
-                case CASE_ZERO:
+                case CASE_LEFT:
                     x = pacman.left();
                     direction = "pacmanLeft.gif";
                     break;
-                case CASE_ONE:
+                case CASE_RIGHT:
                     x = pacman.right();
                     direction = "pacmanRight.gif";
                     break;
-                case CASE_TWO:
+                case CASE_UP:
                     y = pacman.up();
                     direction = "pacmanUp.gif";
                     break;
-                case CASE_THREE:
+                case CASE_DOWN:
                     y = pacman.down();
                     direction = "pacmanDown.gif";
                     break;
