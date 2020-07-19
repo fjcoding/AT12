@@ -7,7 +7,7 @@ public class PacmanTest{
 	public void testMoveUp() {
         Pacman pacman = new Pacman(60, 60, true);
         pacman.up();
-		assertEquals(30, pacman.getY());
+        assertEquals(30, pacman.getY());
 	}
 	
 	@Test
