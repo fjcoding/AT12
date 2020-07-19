@@ -9,10 +9,6 @@ public class ActionKeyPacman implements KeyListener {
     private DrawComponents drawComponents;
     private boolean keyRight, keyLeft, keyUp, keyDown;
     public static final int TIMER_PACMAN = 200;
-    public static final int MOVE_LEFT = 0;
-    public static final int MOVE_RIGHT = 1;
-    public static final int MOVE_UP = 2;
-    public static final int MOVE_DOWN = 3;
 
     public ActionKeyPacman(final DrawComponents dComponents) {
         this.drawComponents = dComponents;
@@ -25,16 +21,16 @@ public class ActionKeyPacman implements KeyListener {
     @Override
         public void actionPerformed(final ActionEvent event) {
             if (keyLeft) {
-                drawComponents.move(MOVE_LEFT);
+                drawComponents.move("left");
             }
             if (keyRight) {
-                drawComponents.move(MOVE_RIGHT);
+                drawComponents.move("right");
             }
             if (keyUp) {
-                drawComponents.move(MOVE_UP);
+                drawComponents.move("up");
             }
             if (keyDown) {
-                drawComponents.move(MOVE_DOWN);
+                drawComponents.move("down");
             }
         }
     });
