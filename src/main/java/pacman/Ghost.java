@@ -10,10 +10,6 @@ public class Ghost extends Position {
     private boolean stuckGhost = false;
     private static final int WALK_DISTANCE = 30;
     private static final int NUM_POSIBLE_RUTES = 4;
-    private static final int DOWN = 0;
-    private static final int UP = 1;
-    private static final int LEFT = 2;
-    private static final int RIGHT = 3;
 
     public Ghost(final int x, final int y, final boolean exist) {
         super(x, y, exist);
@@ -29,38 +25,6 @@ public class Ghost extends Position {
         super(x, y, exist);
         this.eatable = false;
         walls = wallsExtern;
-    }
-
-    /**
-     *
-     * @param x
-     */
-    public void setX(final int x) {
-        super.setX(x);
-    }
-
-    /**
-     *
-     * @param y
-     */
-    public void setY(final int y) {
-        super.setY(y);
-    }
-
-    /**
-     *
-     * @return x
-     */
-    public int getX() {
-        return super.getX();
-    }
-
-    /**
-     *
-     * @return y
-     */
-    public int getY() {
-        return super.getY();
     }
 
     /**
@@ -184,30 +148,9 @@ public class Ghost extends Position {
      * @return string direction X
      */
     public String getDirecctionX() {
-        final int numRand = new Random().nextInt(100);
+        final int numRand = new Random().nextInt(4);
         final String dirRand1 = "left";
         final String dirRand2 = "right";
-        String dirY = dirRand1;
-        if (isPosibleMove(dirRand1) && isPosibleMove(dirRand2)) {
-            if (numRand % 2 == 0) {
-                dirY = dirRand2;
-             }
-        } else {
-            if (isPosibleMove(dirRand2)) {
-                dirY = dirRand2;
-            }
-        }
-        return dirY;
-    }
-
-    /**
-     *
-     * @return string direction y
-     */
-    public String getDirecctionY() {
-        final int numRand = new Random().nextInt(100);
-        final String dirRand1 = "up";
-        final String dirRand2 = "down";
         String dirX = dirRand1;
         if (isPosibleMove(dirRand1) && isPosibleMove(dirRand2)) {
             if (numRand % 2 == 0) {
@@ -219,6 +162,27 @@ public class Ghost extends Position {
             }
         }
         return dirX;
+    }
+
+    /**
+     *
+     * @return string direction y
+     */
+    public String getDirecctionY() {
+        final int numRand = new Random().nextInt(4);
+        final String dirRand1 = "up";
+        final String dirRand2 = "down";
+        String dirY = dirRand1;
+        if (isPosibleMove(dirRand1) && isPosibleMove(dirRand2)) {
+            if (numRand % 2 == 0) {
+                dirY = dirRand2;
+             }
+        } else {
+            if (isPosibleMove(dirRand2)) {
+                dirY = dirRand2;
+            }
+        }
+        return dirY;
     }
 
     /**
@@ -342,8 +306,6 @@ public class Ghost extends Position {
             if (isEatable()) {
                 dirToGo = eatableChangeRoute(sigDX, sigDY, pacman);
             } else {
-                System.out.println("direccion noatable" + dirToGo);
-                System.out.println("direccion irdir" + directionNeedToGo);
                 if (directionNeedToGo != null) {
                     if (isPosibleMove(directionNeedToGo) && directionNeedToGo == (getRoutePosible(sigDX, sigDY))) {
                         dirToGo = directionNeedToGo;
@@ -361,7 +323,6 @@ public class Ghost extends Position {
         }
         return dirToGo;
     }
-
 
     /**
      *
@@ -430,8 +391,6 @@ public class Ghost extends Position {
             default:
                 break;
             }
-        } else {
-            System.out.println("el ghost exist " + doesExist());
         }
     }
 
@@ -496,6 +455,7 @@ public class Ghost extends Position {
         }
         return routePosible;
     }
+
     /**
      *
      * @return routeEscape

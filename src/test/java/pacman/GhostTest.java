@@ -58,14 +58,6 @@ public class GhostTest {
     }
 
     @Test
-    public void testEatPacman() {
-        Ghost ghost = new Ghost(5, 15, true);
-        Pacman pacman = new Pacman(5, 5, true);
-        ghost.eatPacman(pacman);
-        assertFalse(pacman.doesExist());
-    }
-
-    @Test
     public void testIsPosibleMoveDown() {
         Ghost ghost = new Ghost(60, 90, true);
         assertTrue(ghost.isPosibleMoveDown(walls));
@@ -87,19 +79,5 @@ public class GhostTest {
     public void testIsPosibleMoveLeft() {
         Ghost ghost = new Ghost(90, 90, true);
         assertTrue(ghost.isPosibleMoveLeft(walls));
-    }
-
-    @Test
-    public void testGetDirectionX() {
-        Ghost ghost = new Ghost(90, 90, true);
-        String expected = "right";
-        assertEquals(expected, ghost.getDirecctionX());
-    }
-
-    @Test
-    public void testGetDirectionY() {
-        Ghost ghost = new Ghost(60, 90, true);
-        String expected = "up";
-        assertEquals(expected, ghost.getDirecctionY());
     }
 }
