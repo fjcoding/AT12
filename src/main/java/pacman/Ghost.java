@@ -45,7 +45,7 @@ public class Ghost extends Position {
 
     /**
      *
-     * @return changeEatable
+     * @return setEatable
      */
     public void setEatable(final boolean doesEatable) {
         this.eatable = doesEatable;
