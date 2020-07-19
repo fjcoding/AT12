@@ -16,12 +16,7 @@ public class Ghost extends Position {
         this.eatable = false;
     }
 
-    public Ghost(
-        final int x,
-        final int y,
-        final boolean exist,
-        final ArrayList<Position> wallsExtern
-    ) {
+    public Ghost(final int x, final int y, final boolean exist, final ArrayList<Position> wallsExtern) {
         super(x, y, exist);
         this.eatable = false;
         walls = wallsExtern;
