@@ -23,23 +23,21 @@ public class DrawComponents extends JComponent {
     public static final int TIME_TO_CHANGE_GHOST = 50;
     private Pacman pacman;
     private String direction;
-    private ArrayList<Position> walls;
+    private ArrayList<Wall> walls;
     private ArrayList<Dot> dots;
-    private Creator creator;
     private ArrayList<Ghost> ghosts;
-    private ListWalls listWalls;
+    private Creator creator;
     private Timer timer;
     private int seconds = 0;
 
     public DrawComponents() {
-        pacman = new Pacman(SIZE_FRAME, SIZE_FRAME, true);
-        dots = pacman.getDots();
-        direction = "pacman.png";
-        listWalls = new ListWalls();
-        walls = listWalls.getWalls();
         timer = new Timer();
+        direction = "pacman.png";
         creator = new Creator();
-        ghosts = creator.createGhost();
+        walls = creator.createWalls();
+        ghosts = creator.createGhost(walls);
+        dots = creator.createDots(walls);
+        pacman = new Pacman(SIZE_FRAME, SIZE_FRAME, true, walls, dots);
         ghostMovementController();
     }
 
