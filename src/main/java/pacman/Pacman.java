@@ -4,28 +4,9 @@ class Pacman extends Position {
     private boolean eatable;
     private ArrayList<Dot> dots;
     private ArrayList<Wall> walls;
-    private final int positionDimension = 30;
-    private final int frameXSize = 30;
-    private final int frameYSize = 30;
-    private final int indexOfSpecialDot0 = 0;
-    private final int indexOfSpecialDot1 = 27;
-    private final int indexOfSpecialDot2 = 67;
-    private final int indexOfSpecialDot3 = 77;
-    private final int indexOfSpecialDot4 = 78;
-    private final int indexOfSpecialDot5 = 113;
-    private final int indexOfSpecialDot6 = 178;
-    private final int indexOfSpecialDot7 = 223;
-    private final int indexOfSpecialDot8 = 228;
-    private final int indexOfSpecialDot9 = 238;
-    private final int indexOfSpecialDot10 = 257;
-    private final int indexOfSpecialDot11 = 294;
-    private final int indexOfSpecialDot12 = 353;
-    private final int indexOfSpecialDot13 = 300;
-    private final int indexOfSpecialDot14 = 301;
-    private final int indexOfSpecialDot15 = 302;
-    private final int indexOfSpecialDot16 = 303;
+    private static final int POSITION_DIMENSION = 30;
 
-    Pacman(final int x, final int y, final boolean exist, ArrayList<Wall> wallsCreated, ArrayList<Dot> dotsCreated) {
+    Pacman(final int x, final int y, final boolean exist, final ArrayList<Wall> wallsCreated, final ArrayList<Dot> dotsCreated) {
         super(x, y, exist);
         eatable = true;
         walls = wallsCreated;
@@ -49,26 +30,26 @@ class Pacman extends Position {
     }
 
     public void down() {
-        if (!existWall(super.getX(), super.getY() + positionDimension)) {
-            super.setY(super.getY() + positionDimension);
+        if (!existWall(super.getX(), super.getY() + POSITION_DIMENSION)) {
+            super.setY(super.getY() + POSITION_DIMENSION);
         }
     }
 
     public void right() {
-        if (!existWall(super.getX() + positionDimension, super.getY())) {
-            super.setX(super.getX() + positionDimension);
+        if (!existWall(super.getX() + POSITION_DIMENSION, super.getY())) {
+            super.setX(super.getX() + POSITION_DIMENSION);
         }
     }
 
     public void left() {
-        if (!existWall(super.getX() - positionDimension, super.getY())) {
-            super.setX(super.getX() - positionDimension);
+        if (!existWall(super.getX() - POSITION_DIMENSION, super.getY())) {
+            super.setX(super.getX() - POSITION_DIMENSION);
         }
     }
 
     public void up() {
-        if (!existWall(super.getX(), super.getY() - positionDimension)) {
-            super.setY(super.getY() - positionDimension);
+        if (!existWall(super.getX(), super.getY() - POSITION_DIMENSION)) {
+            super.setY(super.getY() - POSITION_DIMENSION);
         }
     }
 

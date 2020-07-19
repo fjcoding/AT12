@@ -13,26 +13,11 @@ public class Creator {
     public static final int[] WALL_POSITIONS_X = {90, 150, 180, 210, 240, 270, 330, 360, 390, 420, 450, 480, 510, 570, 630, 690, 720, 750, 780 };
     public static final int[] WALL_POSITIONS_Y = {60, 120, 570, 450, 780, 150, 840, 180, 240, 300, 360, 420, 720, 480, 540, 600, 810 };
     //constants used by createDots().
-    private final int INDEX_OF_SPECIAL_DOT_0 = 0;
-    private final int INDEX_OF_SPECIAL_DOT_1 = 27;
-    private final int INDEX_OF_SPECIAL_DOT_2 = 67;
-    private final int INDEX_OF_SPECIAL_DOT_3 = 77;
-    private final int INDEX_OF_SPECIAL_DOT_4 = 78;
-    private final int INDEX_OF_SPECIAL_DOT_5 = 113;
-    private final int INDEX_OF_SPECIAL_DOT_6 = 178;
-    private final int INDEX_OF_SPECIAL_DOT_7 = 223;
-    private final int INDEX_OF_SPECIAL_DOT_8 = 228;
-    private final int INDEX_OF_SPECIAL_DOT_9 = 238;
-    private final int INDEX_OF_SPECIAL_DOT_10 = 257;
-    private final int INDEX_OF_SPECIAL_DOT_11 = 294;
-    private final int INDEX_OF_SPECIAL_DOT_12 = 353;
-    private final int INDEX_OF_SPECIAL_DOT_13 = 400;
-    private final int INDEX_OF_SPECIAL_DOT_14 = 420;
-    private final int INDEX_OF_SPECIAL_DOT_15 = 430;
-    private final int INDEX_OF_SPECIAL_DOT_16 = 450;
-    private final int FRAME_X_SIZE = 30;
-    private final int FRAME_Y_SIZE = 30;
-    private final int POSITION_DIMENSION = 30;
+    private static final int[] INDEX_OF_SPECIAL_DOTS = {0, 27, 67, 77, 78, 113, 178, 223, 228, 238, 257, 294, 353, 400, 420, 430, 450};
+
+    private static final int FRAME_X_SIZE = 30;
+    private static final int FRAME_Y_SIZE = 30;
+    private static final int POSITION_DIMENSION = 30;
     //ArrayLists used by add new objects.
     private ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
     private ArrayList<Dot> dots = new ArrayList<Dot>();
@@ -51,15 +36,16 @@ public class Creator {
         return ghosts;
     }
 
+    /**
+    *  Create walls on arraylist
+    */
     public ArrayList<Wall> createWalls() {
-
         for (int i = 0; i <= SCENARIO_SIZE; i += PIXEL_SIZE) {
             walls.add(new Wall(NUMBER_ZERO, i, true)); // left
             walls.add(new Wall(i, NUMBER_ZERO, true)); // up
             walls.add(new Wall(SCENARIO_SIZE, SCENARIO_SIZE - i, true)); // right
             walls.add(new Wall(SCENARIO_SIZE - i, SCENARIO_SIZE, true)); // down
         }
-
         for (int i = NUMBER_ZERO; i < SCENARIO_SIZE; i++) {
             int randX = i % WALL_POSITIONS_X.length;
             int randY = i % WALL_POSITIONS_Y.length;
@@ -69,6 +55,9 @@ public class Creator {
         return walls;
     }
 
+    /**
+    *  Create dots and special dots on arraylist
+    */
     public ArrayList<Dot> createDots(final ArrayList<Wall> wallsCreated) {
         boolean draw = true;
         for (int iy = 1; iy < FRAME_Y_SIZE - 1; iy++) {
@@ -85,24 +74,10 @@ public class Creator {
                 draw = true;
             }
         }
-        //The next lines change isSpecial attribute of Dot to true, at specific positions.
-        dots.get(INDEX_OF_SPECIAL_DOT_0).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_1).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_2).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_3).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_4).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_5).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_6).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_7).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_8).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_9).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_10).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_11).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_12).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_13).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_14).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_15).setSpecial();
-        dots.get(INDEX_OF_SPECIAL_DOT_16).setSpecial();
+        //Change isSpecial attribute of Dot to true, at specific positions.
+        for (int index : INDEX_OF_SPECIAL_DOTS) {
+            dots.get(index).setSpecial();
+        }
         return dots;
     }
 }
