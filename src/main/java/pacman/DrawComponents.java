@@ -35,7 +35,7 @@ public class DrawComponents extends JComponent {
         direction = "pacman.png";
         creator = new Creator();
         walls = creator.createWalls();
-        ghosts = creator.createGhost(walls);
+        ghosts = creator.createGhost();
         dots = creator.createDots(walls);
         pacman = new Pacman(SIZE_FRAME, SIZE_FRAME, true, walls, dots);
         ghostMovementController();
@@ -75,6 +75,15 @@ public class DrawComponents extends JComponent {
                 if (pacman.isEatable()) {
                     for (Ghost ghost : ghosts) {
                         if (ghost.doesExist()) {
+                            ghost.searchRouteGhost(pacman);
+                        }
+                    }
+                    repaint();
+                } else {
+                    for (Ghost ghost : ghosts) {
+                        if (!ghost.doesExist()) {
+                            ghost.setEatable(false);
+                            ghost.live();
                             ghost.searchRouteGhost(pacman);
                         }
                     }
@@ -155,7 +164,13 @@ public class DrawComponents extends JComponent {
                 if (pacman.isEatable()) {
                     ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost2.png"));
                 } else {
-                    ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost1.png"));
+                    if (ghost.isEatable()) {
+                        ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost1.png"));
+                    } else {
+                        ghost.setX(SIZE_ELEMENT);
+                        ghost.setY(SIZE_FRAME);
+                        ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost2.png"));
+                    }
                 }
                 Image ghostImg = ghostIcon.getImage();
                 g.drawImage(ghostImg, ghost.getX(), ghost.getY(), SIZE_ELEMENT, SIZE_ELEMENT, this);

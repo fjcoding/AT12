@@ -13,6 +13,11 @@ class Pacman extends Position {
         dots = dotsCreated;
     }
 
+    Pacman(final int x, final int y, final boolean exist) {
+        super(x, y, exist);
+        eatable = true;
+    }
+
     public boolean isEatable() {
         return this.eatable;
     }
