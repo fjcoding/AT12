@@ -81,6 +81,15 @@ public class DrawComponents extends JComponent {
                         }
                     }
                     repaint();
+                } else {
+                    for (Ghost ghost : ghosts) {
+                        if (!ghost.doesExist()) {
+                            ghost.setEatable(false);
+                            ghost.live();
+                            ghost.searchRouteGhost(pacman);
+                        }
+                    }
+                    repaint();
                 }
             }
         };
@@ -157,7 +166,13 @@ public class DrawComponents extends JComponent {
                 if (pacman.isEatable()) {
                     ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost2.png"));
                 } else {
-                    ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost1.png"));
+                    if (ghost.isEatable()) {
+                        ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost1.png"));
+                    } else {
+                        ghost.setX(SIZE_ELEMENT);
+                        ghost.setY(SIZE_FRAME);
+                        ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost2.png"));
+                    }
                 }
                 Image ghostImg = ghostIcon.getImage();
                 g.drawImage(ghostImg, ghost.getX(), ghost.getY(), SIZE_ELEMENT, SIZE_ELEMENT, this);

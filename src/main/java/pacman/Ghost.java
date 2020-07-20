@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Ghost extends Position {
     private boolean eatable;
-    private ListWalls lWall = new ListWalls();
+    private final ListWalls lWall = new ListWalls();
     private ArrayList<Position> walls = lWall.getWalls();
     private String direction = "right";
     private String directionNeedToGo;
@@ -20,6 +20,54 @@ public class Ghost extends Position {
         super(x, y, exist);
         this.eatable = false;
         walls = wallsExtern;
+    }
+
+    /**
+     *
+     * @return getStuckGhost
+     */
+    public boolean getStuckGhost() {
+        return this.stuckGhost;
+    }
+
+    /**
+     *
+     * @return setStuckGhost
+     */
+    public void setStuckGhost(final boolean stuck) {
+        this.stuckGhost = stuck;
+    }
+
+    /**
+     *
+     * @return getDirectionNeedToGo
+     */
+    public String getDirectionNeedToGo() {
+        return this.directionNeedToGo;
+    }
+
+    /**
+     *
+     * @return getDirection
+     */
+    public String getDirection() {
+        return this.direction;
+    }
+
+    /**
+     *
+     * Method setDirection
+     */
+    public void setDirection(final String dir) {
+        this.direction = dir;
+    }
+
+    /**
+     *
+     * Method setDirectionNeedToGo
+     */
+    public void setDirectionNeedToGo(final String dir) {
+        this.directionNeedToGo = dir;
     }
 
     /**
@@ -91,7 +139,7 @@ public class Ghost extends Position {
      * @return isPosibleMoveDown
      */
     public boolean isPosibleMoveDown(final ArrayList<Position> wallsExtern) {
-        for (Position wall : walls) {
+        for (final Position wall : walls) {
             if (wall.getX() == super.getX() && wall.getY() == super.getY() + WALK_DISTANCE) {
                 return false;
             }
@@ -104,7 +152,7 @@ public class Ghost extends Position {
      * @return isPosibleMoveUp
      */
     public boolean isPosibleMoveUp(final ArrayList<Position> wallsExtern) {
-        for (Position wall : walls) {
+        for (final Position wall : walls) {
             if (wall.getX() == super.getX() && wall.getY() == super.getY() - WALK_DISTANCE) {
                 return false;
             }
@@ -117,7 +165,7 @@ public class Ghost extends Position {
      * @return isPosibleMoveLeft
      */
     public boolean isPosibleMoveLeft(final ArrayList<Position> wallsExtern) {
-        for (Position wall : walls) {
+        for (final Position wall : walls) {
             if (wall.getX() == super.getX() - WALK_DISTANCE && wall.getY() == super.getY()) {
                 return false;
             }
@@ -130,7 +178,7 @@ public class Ghost extends Position {
      * @return isPosibleMoveRight
      */
     public boolean isPosibleMoveRight(final ArrayList<Position> wallsExtern) {
-        for (Position wall : walls) {
+        for (final Position wall : walls) {
             if (wall.getX() == super.getX() + WALK_DISTANCE && wall.getY() == super.getY()) {
                 return false;
             }
@@ -292,12 +340,23 @@ public class Ghost extends Position {
      * @return string getRoute
      */
     public String getRoute(final Pacman pacman) {
+        System.out.println("direccion" + direction);
+        System.out.println("irdir  " + directionNeedToGo);
+        System.out.println("atascado" + stuckGhost);
+
         String dirToGo = "";
         if (stuckGhost) {
+        System.out.println("atascado   " + stuckGhost);
+
             dirToGo = solveStuckGhost(direction);
+        System.out.println("direccion dirto" + dirToGo);
+
         } else {
             final String sigDX = getNextDirectionGhostX(pacman);
             final String sigDY = getNextDirectionGhostY(pacman);
+
+            System.out.println("sidx  " + sigDX);
+        System.out.println("sigdy" + sigDY);
             if (isEatable()) {
                 dirToGo = eatableChangeRoute(sigDX, sigDY, pacman);
             } else {
@@ -306,7 +365,11 @@ public class Ghost extends Position {
                         dirToGo = directionNeedToGo;
                     } else {
                         dirToGo = getRoutePosible(sigDX, sigDY);
+                        System.out.println("idirtogo rlse else  " + dirToGo);
                         directionNeedToGo = null;
+                        if (stuckGhost) {
+                            directionNeedToGo = dirToGo;
+                        }
                     }
                 } else {
                     dirToGo = getRoutePosible(sigDX, sigDY);
@@ -315,7 +378,11 @@ public class Ghost extends Position {
                     }
                 }
             }
-        }
+        System.out.println("irdir salida  " + directionNeedToGo);
+        System.out.println("atascado salida" + stuckGhost);
+
+    }
+        System.out.println("direccion salir" + dirToGo);
         return dirToGo;
     }
 
@@ -457,7 +524,7 @@ public class Ghost extends Position {
      */
     public String routeEscape(final String route) {
         String routeEscape = route;
-        if (route == "right") {
+        if (route == "down") {
             routeEscape = getDirecctionY();
             if (isPosibleMove("left")) {
                 routeEscape = "left";
