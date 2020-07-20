@@ -1,18 +1,21 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
+import java.util.ArrayList;
 
 public class PacmanDotTest {
 	
+	private ArrayList<Wall> walls = new ArrayList<Wall>();
+    private ArrayList<Dot> dots = new ArrayList<Dot>();
 	@Test
 	public void testFoodIsEatable() {
-		Pacman p = new Pacman(5, 5, true);
+		Pacman p = new Pacman(5, 5, true, walls, dots);
 		Dot f = new Dot(5, 5, true);		
 		assertEquals(true, p.isEatable(f));	
 	}
 
 	@Test
 	public void testFoodDoesNotExist() {
-		Pacman p = new Pacman(5, 5, true);
+		Pacman p = new Pacman(5, 5, true, walls, dots);
 		Dot f = new Dot(5, 5, false);		
 		assertEquals(false, p.isEatable(f));		
 	}
@@ -32,15 +35,15 @@ public class PacmanDotTest {
 
 	@Test
 	public void testGhostIsNotEatable() {
-		Pacman p = new Pacman(5, 5, true);
-		Ghost  g = new Ghost(5, 5, true);	
+		Pacman p = new Pacman(5, 5, true, walls, dots);
+		Ghost  g = new Ghost(5, 5, true, walls);	
 		assertEquals(false,p.isEatable(g));	
 	}
 
 	@Test
 	public void testGhostIsEatable() {
-		Pacman p = new Pacman(5, 5, true);
-		Ghost   g = new Ghost(5, 5, true);
+		Pacman p = new Pacman(5, 5, true, walls, dots);
+		Ghost   g = new Ghost(5, 5, true, walls);
 		g.changeEatable();		
 		assertEquals(true,p.isEatable(g));
 	}
