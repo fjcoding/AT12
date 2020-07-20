@@ -3,24 +3,20 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Timer;
-//import javax.swing.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-
 import com.sun.glass.events.KeyEvent;
-
-import sun.util.locale.provider.BreakDictionary;
 
 public class DrawComponents extends JComponent {
 
-    public static final int WIDTH_FRAME = 300;  //300
-    public static final int HEIGHT_FRAME = 300; //300
+    public static final int WIDTH_FRAME = 300;
+    public static final int HEIGHT_FRAME = 300;
     public static final long DELAY_TIMER = 3000;
-    public static final long PERIOD_TIMER = 2000; //200
+    public static final long PERIOD_TIMER = 200;
     public static final long PERIOD_TIMER_GHOST = 500;
-    public static final int WIDHT_PACMAN = 20;  //30
-    public static final int HEIGHT_PACMAN = 20;  //30
+    public static final int WIDHT_PACMAN = 20;
+    public static final int HEIGHT_PACMAN = 20;
     public static final int WIDHT_WALL = 30;
     public static final int HEIGHT_WALL = 30;
     public static final int WIDHT_GHOST = 30;
@@ -233,7 +229,11 @@ public class DrawComponents extends JComponent {
         }
         pacman.pacmanEatGhosts(ghosts);
     }
-    public boolean isNotPosibleMove(final int type){
+
+    /**
+     * Method to check if is posible move to gived direction
+     */
+    public boolean isNotPosibleMove(final int type) {
         switch (type) {
             case KeyEvent.VK_LEFT:
                 aux = pacman.existWall(pacman.getX() - SIZE, pacman.getY());
