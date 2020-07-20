@@ -2,8 +2,7 @@ import java.util.ArrayList;
 
 public class Ghost extends Position {
     private boolean eatable;
-    private ListWalls lWall = new ListWalls();
-    private ArrayList<Position> walls = lWall.getWalls();
+    private ArrayList<Wall> walls;
     private String direccion;
     private String noPDir;
     private String irDir;
@@ -16,20 +15,10 @@ public class Ghost extends Position {
     private static final int LEFT = 2;
     private static final int RIGHT = 3;
 
-    public Ghost(final int x, final int y, final boolean exist) {
+    public Ghost(final int x, final int y, final boolean exist, final ArrayList<Wall> createdWalls) {
         super(x, y, exist);
         this.eatable = false;
-    }
-
-    public Ghost(
-        final int x,
-        final int y,
-        final boolean exist,
-        final ArrayList<Position> wallsExtern
-    ) {
-        super(x, y, exist);
-        this.eatable = false;
-        walls = wallsExtern;
+        walls = createdWalls;
     }
 
     /**
@@ -152,11 +141,11 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveDown
      */
-    public boolean isPosibleMoveDown(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveDown(final ArrayList<Wall> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == super.getX() && wall.getY() == super.getY() + WALK_DISTANCE) {
-            return false;
-        }
+            if (wall.getX() == super.getX() && wall.getY() == super.getY() + WALK_DISTANCE) {
+                return false;
+            }
         }
         return true;
     }
@@ -165,11 +154,11 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveUp
      */
-    public boolean isPosibleMoveUp(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveUp(final ArrayList<Wall> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == super.getX() && wall.getY() == super.getY() - WALK_DISTANCE) {
-            return false;
-        }
+            if (wall.getX() == super.getX() && wall.getY() == super.getY() - WALK_DISTANCE) {
+                return false;
+            }
         }
         return true;
     }
@@ -178,11 +167,11 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveLeft
      */
-    public boolean isPosibleMoveLeft(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveLeft(final ArrayList<Wall> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == super.getX() - WALK_DISTANCE && wall.getY() == super.getY()) {
-            return false;
-        }
+            if (wall.getX() == super.getX() - WALK_DISTANCE && wall.getY() == super.getY()) {
+                return false;
+            }
         }
         return true;
     }
@@ -191,11 +180,11 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveRight
      */
-    public boolean isPosibleMoveRight(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveRight(final ArrayList<Wall> wallsExtern) {
         for (Position wall : walls) {
-        if (wall.getX() == super.getX() + WALK_DISTANCE && wall.getY() == super.getY()) {
-            return false;
-        }
+            if (wall.getX() == super.getX() + WALK_DISTANCE && wall.getY() == super.getY()) {
+                return false;
+            }
         }
         return true;
     }
@@ -207,11 +196,11 @@ public class Ghost extends Position {
 
     public String getDirecctionX() {
         if (isPosibleMoveRight(walls)) {
-        direccion = "right";
+            direccion = "right";
         } else {
-        if (isPosibleMoveLeft(walls)) {
-            direccion = "left";
-        }
+            if (isPosibleMoveLeft(walls)) {
+                direccion = "left";
+            }
         }
         return direccion;
     }
@@ -223,11 +212,11 @@ public class Ghost extends Position {
 
     public String getDirecctionY() {
         if (isPosibleMoveUp(walls)) {
-        direccion = "up";
+            direccion = "up";
         } else {
-        if (isPosibleMoveDown(walls)) {
-            direccion = "down";
-        }
+            if (isPosibleMoveDown(walls)) {
+                direccion = "down";
+            }
         }
         return direccion;
     }
@@ -240,50 +229,50 @@ public class Ghost extends Position {
         switch (direccion) {
         case "down":
             if (isPosibleMoveDown(walls)) {
-            if (irDir == getDirecctionX()) {
-                direccion = irDir;
-                atascado = false;
+                if (irDir == getDirecctionX()) {
+                    direccion = irDir;
+                    atascado = false;
+                } else {
+                    direccion = "down";
+                }
             } else {
-                direccion = "down";
-            }
-            } else {
-            direccion = getDirecctionX();
+                direccion = getDirecctionX();
             }
             break;
         case "up":
             if (isPosibleMoveUp(walls)) {
-            if (irDir == getDirecctionX()) {
-                direccion = irDir;
-                atascado = false;
+                if (irDir == getDirecctionX()) {
+                    direccion = irDir;
+                    atascado = false;
+                } else {
+                    direccion = "up";
+                }
             } else {
-                direccion = "up";
-            }
-            } else {
-            direccion = getDirecctionX();
+                direccion = getDirecctionX();
             }
             break;
         case "left":
             if (isPosibleMoveLeft(walls)) {
-            if (irDir == getDirecctionY()) {
-                direccion = irDir;
-                atascado = false;
+                if (irDir == getDirecctionY()) {
+                    direccion = irDir;
+                    atascado = false;
+                } else {
+                    direccion = "left";
+                }
             } else {
-                direccion = "left";
-            }
-            } else {
-            direccion = getDirecctionY();
+                direccion = getDirecctionY();
             }
             break;
         case "right":
             if (isPosibleMoveRight(walls)) {
-            if (irDir == getDirecctionY()) {
-                direccion = irDir;
-                atascado = false;
+                if (irDir == getDirecctionY()) {
+                    direccion = irDir;
+                    atascado = false;
+                } else {
+                    direccion = "right";
+                }
             } else {
-                direccion = "right";
-            }
-            } else {
-            direccion = getDirecctionY();
+                direccion = getDirecctionY();
             }
             break;
         default:
@@ -299,7 +288,7 @@ public class Ghost extends Position {
         if (pacman.getX() > this.getX()) {
             direccion = "right";
             return direccion;
-            } else {
+        } else {
             if (pacman.getX() < this.getX()) {
                 direccion = "left";
                 return direccion;
@@ -321,15 +310,15 @@ public class Ghost extends Position {
     public String changeDireccionGhostY(final Pacman pacman) {
         if (pacman.getY() > this.getY()) {
             direccion = "down";
-            } else {
+        } else {
             if (pacman.getY() < this.getY()) {
                 direccion = "up";
             } else {
                 if (isPosibleMove(changeDireccionGhostX(pacman))) {
-                direccion = changeDireccionGhostX(pacman);
+                    direccion = changeDireccionGhostX(pacman);
                 } else {
-                atascado = true;
-                irDir = changeDireccionGhostX(pacman);
+                    atascado = true;
+                    irDir = changeDireccionGhostX(pacman);
                 }
             }
         }

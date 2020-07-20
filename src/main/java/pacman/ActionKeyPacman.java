@@ -7,15 +7,13 @@ import javax.swing.Timer;
 public class ActionKeyPacman implements KeyListener {
 
     private DrawComponents drawComponents;
-    private boolean keyRight, keyLeft, keyUp, keyDown;
     public static final int TIMER_PACMAN = 200;
-    public static final int MOVE_LEFT = 0;
-    public static final int MOVE_RIGHT = 1;
-    public static final int MOVE_UP = 2;
-    public static final int MOVE_DOWN = 3;
-    private int preKey;
-    private int key;
-    private Boolean a = true;
+    public static final String MOVE_LEFT = "left";
+    public static final String MOVE_RIGHT = "right";
+    public static final String MOVE_UP = "up";
+    public static final String MOVE_DOWN = "down";
+    private int key, preKey;
+    private Boolean keyLeft, keyRight, keyUp, keyDown, aux = true;
 
     public ActionKeyPacman(final DrawComponents dComponents) {
         this.drawComponents = dComponents;
@@ -27,7 +25,7 @@ public class ActionKeyPacman implements KeyListener {
      */
     @Override
         public void actionPerformed(final ActionEvent event) {
-            a = false;
+            aux = false;
             if (drawComponents.isNotPosibleMove(key)) {
                 key = preKey;
                 preKey = 0;
@@ -65,7 +63,7 @@ public class ActionKeyPacman implements KeyListener {
             if (keyDown) {
                 drawComponents.move(MOVE_DOWN);
             }
-            a = true;
+            aux = true;
         }
     });
 
@@ -73,7 +71,7 @@ public class ActionKeyPacman implements KeyListener {
      @Override key pressed
      */
     public void keyPressed(final KeyEvent event) {
-        if (a) {
+        if (aux) {
             timer.start();
         }
         if (key != preKey) {

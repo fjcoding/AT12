@@ -10,17 +10,11 @@ import java.awt.event.KeyEvent;
 
 public class DrawComponents extends JComponent {
 
-    public static final int WIDTH_FRAME = 300;
-    public static final int HEIGHT_FRAME = 300;
+    public static final int SIZE_FRAME = 300;
     public static final long DELAY_TIMER = 3000;
     public static final long PERIOD_TIMER = 200;
     public static final long PERIOD_TIMER_GHOST = 500;
-    public static final int WIDHT_PACMAN = 20;
-    public static final int HEIGHT_PACMAN = 20;
-    public static final int WIDHT_WALL = 30;
-    public static final int HEIGHT_WALL = 30;
-    public static final int WIDHT_GHOST = 30;
-    public static final int HEIGHT_GHOST = 30;
+    public static final int SIZE_ELEMENT = 30;
     public static final int DOT_SHIFT = 10;
     public static final int SPECIAL_DOT_SHIFT = 5;
     public static final int DOT_SIZE = 10;
@@ -28,17 +22,12 @@ public class DrawComponents extends JComponent {
     public static final int POSITION_GAMEOVER = 100;
     public static final int SIZE_GAMEOVER = 600;
     public static final int TIME_TO_CHANGE_GHOST = 50;
-    public static final int SIZE = 30;
-    private Pacman pacman = new Pacman(WIDTH_FRAME, HEIGHT_FRAME, true);
-    private int x = pacman.getX();
-    private int y = pacman.getY();
+    private Pacman pacman;
     private String direction;
-    private static final int TIME_GHOST_IS_EATABLE = 3;
-    private ArrayList<Position> walls;
+    private ArrayList<Wall> walls;
     private ArrayList<Dot> dots;
-    private Creator creator;
     private ArrayList<Ghost> ghosts;
-    private ListWalls listWalls;
+    private Creator creator;
     private Timer timer;
     private int seconds = 0;
     public static final int CASE_LEFT = 0;
@@ -48,13 +37,20 @@ public class DrawComponents extends JComponent {
     private Boolean aux;
 
     public DrawComponents() {
-        dots = pacman.getDots();
-        direction = "pacman.png";
-        listWalls = new ListWalls();
-        walls = listWalls.getWalls();
         timer = new Timer();
+        direction = "pacman.png";
         creator = new Creator();
-        ghosts = creator.createGhost();
+        walls = creator.createWalls();
+        ghosts = creator.createGhost(walls);
+        dots = creator.createDots(walls);
+        pacman = new Pacman(SIZE_FRAME, SIZE_FRAME, true, walls, dots);
+        ghostMovementController();
+    }
+
+    /**
+     * Method to check the ghost movement
+     */
+    public void ghostMovementController() {
         TimerTask taskScapeGhost = new TimerTask() {
             @Override
             public void run() {
@@ -110,9 +106,7 @@ public class DrawComponents extends JComponent {
      * Method to add components to the frame
      */
     public void drawGameOver(final Graphics g) {
-        ImageIcon gameOver = new ImageIcon(
-        DrawComponents.class.getResource("gameOver.jpg")
-        );
+        ImageIcon gameOver = new ImageIcon(DrawComponents.class.getResource("gameOver.jpg"));
         Image gameOverImg = gameOver.getImage();
         g.drawImage(gameOverImg, POSITION_GAMEOVER, POSITION_GAMEOVER, SIZE_GAMEOVER, SIZE_GAMEOVER, null);
     }
@@ -122,11 +116,9 @@ public class DrawComponents extends JComponent {
      */
     public void drawPacman(final Graphics g) {
         if (pacman.doesExist()) {
-            ImageIcon pacmanIcon = new ImageIcon(
-            DrawComponents.class.getResource(direction)
-        );
-        Image pacmanImg = pacmanIcon.getImage();
-        g.drawImage(pacmanImg, x, y, WIDHT_PACMAN, HEIGHT_PACMAN, null);
+            ImageIcon pacmanIcon = new ImageIcon(DrawComponents.class.getResource(direction));
+            Image pacmanImg = pacmanIcon.getImage();
+            g.drawImage(pacmanImg, pacman.getX(), pacman.getY(), SIZE_ELEMENT, SIZE_ELEMENT, null);
         } else {
             timer.cancel();
             drawGameOver(g);
@@ -139,7 +131,7 @@ public class DrawComponents extends JComponent {
     public void drawWall(final Graphics g) {
         for (Position wall : walls) {
             g.setColor(Color.BLUE);
-            g.fillRect(wall.getX(), wall.getY(), WIDHT_WALL, HEIGHT_WALL);
+            g.fillRect(wall.getX(), wall.getY(), SIZE_ELEMENT, SIZE_ELEMENT);
         }
     }
 
@@ -147,21 +139,13 @@ public class DrawComponents extends JComponent {
      * Method to draw a dot
      */
     public void drawDots(final Graphics g) {
-        int dotPositionX;
-        int dotPositionY;
-        int specialDotPositionX;
-        int specialDotPositionY;
         for (Dot dot : dots) {
-            specialDotPositionX = dot.getX() + SPECIAL_DOT_SHIFT;
-            specialDotPositionY = dot.getY() + SPECIAL_DOT_SHIFT;
-            dotPositionX = dot.getX() + DOT_SHIFT;
-            dotPositionY = dot.getY() + DOT_SHIFT;
             g.setColor(Color.WHITE);
             if (dot.doesExist()) {
                 if (dot.isSpecialDot()) {
-                    g.fillOval(specialDotPositionX, specialDotPositionY, SPECIAL_DOT_SIZE, SPECIAL_DOT_SIZE);
+                    g.fillOval(dot.getX() + SPECIAL_DOT_SHIFT, dot.getY() + SPECIAL_DOT_SHIFT, SPECIAL_DOT_SIZE, SPECIAL_DOT_SIZE);
                 } else {
-                    g.fillOval(dotPositionX, dotPositionY, DOT_SIZE, DOT_SIZE);
+                    g.fillOval(dot.getX() + DOT_SHIFT, dot.getY() + DOT_SHIFT, DOT_SIZE, DOT_SIZE);
                 }
             }
         }
@@ -171,25 +155,16 @@ public class DrawComponents extends JComponent {
      * Method to draw ghosts
      */
     public void drawGhosts(final Graphics g) {
-        if (pacman.isEatable()) {
-            for (Ghost ghost : ghosts) {
-                if (ghost.doesExist()) {
-                    ImageIcon ghostIcon = new ImageIcon(
-                    DrawComponents.class.getResource("ghost2.png")
-                    );
-                    Image ghostImg = ghostIcon.getImage();
-                    g.drawImage(ghostImg, ghost.getX(), ghost.getY(), WIDHT_GHOST, HEIGHT_GHOST, this);
+        for (Ghost ghost : ghosts) {
+            if (ghost.doesExist()) {
+                ImageIcon ghostIcon;
+                if (pacman.isEatable()) {
+                    ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost2.png"));
+                } else {
+                    ghostIcon = new ImageIcon(DrawComponents.class.getResource("ghost1.png"));
                 }
-            }
-        } else {
-            for (Ghost ghost : ghosts) {
-                if (ghost.doesExist()) {
-                    ImageIcon ghostIcon = new ImageIcon(
-                        DrawComponents.class.getResource("ghost1.png")
-                    );
-                    Image ghostImg = ghostIcon.getImage();
-                    g.drawImage(ghostImg, ghost.getX(), ghost.getY(), WIDHT_GHOST, HEIGHT_GHOST, this);
-                }
+                Image ghostImg = ghostIcon.getImage();
+                g.drawImage(ghostImg, ghost.getX(), ghost.getY(), SIZE_ELEMENT, SIZE_ELEMENT, this);
             }
         }
     }
@@ -197,28 +172,10 @@ public class DrawComponents extends JComponent {
     /**
      * Method to move pacman to right 10 SHIFTs And Check if there is a dot or superdot
      */
-    public void move(final int type) {
+
+    public void move(final String type) {
         if (pacman.doesExist()) {
-            switch (type) {
-                case CASE_LEFT:
-                    x = pacman.left();
-                    direction = "pacmanLeft.gif";
-                    break;
-                case CASE_RIGHT:
-                    x = pacman.right();
-                    direction = "pacmanRight.gif";
-                    break;
-                case CASE_UP:
-                    y = pacman.up();
-                    direction = "pacmanUp.gif";
-                    break;
-                case CASE_DOWN:
-                    y = pacman.down();
-                    direction = "pacmanDown.gif";
-                    break;
-                default:
-                    break;
-            }
+            direction = pacman.move(type);
             for (Dot dot : dots) {
                 if (pacman.getX() == dot.getX() && pacman.getY() == dot.getY()) {
                     seconds = pacman.pacmanEatDot(dot, ghosts, seconds);
@@ -236,16 +193,16 @@ public class DrawComponents extends JComponent {
     public boolean isNotPosibleMove(final int type) {
         switch (type) {
             case KeyEvent.VK_LEFT:
-                aux = pacman.existWall(pacman.getX() - SIZE, pacman.getY());
+                aux = pacman.existWall(pacman.getX() - SIZE_ELEMENT, pacman.getY());
                 break;
             case KeyEvent.VK_RIGHT:
-                aux = pacman.existWall(pacman.getX() + SIZE, pacman.getY());
+                aux = pacman.existWall(pacman.getX() + SIZE_ELEMENT, pacman.getY());
                 break;
             case KeyEvent.VK_UP:
-                aux = pacman.existWall(pacman.getX(), pacman.getY() - SIZE);
+                aux = pacman.existWall(pacman.getX(), pacman.getY() - SIZE_ELEMENT);
                 break;
             case KeyEvent.VK_DOWN:
-                aux = pacman.existWall(pacman.getX(), pacman.getY() + SIZE);
+                aux = pacman.existWall(pacman.getX(), pacman.getY() + SIZE_ELEMENT);
                 break;
             default:
                 break;
