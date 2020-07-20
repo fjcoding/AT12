@@ -39,6 +39,21 @@ public class GhostTest {
     }
 
     @Test
+    public void testMove() {
+        Ghost g = new Ghost(5, 5, true);
+        g.move("right");
+        assertEquals(35, g.getX());
+        g.move("left");
+        assertEquals(5, g.getX());
+        g.move("down");
+        assertEquals(35, g.getY());
+        g.move("up");
+        assertEquals(5, g.getY());
+        g.move("other");
+        assertEquals(5, g.getY());
+    }
+
+    @Test
     public void testDie() {
         Ghost ghost = new Ghost(5, 5, true);
         ghost.die();
@@ -53,18 +68,33 @@ public class GhostTest {
     }
 
     @Test
+    public void testSetDirection() {
+        String direction = "right";
+        Ghost ghost = new Ghost(5, 5, false);
+        ghost.setDirection(direction);
+        assertEquals(direction,ghost.getDirection());
+    }
+
+    @Test
     public void testExistPacmanEatable() {
         Ghost g = new Ghost(5, 5, true);
         Pacman p = new Pacman(5, 5, true);
-        boolean resultToCompare = g.existPacmanEatable(p);
-        assertEquals(true, resultToCompare);
+        assertTrue(g.existPacmanEatable(p));
+        g.setX(10);
+        assertFalse(g.existPacmanEatable(p));
+        p.doesnotExist();
+        assertFalse(g.existPacmanEatable(p));
     }
     @Test
     public void testExistGhostEatable() {
         Ghost g = new Ghost(5, 5, true);
         Pacman p = new Pacman(5, 5, true);
-        boolean resultToCompare = g.existGhostEatable(p);
-        assertEquals(true, resultToCompare);
+        assertTrue(g.existGhostEatable(p));
+        g.setX(10);
+        p.setY(10);
+        assertFalse(g.existGhostEatable(p));
+        g.doesnotExist();
+        assertFalse(g.existGhostEatable(p));
     }
 
     @Test
@@ -99,6 +129,21 @@ public class GhostTest {
         String direction = "right";
         String expected = "right";
         assertEquals(expected,ghost.solveStuckGhost(direction));
+        ghost.setDirectionNeedToGo("up");
+        direction = "left";
+        assertEquals("left",ghost.solveStuckGhost(direction));
+        ghost.setX(300);
+        ghost.setY(120);
+        ghost.setDirectionNeedToGo("rigth");
+        direction = "up";
+        assertEquals("up",ghost.solveStuckGhost(direction));
+        ghost.setDirectionNeedToGo("left");
+        direction = "down";
+        assertEquals("down",ghost.solveStuckGhost(direction));
+        ghost.setDirectionNeedToGo("up");
+        direction = "up";
+        assertEquals("up",ghost.solveStuckGhost(direction));
+        assertFalse(ghost.getStuckGhost());
     }
 
     @Test
@@ -210,16 +255,16 @@ public class GhostTest {
     public void testGetDirecctionX() {
         Ghost ghost = new Ghost(30, 30, true);
         Pacman pacman = new Pacman(300,300,true);
-        String expected = "right";
-        assertEquals(expected, ghost.getDirecctionX());
+        assertEquals("right", ghost.getDirecctionX());
+        ghost.setX(400);
     }
 
     @Test
     public void testGetDirecctionY() {
         Ghost ghost = new Ghost(30, 30, true);
         Pacman pacman = new Pacman(300,300,true);
-        String expected = "down";
-        assertEquals(expected, ghost.getDirecctionY());
+        assertEquals("down", ghost.getDirecctionY());
+        ghost.setX(400);
     }
 
     @Test
@@ -249,6 +294,21 @@ public class GhostTest {
         Ghost ghost = new Ghost(300, 90, true);
         Pacman pacman = new Pacman(300,300,true);
         String expected = "down";
+        ghost.searchRouteGhost(pacman);
+        assertEquals(expected, ghost.getDirection());
+        ghost.setY(360);
+        expected = "up";
+        ghost.searchRouteGhost(pacman);
+        assertEquals(expected, ghost.getDirection());
+        pacman.setEatable();
+        expected = "up";
+        ghost.searchRouteGhost(pacman);
+        assertEquals(expected, ghost.getDirection());
+        pacman.live();
+        ghost.setEatable(true);
+        pacman.setNotEatable();
+        ghost.setY(330);
+        expected = "down";
         ghost.searchRouteGhost(pacman);
         assertEquals(expected, ghost.getDirection());
     }
@@ -291,6 +351,10 @@ public class GhostTest {
         Pacman pacman = new Pacman(300,300,true);
         String expected = "left";
         assertEquals(expected, ghost.routeEscape("down"));
+        expected = "down";
+        assertEquals(expected, ghost.routeEscape("up"));
+        expected = "right";
+        assertEquals(expected, ghost.routeEscape("left"));
     }
 
 }
