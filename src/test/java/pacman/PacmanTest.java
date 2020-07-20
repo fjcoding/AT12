@@ -10,21 +10,21 @@ public class PacmanTest{
 	public void testMoveUp(){
         Pacman pacman = new Pacman(60, 60, true, walls, dots);
         pacman.up();
-		assertEquals(30, pacman.getY());
+        assertEquals(30, pacman.getY());
 	}
 	
 	@Test
 	public void testMoveDown(){
         Pacman pacman = new Pacman(60, 60, true, walls, dots);
         pacman.down();
-		assertEquals(90, pacman.getY());
+        assertEquals(90, pacman.getY());
 	}
 	
 	@Test
 	public void testMoveLeft(){
         Pacman pacman = new Pacman(60, 60, true, walls, dots);
         pacman.left();
-		assertEquals(30, pacman.getX());
+        assertEquals(30, pacman.getX());
 	}
 	
 	@Test
