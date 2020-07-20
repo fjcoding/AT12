@@ -10,6 +10,8 @@ import javax.swing.JComponent;
 
 import com.sun.glass.events.KeyEvent;
 
+import sun.util.locale.provider.BreakDictionary;
+
 public class DrawComponents extends JComponent {
 
     public static final int WIDTH_FRAME = 300;  //300
@@ -30,6 +32,7 @@ public class DrawComponents extends JComponent {
     public static final int POSITION_GAMEOVER = 100;
     public static final int SIZE_GAMEOVER = 600;
     public static final int TIME_TO_CHANGE_GHOST = 50;
+    public static final int SIZE = 30;
     private Pacman pacman = new Pacman(WIDTH_FRAME, HEIGHT_FRAME, true);
     private int x = pacman.getX();
     private int y = pacman.getY();
@@ -46,7 +49,7 @@ public class DrawComponents extends JComponent {
     public static final int CASE_RIGHT = 1;
     public static final int CASE_UP = 2;
     public static final int CASE_DOWN = 3;
-    Boolean aux;
+    private Boolean aux;
 
     public DrawComponents() {
         dots = pacman.getDots();
@@ -230,24 +233,23 @@ public class DrawComponents extends JComponent {
         }
         pacman.pacmanEatGhosts(ghosts);
     }
-    public boolean isNotPosibleMove(int type){
-        //if (pacman.doesExist()){
-        switch(type){
+    public boolean isNotPosibleMove(final int type){
+        switch (type) {
             case KeyEvent.VK_LEFT:
-                aux=pacman.existWall(pacman.getX()-30,pacman.getY());
+                aux = pacman.existWall(pacman.getX() - SIZE, pacman.getY());
                 break;
             case KeyEvent.VK_RIGHT:
-                aux= pacman.existWall(pacman.getX()+30,pacman.getY());
+                aux = pacman.existWall(pacman.getX() + SIZE, pacman.getY());
                 break;
             case KeyEvent.VK_UP:
-                aux=pacman.existWall(pacman.getX(),pacman.getY()-30);
+                aux = pacman.existWall(pacman.getX(), pacman.getY() - SIZE);
                 break;
             case KeyEvent.VK_DOWN:
-                aux=pacman.existWall(pacman.getX(),pacman.getY()+30);
+                aux = pacman.existWall(pacman.getX(), pacman.getY() + SIZE);
+                break;
+            default:
                 break;
         }
-        
-        //System.out.println("aux: " + aux);
         return aux;
     }
 }
