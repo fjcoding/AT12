@@ -3,7 +3,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import java.util.concurrent.TimeUnit;
 
 public class ActionKeyPacman implements KeyListener {
 
@@ -14,12 +13,9 @@ public class ActionKeyPacman implements KeyListener {
     public static final int MOVE_RIGHT = 1;
     public static final int MOVE_UP = 2;
     public static final int MOVE_DOWN = 3;
-    int preKey;
-    int key;
-    //long time1 = 50;
-    //TimeUnit timer1 = TimeUnit.MILLISECONDS;
-    Boolean a = true;
-    //private Timer timer1 = new Timer();
+    private int preKey;
+    private int key;
+    private Boolean a = true;
 
     public ActionKeyPacman(final DrawComponents dComponents) {
         this.drawComponents = dComponents;
@@ -31,13 +27,11 @@ public class ActionKeyPacman implements KeyListener {
      */
     @Override
         public void actionPerformed(final ActionEvent event) {
-            
-            if(drawComponents.isNotPosibleMove(key)){
+            a = false;
+            if (drawComponents.isNotPosibleMove(key)) {
                 key = preKey;
                 preKey = 0;
-                System.out.println ("no es posible ir a la posicion indicada");
             }
-            System.out.println ("inicio de actionPerformed");
             if (key == KeyEvent.VK_RIGHT) {
                 keyUp = false;
                 keyDown = false;
@@ -71,8 +65,7 @@ public class ActionKeyPacman implements KeyListener {
             if (keyDown) {
                 drawComponents.move(MOVE_DOWN);
             }
-            System.out.println ("fin de actionPerformed");
-            
+            a = true;
         }
     });
 
@@ -80,15 +73,11 @@ public class ActionKeyPacman implements KeyListener {
      @Override key pressed
      */
     public void keyPressed(final KeyEvent event) {
-        if(!timer.isRunning()){
-            //wait(100);
+        if (a) {
             timer.start();
         }
-        //timer.start();
-        System.out.println ("el timer es mayor a 10 ms");
-        if(key != preKey) {
+        if (key != preKey) {
             preKey = key;
-            System.out.println ("Se actualizo el prekey");
         }
         key = event.getKeyCode();
         if (key == KeyEvent.VK_RIGHT) {
@@ -112,15 +101,12 @@ public class ActionKeyPacman implements KeyListener {
             keyRight = false;
             keyLeft = false;
         }
-        System.out.println("prekey: " + preKey);
-        System.out.println("key: " + key);
-        a=true;
     }
 
     /**
      @Override key Released
      */
-    public void keyReleased(final KeyEvent event) {     
+    public void keyReleased(final KeyEvent event) {
     }
 
     /**
