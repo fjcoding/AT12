@@ -1,7 +1,6 @@
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.*;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -68,7 +67,7 @@ public class GhostTest {
     }
 
     @Test
-    public void testSetDirection() {
+    public void testSetDirectionGhost() {
         String direction = "right";
         Ghost ghost = new Ghost(5, 5, false);
         ghost.setDirection(direction);
@@ -256,7 +255,6 @@ public class GhostTest {
         Ghost ghost = new Ghost(30, 30, true);
         Pacman pacman = new Pacman(300,300,true);
         assertEquals("right", ghost.getDirecctionX());
-        ghost.setX(400);
     }
 
     @Test
@@ -349,5 +347,5 @@ public class GhostTest {
         expected = "right";
         assertEquals(expected, ghost.routeEscape("left"));
     }
-
+    
 }
