@@ -53,7 +53,7 @@ public class PacmanTest{
 		Wall wall1 = new Wall(0, 0, true);
 		walls.add(wall1);
 		Pacman pacman = new Pacman(60, 60, true, walls, dots);
-		assertEquals(false,pacman.existWall(30, 30));
+		assertEquals(false, pacman.existWall(30, 30));
 		assertEquals(true, pacman.existWall(0, 0));
 	}
 
@@ -67,7 +67,7 @@ public class PacmanTest{
 	}
 
 	@Test
-	public void testpacmanEatGhosts(){
+	public void testPacmanEatGhosts(){
 		Ghost ghost = new Ghost(60, 60, true, walls);
 		ghost.setEatable(true);
 		Ghost ghost2 = new Ghost(60, 60, true, walls);
@@ -81,16 +81,14 @@ public class PacmanTest{
 	}
 
 	@Test
-	public void testpacmanEatDot() {
+	public void testPacmanEatDot() {
 		Pacman pacman = new Pacman(60, 60, true, walls, dots);
-		Ghost ghost = new Ghost(90, 60, true, walls);
+		Ghost ghost = new Ghost(90, 90, true, walls);
 		ghosts.add(ghost);
 		Dot dot = new Dot(60, 60, true);
-		assertEquals(1, pacman.pacmanEatDot(dot, ghosts, 1));
-		Dot dotSpecial = new Dot(60, 60, true);
+		Dot dotSpecial = new Dot(100, 100, true);
 		dotSpecial.setSpecial();
-		pacman.setNotEatable();
-		ghost.changeEatable();
+		assertEquals(1, pacman.pacmanEatDot(dot, ghosts, 1));
 		assertNotEquals(0, pacman.pacmanEatDot(dotSpecial, ghosts, 1));
 	}
 
