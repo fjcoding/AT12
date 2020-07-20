@@ -270,7 +270,6 @@ public class GhostTest {
         ghost.setDirectionNeedToGo("down");
         ghost.searchRouteGhost(pacman);
         String result = ghost.getDirection();
-        System.out.println("rrrrrrrrrrrrrrrrrrr" + result);
         boolean expected = false;
         if(result == "left" || result == "right") {
             expected = true;
