@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class Ghost extends Position {
     private boolean eatable;
-    private final ListWalls lWall = new ListWalls();
-    private ArrayList<Position> walls = lWall.getWalls();
+    private ArrayList<Wall> walls;
+    private Creator creator = new Creator();
     private String direction = "right";
     private String directionNeedToGo;
     private boolean stuckGhost = false;
@@ -14,8 +14,14 @@ public class Ghost extends Position {
     public Ghost(final int x, final int y, final boolean exist) {
         super(x, y, exist);
         this.eatable = false;
+        walls = creator.createWalls();
     }
 
+    public Ghost(final int x, final int y, final boolean exist, final ArrayList<Wall> wallsCreated) {
+        super(x, y, exist);
+        this.eatable = false;
+        walls = wallsCreated;
+    }
     /**
      *
      * @return getStuckGhost

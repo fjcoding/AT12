@@ -1,41 +1,41 @@
 import static org.junit.Assert.*;
-
+import java.util.ArrayList;
 import java.util.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class GhostTest {
-    private ListWalls listWalls = new ListWalls();
-    private ArrayList<Position> walls = listWalls.getWalls();
+    private Creator creator = new Creator();
+    private ArrayList<Wall> walls = creator.createWalls();
     private String parametroDir = "right";
 
     @Test
     public void testMoveUp() {
-        Ghost g = new Ghost(0, 30, true);
-        g.moveUp();
-        assertEquals(0, g.getY());
+        Ghost ghost = new Ghost(0, 30, true, walls);
+        ghost.moveUp();
+        assertEquals(0, ghost.getY());
     }
 
     @Test
     public void testMoveDown() {
-        Ghost g = new Ghost(5, 5, true);
-        g.moveDown();
-        assertEquals(35, g.getY());
+        Ghost ghost = new Ghost(5, 5, true, walls);
+        ghost.moveDown();
+        assertEquals(35, ghost.getY());
     }
 
     @Test
     public void testMoveLeft() {
-        Ghost g = new Ghost(30, 5, true);
-        g.moveLeft();
-        assertEquals(0, g.getX());
+        Ghost ghost = new Ghost(30, 5, true, walls);
+        ghost.moveLeft();
+        assertEquals(0, ghost.getX());
     }
 
     @Test
     public void testMoveRight() {
-        Ghost g = new Ghost(5, 5, true);
-        g.moveRight();
-        assertEquals(35, g.getX());
+        Ghost ghost = new Ghost(5, 5, true, walls);
+        ghost.moveRight();
+        assertEquals(35, ghost.getX());
     }
 
     @Test
@@ -55,14 +55,14 @@ public class GhostTest {
 
     @Test
     public void testDie() {
-        Ghost ghost = new Ghost(5, 5, true);
+        Ghost ghost = new Ghost(5, 5, true, walls);
         ghost.die();
         assertFalse(ghost.doesExist());
     }
 
     @Test
     public void testLive() {
-        Ghost ghost = new Ghost(5, 5, false);
+        Ghost ghost = new Ghost(5, 5, false, walls);
         ghost.live();
         assertTrue(ghost.doesExist());
     }
@@ -302,13 +302,6 @@ public class GhostTest {
         assertEquals(expected, ghost.getDirection());
         pacman.setEatable();
         expected = "up";
-        ghost.searchRouteGhost(pacman);
-        assertEquals(expected, ghost.getDirection());
-        pacman.live();
-        ghost.setEatable(true);
-        pacman.setNotEatable();
-        ghost.setY(330);
-        expected = "down";
         ghost.searchRouteGhost(pacman);
         assertEquals(expected, ghost.getDirection());
     }

@@ -7,7 +7,7 @@ import javax.swing.Timer;
 public class ActionKeyPacman implements KeyListener {
 
     private DrawComponents drawComponents;
-    private boolean keyRight, keyLeft, keyUp, keyDown;
+    private int key;
     public static final int TIMER_PACMAN = 200;
 
     public ActionKeyPacman(final DrawComponents dComponents) {
@@ -20,16 +20,16 @@ public class ActionKeyPacman implements KeyListener {
      */
     @Override
         public void actionPerformed(final ActionEvent event) {
-            if (keyLeft) {
+            if (key == KeyEvent.VK_LEFT) {
                 drawComponents.move("left");
             }
-            if (keyRight) {
+            if (key == KeyEvent.VK_RIGHT) {
                 drawComponents.move("right");
             }
-            if (keyUp) {
+            if (key == KeyEvent.VK_UP) {
                 drawComponents.move("up");
             }
-            if (keyDown) {
+            if (key == KeyEvent.VK_DOWN) {
                 drawComponents.move("down");
             }
         }
@@ -40,28 +40,7 @@ public class ActionKeyPacman implements KeyListener {
      */
     public void keyPressed(final KeyEvent event) {
         timer.start();
-        final int key = event.getKeyCode();
-        if (key == KeyEvent.VK_RIGHT) {
-            keyUp = false;
-            keyDown = false;
-            keyRight = true;
-            keyLeft = false;
-        } else if (key == KeyEvent.VK_LEFT) {
-            keyUp = false;
-            keyDown = false;
-            keyRight = false;
-            keyLeft = true;
-        } else if (key == KeyEvent.VK_DOWN) {
-            keyUp = false;
-            keyDown = true;
-            keyRight = false;
-            keyLeft = false;
-        } else if (key == KeyEvent.VK_UP) {
-            keyUp = true;
-            keyDown = false;
-            keyRight = false;
-            keyLeft = false;
-        }
+        key = event.getKeyCode();
     }
 
     /**
