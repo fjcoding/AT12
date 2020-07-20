@@ -172,41 +172,34 @@ public class Ghost extends Position {
      */
     public String solveStuckGhost(final String dirOptional) {
         String routeOptional = dirOptional;
-        switch (dirOptional) {
-        case "down":
-                if (isPosibleMove(directionNeedToGo)) {
-                    routeOptional = directionNeedToGo;
-                    stuckGhost = false;
-                } else if (!isPosibleMoveDown()) {
+        if (isPosibleMove(directionNeedToGo)) {
+            routeOptional = directionNeedToGo;
+            stuckGhost = false;
+        } else {
+            switch (dirOptional) {
+            case "down":
+                if (!isPosibleMoveDown()) {
                     routeOptional = getDirecctionX();
                 }
-            break;
-        case "up":
-                if (isPosibleMove(directionNeedToGo)) {
-                    routeOptional = directionNeedToGo;
-                    stuckGhost = false;
-                } else  if (!isPosibleMoveUp()) {
+                break;
+            case "up":
+                if (!isPosibleMoveUp()) {
                     routeOptional = getDirecctionX();
                 }
-            break;
-        case "left":
-                if (isPosibleMove(directionNeedToGo)) {
-                    routeOptional = directionNeedToGo;
-                    stuckGhost = false;
-                } else if (!isPosibleMoveLeft()) {
+                break;
+            case "left":
+                if (!isPosibleMoveLeft()) {
                     routeOptional = getDirecctionY();
                 }
-            break;
-        case "right":
-                if (isPosibleMove(directionNeedToGo)) {
-                    routeOptional = directionNeedToGo;
-                    stuckGhost = false;
-                } else if (!isPosibleMoveRight()) {
+                break;
+            case "right":
+                if (!isPosibleMoveRight()) {
                     routeOptional = getDirecctionY();
                 }
-            break;
-        default:
-            break;
+                break;
+            default:
+                break;
+            }
         }
         return routeOptional;
     }
@@ -307,70 +300,45 @@ public class Ghost extends Position {
 
     /**
      *
+     *  move
+     */
+    public void move(final String directionTo) {
+        switch (directionTo) {
+        case "down":
+            moveDown();
+            break;
+        case "up":
+            moveUp();
+            break;
+        case "left":
+            moveLeft();
+            break;
+        case "right":
+            moveRight();
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     *
      *  searchRouteGhost
      */
     public void searchRouteGhost(final Pacman pacman) {
         if (this.doesExist()) {
             direction = getRoute(pacman);
-            switch (direction) {
-            case "down":
-                if (isPosibleMoveDown()) {
-                    moveDown();
-                    if (isEatable()) {
-                        if (existGhostEatable(pacman)) {
-                            super.die();
-                        }
-                    } else {
-                        if (existPacmanEatable(pacman)) {
-                            pacman.die();
-                        }
+            if (isPosibleMove(direction)) {
+                move(direction);
+                if (isEatable()) {
+                    if (existGhostEatable(pacman)) {
+                        super.die();
+                    }
+                } else {
+                    if (existPacmanEatable(pacman)) {
+                        pacman.die();
                     }
                 }
-                break;
-            case "up":
-                if (isPosibleMoveUp()) {
-                    moveUp();
-                    if (isEatable()) {
-                        if (existGhostEatable(pacman)) {
-                            super.die();
-                        }
-                    } else {
-                        if (existPacmanEatable(pacman)) {
-                            pacman.die();
-                        }
-                    }
-                }
-                break;
-            case "left":
-                if (isPosibleMoveLeft()) {
-                    moveLeft();
-                    if (isEatable()) {
-                        if (existGhostEatable(pacman)) {
-                            super.die();
-                        }
-                    } else {
-                        if (existPacmanEatable(pacman)) {
-                            pacman.die();
-                        }
-                    }
-                }
-                break;
-            case "right":
-                if (isPosibleMoveRight()) {
-                    moveRight();
-                    if (isEatable()) {
-                        if (existGhostEatable(pacman)) {
-                            super.die();
-                        }
-                    } else {
-                        if (existPacmanEatable(pacman)) {
-                            pacman.die();
-                        }
-                    }
-                }
-                break;
-            default:
-                break;
             }
         }
     }
