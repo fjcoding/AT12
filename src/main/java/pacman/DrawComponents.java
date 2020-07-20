@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import com.sun.glass.events.KeyEvent;
+import java.awt.event.KeyEvent;
 
 public class DrawComponents extends JComponent {
 
