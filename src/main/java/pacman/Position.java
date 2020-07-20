@@ -11,13 +11,6 @@ class Position {
         this.exist = itExists;
     }
 
-    Position(final int positionInX, final int positionInY, final boolean itExists, final String kindOfSymbol) {
-        this.x = positionInX;
-        this.y = positionInY;
-        this.exist = itExists;
-        this.symbol = kindOfSymbol;
-    }
-
     public int getX() {
         return  this.x;
     }
