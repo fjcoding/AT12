@@ -60,24 +60,24 @@ public class GhostTest {
     @Test
     public void testIsPosibleMoveDown() {
         Ghost ghost = new Ghost(60, 90, true);
-        assertTrue(ghost.isPosibleMoveDown(walls));
+        assertTrue(ghost.isPosibleMoveDown());
     }
 
     @Test
     public void testIsPosibleMoveUp() {
         Ghost ghost = new Ghost(120, 90, true);
-        assertTrue(ghost.isPosibleMoveUp(walls));
+        assertTrue(ghost.isPosibleMoveUp());
     }
 
     @Test
     public void testIsPosibleMoveRight() {
         Ghost ghost = new Ghost(60, 90, true);
-        assertTrue(ghost.isPosibleMoveRight(walls));
+        assertTrue(ghost.isPosibleMoveRight());
     }
 
     @Test
     public void testIsPosibleMoveLeft() {
         Ghost ghost = new Ghost(90, 90, true);
-        assertTrue(ghost.isPosibleMoveLeft(walls));
+        assertTrue(ghost.isPosibleMoveLeft());
     }
 }

@@ -16,12 +16,6 @@ public class Ghost extends Position {
         this.eatable = false;
     }
 
-    public Ghost(final int x, final int y, final boolean exist, final ArrayList<Position> wallsExtern) {
-        super(x, y, exist);
-        this.eatable = false;
-        walls = wallsExtern;
-    }
-
     /**
      *
      * @return isEatable
@@ -44,14 +38,6 @@ public class Ghost extends Position {
      */
     public void setEatable(final boolean doesEatable) {
         this.eatable = doesEatable;
-    }
-
-    /**
-     *
-     * @return die
-     */
-    public void die() {
-        super.doesnotExist();
     }
 
     /**
@@ -90,7 +76,7 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveDown
      */
-    public boolean isPosibleMoveDown(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveDown() {
         for (Position wall : walls) {
             if (wall.getX() == super.getX() && wall.getY() == super.getY() + WALK_DISTANCE) {
                 return false;
@@ -103,7 +89,7 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveUp
      */
-    public boolean isPosibleMoveUp(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveUp() {
         for (Position wall : walls) {
             if (wall.getX() == super.getX() && wall.getY() == super.getY() - WALK_DISTANCE) {
                 return false;
@@ -116,7 +102,7 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveLeft
      */
-    public boolean isPosibleMoveLeft(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveLeft() {
         for (Position wall : walls) {
             if (wall.getX() == super.getX() - WALK_DISTANCE && wall.getY() == super.getY()) {
                 return false;
@@ -129,7 +115,7 @@ public class Ghost extends Position {
      *
      * @return isPosibleMoveRight
      */
-    public boolean isPosibleMoveRight(final ArrayList<Position> wallsExtern) {
+    public boolean isPosibleMoveRight() {
         for (Position wall : walls) {
             if (wall.getX() == super.getX() + WALK_DISTANCE && wall.getY() == super.getY()) {
                 return false;
@@ -191,7 +177,7 @@ public class Ghost extends Position {
                 if (isPosibleMove(directionNeedToGo)) {
                     routeOptional = directionNeedToGo;
                     stuckGhost = false;
-                } else if (!isPosibleMoveDown(walls)) {
+                } else if (!isPosibleMoveDown()) {
                     routeOptional = getDirecctionX();
                 }
             break;
@@ -199,7 +185,7 @@ public class Ghost extends Position {
                 if (isPosibleMove(directionNeedToGo)) {
                     routeOptional = directionNeedToGo;
                     stuckGhost = false;
-                } else  if (!isPosibleMoveUp(walls)) {
+                } else  if (!isPosibleMoveUp()) {
                     routeOptional = getDirecctionX();
                 }
             break;
@@ -207,7 +193,7 @@ public class Ghost extends Position {
                 if (isPosibleMove(directionNeedToGo)) {
                     routeOptional = directionNeedToGo;
                     stuckGhost = false;
-                } else if (!isPosibleMoveLeft(walls)) {
+                } else if (!isPosibleMoveLeft()) {
                     routeOptional = getDirecctionY();
                 }
             break;
@@ -215,7 +201,7 @@ public class Ghost extends Position {
                 if (isPosibleMove(directionNeedToGo)) {
                     routeOptional = directionNeedToGo;
                     stuckGhost = false;
-                } else if (!isPosibleMoveRight(walls)) {
+                } else if (!isPosibleMoveRight()) {
                     routeOptional = getDirecctionY();
                 }
             break;
@@ -269,16 +255,16 @@ public class Ghost extends Position {
         boolean result = false;
         switch (nextDirection) {
         case "down":
-            result = isPosibleMoveDown(walls);
+            result = isPosibleMoveDown();
             break;
         case "up":
-            result = isPosibleMoveUp(walls);
+            result = isPosibleMoveUp();
             break;
         case "left":
-            result = isPosibleMoveLeft(walls);
+            result = isPosibleMoveLeft();
             break;
         case "right":
-            result = isPosibleMoveRight(walls);
+            result = isPosibleMoveRight();
             break;
         default:
             result = false;
@@ -328,7 +314,7 @@ public class Ghost extends Position {
             direction = getRoute(pacman);
             switch (direction) {
             case "down":
-                if (isPosibleMoveDown(walls)) {
+                if (isPosibleMoveDown()) {
                     moveDown();
                     if (isEatable()) {
                         if (existGhostEatable(pacman)) {
@@ -342,7 +328,7 @@ public class Ghost extends Position {
                 }
                 break;
             case "up":
-                if (isPosibleMoveUp(walls)) {
+                if (isPosibleMoveUp()) {
                     moveUp();
                     if (isEatable()) {
                         if (existGhostEatable(pacman)) {
@@ -356,7 +342,7 @@ public class Ghost extends Position {
                 }
                 break;
             case "left":
-                if (isPosibleMoveLeft(walls)) {
+                if (isPosibleMoveLeft()) {
                     moveLeft();
                     if (isEatable()) {
                         if (existGhostEatable(pacman)) {
@@ -370,7 +356,7 @@ public class Ghost extends Position {
                 }
                 break;
             case "right":
-                if (isPosibleMoveRight(walls)) {
+                if (isPosibleMoveRight()) {
                     moveRight();
                     if (isEatable()) {
                         if (existGhostEatable(pacman)) {
