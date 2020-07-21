@@ -7,10 +7,12 @@ mainClassName = 'Main'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.7.22'
 }
 
 test {
