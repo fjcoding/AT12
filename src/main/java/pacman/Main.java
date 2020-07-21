@@ -15,7 +15,7 @@ public class Main extends JFrame {
         this.setVisible(true);
     }
     public static void HelloWorld() {
-        System.out.println("Hola mundo");
+        System.out.println("Hola mundo!!!");
     }
     public static void main(final String[] args) {
         Main frame = new Main();
