@@ -13,7 +13,7 @@ public class ActionKeyPacman implements KeyListener {
     public static final String MOVE_UP = "up";
     public static final String MOVE_DOWN = "down";
     private int key, preKey;
-    private Boolean aux = true;
+    private Boolean isKeyPressed = true;
     private String posToMove = "";
 
     public ActionKeyPacman(final DrawComponents dComponents) {
@@ -26,14 +26,14 @@ public class ActionKeyPacman implements KeyListener {
      */
     @Override
         public void actionPerformed(final ActionEvent event) {
-            aux = false;
+            isKeyPressed = false;
             if (drawComponents.isNotPosibleMove(key)) {
                 key = preKey;
                 preKey = 0;
             }
             posToMove = assignMovement(key);
             drawComponents.move(posToMove);
-            aux = true;
+            isKeyPressed = true;
         }
     });
 
@@ -41,7 +41,7 @@ public class ActionKeyPacman implements KeyListener {
      @Override key pressed
      */
     public void keyPressed(final KeyEvent event) {
-        if (aux) {
+        if (isKeyPressed) {
             timer.start();
         }
         if (key != preKey) {
@@ -68,13 +68,13 @@ public class ActionKeyPacman implements KeyListener {
      */
     public String assignMovement(final int keyValue) {
         if (keyValue == KeyEvent.VK_RIGHT) {
-            posToMove = "right";
+            posToMove = MOVE_RIGHT;
         } else if (keyValue == KeyEvent.VK_LEFT) {
-            posToMove = "left";
+            posToMove = MOVE_LEFT;
         } else if (keyValue == KeyEvent.VK_DOWN) {
-            posToMove = "down";
+            posToMove = MOVE_DOWN;
         } else if (keyValue == KeyEvent.VK_UP) {
-            posToMove = "up";
+            posToMove = MOVE_UP;
         }
         return posToMove;
     }

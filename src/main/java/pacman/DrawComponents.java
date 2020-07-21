@@ -30,11 +30,7 @@ public class DrawComponents extends JComponent {
     private Creator creator;
     private Timer timer;
     private int seconds = 0;
-    public static final int CASE_LEFT = 0;
-    public static final int CASE_RIGHT = 1;
-    public static final int CASE_UP = 2;
-    public static final int CASE_DOWN = 3;
-    private Boolean aux;
+    private Boolean isNotPossible;
 
     public DrawComponents() {
         timer = new Timer();
@@ -193,20 +189,20 @@ public class DrawComponents extends JComponent {
     public boolean isNotPosibleMove(final int type) {
         switch (type) {
             case KeyEvent.VK_LEFT:
-                aux = pacman.existWall(pacman.getX() - SIZE_ELEMENT, pacman.getY());
+                isNotPossible = pacman.existWall(pacman.getX() - SIZE_ELEMENT, pacman.getY());
                 break;
             case KeyEvent.VK_RIGHT:
-                aux = pacman.existWall(pacman.getX() + SIZE_ELEMENT, pacman.getY());
+                isNotPossible = pacman.existWall(pacman.getX() + SIZE_ELEMENT, pacman.getY());
                 break;
             case KeyEvent.VK_UP:
-                aux = pacman.existWall(pacman.getX(), pacman.getY() - SIZE_ELEMENT);
+                isNotPossible = pacman.existWall(pacman.getX(), pacman.getY() - SIZE_ELEMENT);
                 break;
             case KeyEvent.VK_DOWN:
-                aux = pacman.existWall(pacman.getX(), pacman.getY() + SIZE_ELEMENT);
+                isNotPossible = pacman.existWall(pacman.getX(), pacman.getY() + SIZE_ELEMENT);
                 break;
             default:
                 break;
         }
-        return aux;
+        return isNotPossible;
     }
 }
