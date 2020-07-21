@@ -13,7 +13,8 @@ public class ActionKeyPacman implements KeyListener {
     public static final String MOVE_UP = "up";
     public static final String MOVE_DOWN = "down";
     private int key, preKey;
-    private Boolean keyLeft, keyRight, keyUp, keyDown, aux = true;
+    private Boolean aux = true;
+    private String posToMove = "";
 
     public ActionKeyPacman(final DrawComponents dComponents) {
         this.drawComponents = dComponents;
@@ -30,39 +31,8 @@ public class ActionKeyPacman implements KeyListener {
                 key = preKey;
                 preKey = 0;
             }
-            if (key == KeyEvent.VK_RIGHT) {
-                keyUp = false;
-                keyDown = false;
-                keyRight = true;
-                keyLeft = false;
-            } else if (key == KeyEvent.VK_LEFT) {
-                keyUp = false;
-                keyDown = false;
-                keyRight = false;
-                keyLeft = true;
-            } else if (key == KeyEvent.VK_DOWN) {
-                keyUp = false;
-                keyDown = true;
-                keyRight = false;
-                keyLeft = false;
-            } else if (key == KeyEvent.VK_UP) {
-                keyUp = true;
-                keyDown = false;
-                keyRight = false;
-                keyLeft = false;
-            }
-            if (keyLeft) {
-                drawComponents.move(MOVE_LEFT);
-            }
-            if (keyRight) {
-                drawComponents.move(MOVE_RIGHT);
-            }
-            if (keyUp) {
-                drawComponents.move(MOVE_UP);
-            }
-            if (keyDown) {
-                drawComponents.move(MOVE_DOWN);
-            }
+            posToMove = assignMovement(key);
+            drawComponents.move(posToMove);
             aux = true;
         }
     });
@@ -78,28 +48,8 @@ public class ActionKeyPacman implements KeyListener {
             preKey = key;
         }
         key = event.getKeyCode();
-        if (key == KeyEvent.VK_RIGHT) {
-            keyUp = false;
-            keyDown = false;
-            keyRight = true;
-            keyLeft = false;
-        } else if (key == KeyEvent.VK_LEFT) {
-            keyUp = false;
-            keyDown = false;
-            keyRight = false;
-            keyLeft = true;
-        } else if (key == KeyEvent.VK_DOWN) {
-            keyUp = false;
-            keyDown = true;
-            keyRight = false;
-            keyLeft = false;
-        } else if (key == KeyEvent.VK_UP) {
-            keyUp = true;
-            keyDown = false;
-            keyRight = false;
-            keyLeft = false;
-        }
-    }
+        posToMove = assignMovement(key);
+     }
 
     /**
      @Override key Released
@@ -111,5 +61,21 @@ public class ActionKeyPacman implements KeyListener {
      @Override key Typed
      */
     public void keyTyped(final KeyEvent event) {
+    }
+
+    /**
+     * Method to set variable assigned to keyRight, keyLeft, keyUp, keyDown
+     */
+    public String assignMovement(final int keyValue) {
+        if (keyValue == KeyEvent.VK_RIGHT) {
+            posToMove = "right";
+        } else if (keyValue == KeyEvent.VK_LEFT) {
+            posToMove = "left";
+        } else if (keyValue == KeyEvent.VK_DOWN) {
+            posToMove = "down";
+        } else if (keyValue == KeyEvent.VK_UP) {
+            posToMove = "up";
+        }
+        return posToMove;
     }
 }
