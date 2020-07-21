@@ -33,6 +33,12 @@ public class DrawComponents extends JComponent {
     private Boolean isNotPossible;
 
     public DrawComponents() {
+        init();
+    }
+    /**
+     * The init method
+     */
+    public void init() {
         timer = new Timer();
         direction = "pacman.png";
         creator = new Creator();
@@ -127,6 +133,7 @@ public class DrawComponents extends JComponent {
         } else {
             timer.cancel();
             drawGameOver(g);
+            this.init();
         }
     }
 
