@@ -201,7 +201,7 @@ public class DrawComponents extends JComponent {
     /**
      * Method to check if is posible move to gived direction
      */
-    public boolean isNotPosibleMove(final int type) {
+    public boolean isNotPossibleMove(final int type) {
         switch (type) {
             case KeyEvent.VK_LEFT:
                 isNotPossible = pacman.existWall(pacman.getX() - SIZE_ELEMENT, pacman.getY());
