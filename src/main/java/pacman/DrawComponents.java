@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import java.awt.event.KeyEvent;
 
 public class DrawComponents extends JComponent {
 
@@ -29,6 +30,7 @@ public class DrawComponents extends JComponent {
     private Creator creator;
     private Timer timer;
     private int seconds = 0;
+    private Boolean isNotPossible;
 
     public DrawComponents() {
         timer = new Timer();
@@ -194,5 +196,28 @@ public class DrawComponents extends JComponent {
             repaint();
         }
         pacman.pacmanEatGhosts(ghosts);
+    }
+
+    /**
+     * Method to check if is posible move to gived direction
+     */
+    public boolean isNotPosibleMove(final int type) {
+        switch (type) {
+            case KeyEvent.VK_LEFT:
+                isNotPossible = pacman.existWall(pacman.getX() - SIZE_ELEMENT, pacman.getY());
+                break;
+            case KeyEvent.VK_RIGHT:
+                isNotPossible = pacman.existWall(pacman.getX() + SIZE_ELEMENT, pacman.getY());
+                break;
+            case KeyEvent.VK_UP:
+                isNotPossible = pacman.existWall(pacman.getX(), pacman.getY() - SIZE_ELEMENT);
+                break;
+            case KeyEvent.VK_DOWN:
+                isNotPossible = pacman.existWall(pacman.getX(), pacman.getY() + SIZE_ELEMENT);
+                break;
+            default:
+                break;
+        }
+        return isNotPossible;
     }
 }

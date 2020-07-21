@@ -7,8 +7,14 @@ import javax.swing.Timer;
 public class ActionKeyPacman implements KeyListener {
 
     private DrawComponents drawComponents;
-    private int key;
     public static final int TIMER_PACMAN = 200;
+    public static final String MOVE_LEFT = "left";
+    public static final String MOVE_RIGHT = "right";
+    public static final String MOVE_UP = "up";
+    public static final String MOVE_DOWN = "down";
+    private int key, preKey;
+    private Boolean isKeyPressed = true;
+    private String posToMove = "";
 
     public ActionKeyPacman(final DrawComponents dComponents) {
         this.drawComponents = dComponents;
@@ -20,18 +26,14 @@ public class ActionKeyPacman implements KeyListener {
      */
     @Override
         public void actionPerformed(final ActionEvent event) {
-            if (key == KeyEvent.VK_LEFT) {
-                drawComponents.move("left");
+            isKeyPressed = false;
+            if (drawComponents.isNotPosibleMove(key)) {
+                key = preKey;
+                preKey = 0;
             }
-            if (key == KeyEvent.VK_RIGHT) {
-                drawComponents.move("right");
-            }
-            if (key == KeyEvent.VK_UP) {
-                drawComponents.move("up");
-            }
-            if (key == KeyEvent.VK_DOWN) {
-                drawComponents.move("down");
-            }
+            posToMove = assignMovement(key);
+            drawComponents.move(posToMove);
+            isKeyPressed = true;
         }
     });
 
@@ -39,9 +41,15 @@ public class ActionKeyPacman implements KeyListener {
      @Override key pressed
      */
     public void keyPressed(final KeyEvent event) {
-        timer.start();
+        if (isKeyPressed) {
+            timer.start();
+        }
+        if (key != preKey) {
+            preKey = key;
+        }
         key = event.getKeyCode();
-    }
+        posToMove = assignMovement(key);
+     }
 
     /**
      @Override key Released
@@ -53,5 +61,21 @@ public class ActionKeyPacman implements KeyListener {
      @Override key Typed
      */
     public void keyTyped(final KeyEvent event) {
+    }
+
+    /**
+     * Method to set variable assigned to keyRight, keyLeft, keyUp, keyDown
+     */
+    public String assignMovement(final int keyValue) {
+        if (keyValue == KeyEvent.VK_RIGHT) {
+            posToMove = MOVE_RIGHT;
+        } else if (keyValue == KeyEvent.VK_LEFT) {
+            posToMove = MOVE_LEFT;
+        } else if (keyValue == KeyEvent.VK_DOWN) {
+            posToMove = MOVE_DOWN;
+        } else if (keyValue == KeyEvent.VK_UP) {
+            posToMove = MOVE_UP;
+        }
+        return posToMove;
     }
 }
