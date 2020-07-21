@@ -27,7 +27,7 @@ public class ActionKeyPacman implements KeyListener {
     @Override
         public void actionPerformed(final ActionEvent event) {
             isKeyPressed = false;
-            if (drawComponents.isNotPosibleMove(key)) {
+            if (drawComponents.isNotPossibleMove(key)) {
                 key = preKey;
                 preKey = 0;
             }

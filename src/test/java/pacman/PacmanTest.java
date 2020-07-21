@@ -114,4 +114,44 @@ public class PacmanTest{
 		pacman.setNotEatable();
 		assertEquals(false, pacman.isEatable());
 	}
+
+	@Test
+	public void testIsNotPossibleMoveRight(){
+		DrawComponents dComponents = new DrawComponents();
+		Wall wall1 = new Wall(90, 60, true);
+		walls.add(wall1);
+		Pacman pacman = new Pacman(60, 60, true, walls, dots);
+		int keyRight = 39;
+		assertEquals(true,dComponents.isNotPossibleMove(keyRight));
+	}
+
+	@Test
+	public void testIsNotPossibleMoveLeft(){
+		DrawComponents dComponents = new DrawComponents();
+		Wall wall1 = new Wall(30, 60, true);
+		walls.add(wall1);
+		Pacman pacman = new Pacman(60, 60, true, walls, dots);
+		int keyLeft = 37;
+		assertEquals(true,dComponents.isNotPossibleMove(keyLeft));
+	}
+
+	@Test
+	public void testIsNotPossibleMoveUp(){
+		DrawComponents dComponents = new DrawComponents();
+		Wall wall1 = new Wall(60, 30, true);
+		walls.add(wall1);
+		Pacman pacman = new Pacman(60, 60, true, walls, dots);
+		int keyUp = 38;
+		assertEquals(false,dComponents.isNotPossibleMove(keyUp));
+	}
+
+	@Test
+	public void testIsNotPossibleMoveDown(){
+		DrawComponents dComponents = new DrawComponents();
+		Wall wall1 = new Wall(60, 90, true);
+		walls.add(wall1);
+		Pacman pacman = new Pacman(60, 60, true, walls, dots);
+		int keyDown = 40;
+		assertEquals(false,dComponents.isNotPossibleMove(keyDown));
+	}
 }
