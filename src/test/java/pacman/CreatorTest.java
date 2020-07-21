@@ -18,8 +18,7 @@ public class CreatorTest {
     @Test
     public void testCreateGhosts() {
         creator = new Creator();
-        walls = creator.createWalls();
-        ghosts = creator.createGhost(walls);
+        ghosts = creator.createGhost();
         assertTrue(ghosts.size() > 0);  
     }
 
